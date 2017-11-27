@@ -1,0 +1,299 @@
+/* pages/shoppingCart/shoppingCart.wxss */
+
+page {
+  background: #edf1f2;
+}
+
+.window {
+  width: 100%;
+  overflow: hidden;
+}
+
+.shoppingBkg {
+  width: 420rpx;
+  height: 300rpx;
+  margin-top: 158rpx;
+  margin-left: 186rpx;
+  margin-bottom: 34rpx;
+}
+
+.bkgTxt {
+  width: 100%;
+  height: 48rpx;
+  margin-bottom: 128rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 34rpx;
+  color: #5d636f;
+  letter-spacing: -0.41px;
+  text-align: center;
+}
+
+.bkgBtn {
+  width: 686rpx;
+  height: 94rpx;
+  background-image: linear-gradient(90deg, #ff0165 0%, #e2231a 100%);
+  border-radius: 8rpx;
+  margin: 0 auto 0 auto;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 36rpx;
+  color: #fff;
+  letter-spacing: 0.16rpx;
+  line-height: 94rpx;
+}
+
+/* .goodsLi {
+  width: 686rpx;
+  height: 182rpx;
+  margin-top: 16rpx;
+  background: #fff;
+  padding: 16rpx 32rpx;
+} */
+
+
+.goodsLi {
+  /* width: 686rpx;  */
+  width: 92%;
+  height: 182rpx;
+  margin-top: 16rpx;
+  background: #fff;
+  padding: 16rpx 32rpx;
+  position: relative;
+  transition: left0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.top {
+  height: 198rpx;
+  width:718rpx;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left:0;
+  background: #fff;
+  padding-top:16rpx;
+  padding-left:32rpx;
+}
+
+.delete {
+  position: absolute;
+  height: 214rpx;
+  top: 0;
+  background-image: linear-gradient(-90deg, #ff3b30 0%, #ff3b30 100%);
+  /* width: 124rpx; */
+  width: 16.6%;
+  text-align: center;
+  z-index: 2;
+  right: 0;
+  color: #fff;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  line-height: 214rpx;
+  letter-spacing: 0.28rpx;
+}
+
+.checkBox {
+  width: 46rpx;
+  height: 46rpx;
+  margin-top: 68rpx;
+  margin-right: 18rpx;
+  float: left;
+}
+
+.goodsBlock {
+  width: 630rpx;
+  height: 182rpx;
+  float: left;
+}
+
+.goodsImg {
+  width: 180rpx;
+  height: 182rpx;
+  float: left;
+}
+
+.infoBlock {
+  float: left;
+  /* padding-left:30rpx; */
+  width: 450rpx;
+  height: 182rpx;
+}
+
+.goodsName {
+  padding-left:30rpx;
+  width: 410rpx;
+  height: 94rpx;
+  font-family: PingFangSC-Regular;
+  /* padding-bottom:50rpx; */
+  font-size: 28rpx;
+  color: rgba(52, 60, 75, 0.80);
+  letter-spacing: 0;
+  line-height: 32rpx;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  margin-top:6rpx;
+}
+
+.goodsPrice {
+  padding-left:30rpx;
+  width: 200rpx;
+  height: 60rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #f47731;
+  letter-spacing: 0.34rpx;
+  line-height: 28rpx;
+  margin-top: 28rpx;
+  float: left;
+}
+
+.numBlock {
+  width: 212rpx;
+  height: 60rpx;
+  float: right;
+  margin-top: 24rpx;
+}
+
+.minus {
+  float: left;
+  width: 66rpx;
+  height: 60rpx;
+  background: #fbfbfb;
+  position: relative;
+}
+
+.minusline {
+  width: 28rpx;
+  height: 4rpx;
+  background: #c9c9c9;
+  position: absolute;
+  top: 28rpx;
+  left: 19rpx;
+}
+
+.num {
+  float: left;
+  width: 76rpx;
+  height: 60rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  color: #363a3e;
+  letter-spacing: 0.19px;
+  text-align: center;
+  line-height: 60rpx;
+  background: #f0efef;
+  margin-left: 2rpx;
+  /* font-weight: bold; */
+}
+
+.add {
+  margin-left: 2rpx;
+  float: left;
+  width: 66rpx;
+  height: 60rpx;
+  background: #fbfbfb;
+  position: relative;
+}
+
+.addline {
+  width: 4rpx;
+  height: 28rpx;
+  background: #a4a4a4;
+  position: absolute;
+  top: 16rpx;
+  left: 31rpx;
+}
+
+.sp {
+  background: #a4a4a4;
+}
+
+.footer {
+  width: 100%;
+  background: #fff;
+  height: 94rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.checkBoxDown {
+  width: 46rpx;
+  height: 46rpx;
+  float: left;
+  margin: 24rpx 12rpx 0 32rpx;
+}
+
+.checkTxt {
+  float: left;
+  height: 94rpx;
+  width: 50rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: rgba(52, 60, 75, 0.80);
+  letter-spacing: 0.28rpx;
+  line-height: 94rpx;
+  position:relative;
+  top:2rpx;
+
+}
+
+.total {
+  float: right;
+  width: 350rpx;
+  height: 94rpx;
+  line-height: 88rpx;
+  text-align: right;
+  margin-right: 22rpx;
+}
+
+.totalTxt {
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #343c4b;
+  font-weight: bold;
+  letter-spacing: 0.34rpx;
+  text-align: right;
+  line-height: 94rpx;
+}
+
+.totalPrice {
+  text-align: right;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #ff0b6f;
+  letter-spacing: 0.38rpx;
+  line-height: 94rpx;
+  float: right;
+}
+.totalPrice view{
+  float: left;
+}
+.totalPrice .dw{
+  float: left;
+  font-size: 24rpx;
+  margin-right:6rpx;
+  position:relative;
+  top:4rpx;
+
+}
+.btn {
+  float: right;
+  width: 218rpx;
+  height: 94rpx;
+  background-image: linear-gradient(90deg, #ff0165 0%, #e2231a 100%);
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #fff;
+  letter-spacing: 0.34rpx;
+  line-height: 94rpx;
+  border: none;
+  text-align: center;
+  border-radius: 0px;
+}
+.clearBoth{
+  clear: both;
+}

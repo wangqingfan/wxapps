@@ -1,0 +1,59 @@
+<!--pages/shoppingCart/shoppingCart.wxml-->
+
+<!-- 购物车为空 -->
+<view wx:if="{{showType==0}}">
+  <image class="shoppingBkg" src="../../images/shopping.png"></image>
+  <view class="bkgTxt">购物车还是空的</view>
+  <view class="bkgBtn" bindtap="goHome">到商城逛逛</view>
+</view>
+
+
+
+<!-- 购物车不为空 -->
+<view wx:if="{{showType==1}}" class="window">
+  <view class="goodsLi" wx:for="{{goodsList}}" wx:key="key" data-id="{{item.id}}" data-index="{{index}}">
+    <view class="top" data-id="{{item.id}}" style="{{item.listStyle}}">
+      <image src="../../images/{{item.check ? 'checked' : 'unchecked'}}.png" data-index="{{index}}" class="checkBox" mode="scaleToFill" catchtap="clickCheckBox">
+      </image>
+      <view class="goodsBlock">
+        <image src="{{item.img}}" class="goodsImg" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"></image>
+        <view class="infoBlock">
+          <view class="goodsName" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}">{{item.name}}</view>
+          <view class="goodsPrice" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}">¥{{item.price}}</view>
+
+          <view class="numBlock">
+            <view class="minus" id='jian' catchtap="clickMinus" data-index="{{index}}" data-id="{{item.id}}">
+              <view class="minusline"></view>
+            </view>
+            <view class="num">{{item.num}}</view>
+            <view class="add" id='jia' catchtap="clickAdd" data-index="{{index}}" data-id="{{item.id}}">
+              <view class="minusline sp"></view>
+              <view class="addline"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="delete" bindtap="delItem" data-id='{{item.id}}'>删除</view>
+
+  </view>
+
+
+  <view class="footer">
+    <image src="../../images/{{selectAll==1 ? 'checked' : 'unchecked'}}.png" data-index="{{index}}" class="checkBoxDown" mode="scaleToFill" bindtap="clickCheckAll">
+    </image>
+    <view class="checkTxt" bindtap="clickCheckAll">全选</view>
+    <form report-submit='true' bindsubmit='goSettle'>
+      <button class='btn' form-type='submit'>结算({{totalNum}})</button>
+    </form>
+    <!-- <view class="btn" bindtap="goSettle">结算（{{totalNum}}）</view> -->
+    <view class="total">
+      <text class="totalTxt">合计：</text>
+      <view class="totalPrice"><view class='dw'>¥</view><view>{{totalPrice}}元</view><view class='clearBoth'></view></view>
+      <view class='clearBoth'></view>
+    </view>
+  </view>
+
+
+</view>

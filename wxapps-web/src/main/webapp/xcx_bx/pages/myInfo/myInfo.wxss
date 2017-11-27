@@ -1,0 +1,71 @@
+/* pages/myInfo/myInfo.wxss */
+
+page {
+  background: #edf1f2;
+}
+
+.all {
+  width: 100%;
+  margin-top: 16rpx;
+  background: #fff;
+  
+}
+
+.general {
+  
+  border-bottom: 2rpx solid #edf1f2;
+  height: 120rpx;
+  padding: 20rpx 0 20rpx 0;
+  display: flex;
+  justify-content: flex-start;
+  margin-left:32rpx;
+}
+
+.avator {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.info {
+  margin-left: 20rpx;
+}
+
+.name {
+  margin-top: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #343c4b;
+  letter-spacing: 0.38px;
+  line-height: 120rpx;
+}
+
+.myOrder {
+  
+  border-bottom: 2rpx solid #edf1f2;
+  height: 48rpx;
+  padding: 28rpx 20rpx 28rpx 0;
+  margin-left:32rpx;
+}
+
+.myOrderImg {
+  width: 36rpx;
+  height: 44rpx;
+  margin: 4rpx 30rpx 4rpx 0;
+  float: left;
+}
+
+.myOrderTxt {
+  float: left;
+  width: 140rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #343c4b;
+  letter-spacing: 0.38rpx;
+  line-height: 48rpx; /* 与myOrder高度一致 */
+}
+
+.arrow {
+  float:right;
+  width: 48rpx;
+  height: 48rpx;
+}

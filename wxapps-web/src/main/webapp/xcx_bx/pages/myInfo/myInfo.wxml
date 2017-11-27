@@ -1,0 +1,27 @@
+<!--pages/myInfo/myInfo.wxml-->
+<view class="all">
+  <view class="general">
+    <image class="avator" src="{{image}}"></image>
+    <view class="info">
+      <text class="name">{{name}}</text>
+    </view>
+  </view>
+  
+  <view class="myOrder" bindtap="onClickMyOrder">
+    <image class="myOrderImg" src="../../images/orderList.png">
+    </image>
+    <view class="myOrderTxt">我的订单</view>
+    <image class="arrow" src="../../images/right.png">
+    </image>
+  </view>
+
+  <view class="myOrder" bindtap="onClickConsult">
+    <image class="myOrderImg" src="../../images/service.png">
+    </image>
+    <view class="myOrderTxt">客服咨询</view>
+    <image class="arrow" src="../../images/right.png">
+    </image>
+  </view>
+
+
+</view>
