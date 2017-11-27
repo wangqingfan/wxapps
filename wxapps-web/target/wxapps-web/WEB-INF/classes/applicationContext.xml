@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:amq="http://activemq.apache.org/schema/core"
+	   xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
+        http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.8.0.xsd">
+     <!-- 组件service扫描 -->
+	 <context:component-scan base-package="com.beixiao">
+     	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+     </context:component-scan>
+
+	<!-- 配置文件 -->
+    <context:property-placeholder location="classpath*:/*.properties"/>
+    
+    <!-- 数据源 -->
+      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+       		<property name="driverClassName" value="${jdbc.driver}"></property>
+       		<property name="url" value="${jdbc.url}"></property>
+       		<property name="username" value="${jdbc.username}"></property>
+       		<property name="password" value="${jdbc.password}"></property>
+       		<property name="initialSize" value="${jdbc.initialSize}"></property>
+       		<property name="maxActive" value="${jdbc.maxActive}"></property>
+       		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
+       		<property name="minIdle" value="${jdbc.minIdle}"></property>
+       		<property name="maxWait" value="${jdbc.maxWait}"></property>
+       </bean>
+      <!-- spring和mybatis整合 -->
+      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       		<property name="dataSource" ref="dataSource"></property>
+       		<property name="mapperLocations" value="classpath*:/mybatis/**/*.xml"></property>
+      </bean>
+       <!-- DAO接口所在的包，spring会自动查找 -->
+      <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+       		<property name="basePackage" value="com.beixiao.*.repository"></property>
+       		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+      </bean>
+       
+       <!-- 事务管理 -->
+       <tx:annotation-driven transaction-manager="transcationManager" proxy-target-class="true"/>
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+       		<property name="dataSource" ref="dataSource"></property>
+       </bean>
+</beans>

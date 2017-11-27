@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/export/home/tomcat/domains/credit.hexinxiaodai.com/server1/logs/credit-bussiness.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                /export/home/tomcat/domains/credit.hexinxiaodai.com/server1/logs/credit-bussiness.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- project default level -->
+    <logger name="com.beixiao" level="${com.beixiao}"/>
+    <logger name="org.apache.ibatis" level="INFO"/>
+    <logger name="java.sql" level="INFO"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="com.fasterlogbackxml" level="ERROR"/>
+    <!-- <logger name="com.hexin.utils.mapper" level="ERROR"/> -->
+    <!--log4jdbc -->
+    <logger name="jdbc.sqltiming" level="INFO"/>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="rollingFile"/>
+    </root>
+</configuration>

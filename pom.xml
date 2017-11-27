@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.beixiao</groupId>
+  <artifactId>wxapps</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>wxapps-web</module>
+    <module>wxapps-common</module>
+  </modules>
+  
+  
+  <properties>
+  	<spring.version>4.3.12.RELEASE</spring.version>
+  	<aspectj.version>1.7.4</aspectj.version>
+  	<slf4j.version>1.6.1</slf4j.version>
+  	<com.beixiao>DEBUG</com.beixiao>
+  </properties>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+        	<groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+       		<scope>test</scope>
+       	</dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+  	<!-- log4j -->
+		<dependency>  
+		    <groupId>log4j</groupId>  
+		    <artifactId>log4j</artifactId>  
+		    <version>1.2.17</version>  
+		</dependency>  
+		<dependency>  
+		    <groupId>org.slf4j</groupId>  
+		    <artifactId>slf4j-api</artifactId>  
+		    <version>${slf4j.version}</version>  
+		</dependency>
+		<dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-api</artifactId>
+	        <version>1.7.7</version>
+	    </dependency>
+	    <dependency>  
+	    <groupId>ch.qos.logback</groupId>  
+		    <artifactId>logback-classic</artifactId>  
+		    <version>1.1.2</version>  
+		</dependency>  
+		<dependency>  
+		    <groupId>ch.qos.logback</groupId>  
+		    <artifactId>logback-core</artifactId>  
+		    <version>1.1.2</version>  
+		</dependency>
+		<!-- 其中logback-ext-spring这个jar包是为了和spring一起使用的。 -->  
+		<dependency>  
+		    <groupId>org.logback-extensions</groupId>  
+		    <artifactId>logback-ext-spring</artifactId>  
+		    <version>0.1.1</version>  
+		</dependency>
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.2</version>
+		</dependency>
+  	</dependencies>
+</project>
