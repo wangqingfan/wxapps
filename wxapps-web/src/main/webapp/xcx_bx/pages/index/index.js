@@ -1,10 +1,12 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+let that;
 
 Page({
   data: {
     motto: 'Hello World',
+    hasData: 0,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -16,12 +18,25 @@ Page({
     })
   },
   onLoad: function () {
+    that = this;
+    this.setData({
+      hasData: 1
+    });
+    
+    // 展示本地存储能力
+    var logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs);
+   
+  },
+  onShow: function () {
+    getWxInfo();
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -43,6 +58,8 @@ Page({
       })
     }
   },
+
+  
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -52,3 +69,13 @@ Page({
     })
   }
 })
+
+function getWxInfo () {
+  if (app.globalData.userInfo.length > 0) {
+    console.log(app.globalData.userInfo)
+    
+    that.setData({
+      hasData: 1
+    })
+  }
+}

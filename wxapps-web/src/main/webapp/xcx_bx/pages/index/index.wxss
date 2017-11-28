@@ -1,4 +1,28 @@
 /**index.wxss**/
+.loadingView {
+  height: 50rpx;
+  margin: auto;
+  margin-top: 30rpx;
+  width: 200rpx;
+}
+
+.loadingView .loadingImg {
+  height: 50rpx;
+  width: 50rpx;
+  margin: auto;
+  float: left;
+}
+
+.loadingView .loadingtitle {
+  display: inline-block;
+  height: 50rpx;
+  line-height: 50rpx;
+  float: left;
+  margin: 0;
+  padding: 0;
+  margin-left: 20rpx;
+  color: #999;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
