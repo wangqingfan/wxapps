@@ -16,6 +16,11 @@
   	<aspectj.version>1.7.4</aspectj.version>
   	<slf4j.version>1.6.1</slf4j.version>
   	<com.beixiao>DEBUG</com.beixiao>
+  	
+  	<mysql.version>5.1.21</mysql.version>
+    <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+    <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+    <jdbc.driver.version>${mysql.version}</jdbc.driver.version>
   </properties>
   <dependencyManagement>
   	<dependencies>
@@ -70,5 +75,21 @@
 		    <artifactId>commons-logging</artifactId>
 		    <version>1.2</version>
 		</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mysql.version}</version>
+		</dependency>
   	</dependencies>
+  	<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+                <testFailureIgnore>true</testFailureIgnore>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>

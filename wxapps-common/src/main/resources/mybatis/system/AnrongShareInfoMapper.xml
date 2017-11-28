@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.system.repository.AnrongShareInfoDao" >
+  <resultMap id="BaseResultMap" type="com.beixiao.system.domain.AnrongShareInfo" >
+    <id column="anrong_share_id" property="anrongShareId" jdbcType="INTEGER" />
+    <result column="auditing_info_id" property="auditingInfoId" jdbcType="INTEGER" />
+    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="loan_id" property="loanId" jdbcType="VARCHAR" />
+    <result column="is_share_contract" property="isShareContract" jdbcType="TINYINT" />
+    <result column="is_share_overdue" property="isShareOverdue" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    anrong_share_id, auditing_info_id, id_code, customer_name, loan_id, is_share_contract, 
+    is_share_overdue, create_time
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from anrong_share_info
+    where anrong_share_id = #{anrongShareId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from anrong_share_info
+    where anrong_share_id = #{anrongShareId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="com.beixiao.system.domain.AnrongShareInfo" >
+    insert into anrong_share_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="anrongShareId != null" >
+        anrong_share_id,
+      </if>
+      <if test="auditingInfoId != null" >
+        auditing_info_id,
+      </if>
+      <if test="idCode != null" >
+        id_code,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="loanId != null" >
+        loan_id,
+      </if>
+      <if test="isShareContract != null" >
+        is_share_contract,
+      </if>
+      <if test="isShareOverdue != null" >
+        is_share_overdue,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="anrongShareId != null" >
+        #{anrongShareId,jdbcType=INTEGER},
+      </if>
+      <if test="auditingInfoId != null" >
+        #{auditingInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="idCode != null" >
+        #{idCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanId != null" >
+        #{loanId,jdbcType=VARCHAR},
+      </if>
+      <if test="isShareContract != null" >
+        #{isShareContract,jdbcType=TINYINT},
+      </if>
+      <if test="isShareOverdue != null" >
+        #{isShareOverdue,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.beixiao.system.domain.AnrongShareInfo" >
+    update anrong_share_info
+    <set >
+      <if test="auditingInfoId != null" >
+        auditing_info_id = #{auditingInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="idCode != null" >
+        id_code = #{idCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="loanId != null" >
+        loan_id = #{loanId,jdbcType=VARCHAR},
+      </if>
+      <if test="isShareContract != null" >
+        is_share_contract = #{isShareContract,jdbcType=TINYINT},
+      </if>
+      <if test="isShareOverdue != null" >
+        is_share_overdue = #{isShareOverdue,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where anrong_share_id = #{anrongShareId,jdbcType=INTEGER}
+  </update>
+</mapper>

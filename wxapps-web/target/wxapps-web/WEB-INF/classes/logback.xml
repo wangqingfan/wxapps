@@ -7,10 +7,10 @@
     </appender>
 
     <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/export/home/tomcat/domains/credit.hexinxiaodai.com/server1/logs/credit-bussiness.log</file>
+        <file>/export/home/tomcat/domains/wxapps.bexiao.com/server1/logs/wxapps-bussiness.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>
-                /export/home/tomcat/domains/credit.hexinxiaodai.com/server1/logs/credit-bussiness.%d{yyyy-MM-dd}.log
+                /export/home/tomcat/domains/wxapps.bexiao.com/server1/logs/wxapps-bussiness.%d{yyyy-MM-dd}.log
             </fileNamePattern>
         </rollingPolicy>
         <encoder>
