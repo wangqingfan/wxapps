@@ -32,7 +32,7 @@ Page({
     if (app.globalData.userInfo.length > 0) {
       console.log(app.globalData.userInfo)
       that.setData({
-        hasData: 0
+        hasData: 1
       })
     } else {
     }
