@@ -1,4 +1,5 @@
 var _app;
+
 /**
  * 重新封装wx.request,用户统一处理请求
  * @param value 等同于wx.request参数

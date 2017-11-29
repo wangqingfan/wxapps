@@ -28,14 +28,17 @@ Page({
    
   },
   onShow: function () {
-    console.log(wx.canIUse('button.open-type.getUserInfo'))
-    if (app.globalData.userInfo.length > 0) {
-      console.log(app.globalData.userInfo)
-      that.setData({
-        hasData: 1
-      })
+    if (!app.globalData.userInfo.hasOwnProperty("avatarUrl")){
+      app.dataManager.prepareBaseInfo(getUser); // 获取信息 开始注册等。。
     } else {
+      getUser();
     }
-    
   }
 })
+
+function getUser () {
+  that.setData({
+    hasData: 1,
+    userInfo: app.globalData.userInfo
+  })
+}

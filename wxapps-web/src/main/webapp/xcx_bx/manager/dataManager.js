@@ -1,6 +1,7 @@
 let _app;
 let _user;
 let _finished = false;
+let _prepareBackFun;
 
 /**
  * 初始化
@@ -21,14 +22,27 @@ function initData () {
   _app.globalData = {
     userInfo: {},
     address: {},
-    invoice: {},
-    initFlag: false,
     options: {},
-    //首页和砍价首页的顶导图片
-    topImg: {}
   }
 }
 
+function prepareBaseInfo(backFun) {
+  _prepareBackFun = backFun;
+  //检测基础数据信息是否已经获取
+  _user.checkBaseInfo(prepareBseInfoBack);
+}
+
+function prepareBseInfoBack() {
+  _prepareBackFun();// 入口 开始调用
+}
+
+// 接口是否等待
+function isLoadingUserInfo() {
+  return _user.isLoading();
+}
+
 module.exports = {
-  init: init
+  init: init,
+  prepareBaseInfo: prepareBaseInfo,
+  isLoadingUserInfo: isLoadingUserInfo
 }
