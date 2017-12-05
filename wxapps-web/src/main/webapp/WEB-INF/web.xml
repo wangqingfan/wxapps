@@ -16,7 +16,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>com.beixiao.controller.system.LoginListener</listener-class>
+		<listener-class>com.beixiao.system.controller.LoginListener</listener-class>
 	</listener>	
 	<context-param>  
          <param-name>logbackConfigLocation</param-name>  
