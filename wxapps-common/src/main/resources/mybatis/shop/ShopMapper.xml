@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.shop.repository.ShopDao" >
+  <resultMap id="BaseResultMap" type="com.beixiao.shop.domain.Shop" >
+    <id column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="mini_app_id" property="miniAppId" jdbcType="INTEGER" />
+    <result column="cutomer_name" property="cutomerName" jdbcType="VARCHAR" />
+    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+    <result column="client_card_id" property="clientCardId" jdbcType="INTEGER" />
+    <result column="shop_province" property="shopProvince" jdbcType="VARCHAR" />
+    <result column="shop_city" property="shopCity" jdbcType="VARCHAR" />
+    <result column="shop_sub_city" property="shopSubCity" jdbcType="VARCHAR" />
+    <result column="shop_address" property="shopAddress" jdbcType="VARCHAR" />
+    <result column="shop_telphone" property="shopTelphone" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
+    <result column="shop_state" property="shopState" jdbcType="TINYINT" />
+    <result column="total_deal_money" property="totalDealMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shop_id, mini_app_id, cutomer_name, id_code, client_card_id, shop_province, shop_city, 
+    shop_sub_city, shop_address, shop_telphone, create_time, lst_mod_time, shop_state, 
+    total_deal_money
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.shop.domain.Shop" >
+    insert into shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="miniAppId != null" >
+        mini_app_id,
+      </if>
+      <if test="cutomerName != null" >
+        cutomer_name,
+      </if>
+      <if test="idCode != null" >
+        id_code,
+      </if>
+      <if test="clientCardId != null" >
+        client_card_id,
+      </if>
+      <if test="shopProvince != null" >
+        shop_province,
+      </if>
+      <if test="shopCity != null" >
+        shop_city,
+      </if>
+      <if test="shopSubCity != null" >
+        shop_sub_city,
+      </if>
+      <if test="shopAddress != null" >
+        shop_address,
+      </if>
+      <if test="shopTelphone != null" >
+        shop_telphone,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time,
+      </if>
+      <if test="shopState != null" >
+        shop_state,
+      </if>
+      <if test="totalDealMoney != null" >
+        total_deal_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="miniAppId != null" >
+        #{miniAppId,jdbcType=INTEGER},
+      </if>
+      <if test="cutomerName != null" >
+        #{cutomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCode != null" >
+        #{idCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientCardId != null" >
+        #{clientCardId,jdbcType=INTEGER},
+      </if>
+      <if test="shopProvince != null" >
+        #{shopProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="shopCity != null" >
+        #{shopCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shopSubCity != null" >
+        #{shopSubCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null" >
+        #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTelphone != null" >
+        #{shopTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopState != null" >
+        #{shopState,jdbcType=TINYINT},
+      </if>
+      <if test="totalDealMoney != null" >
+        #{totalDealMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.beixiao.shop.domain.Shop" >
+    update shop
+    <set >
+      <if test="miniAppId != null" >
+        mini_app_id = #{miniAppId,jdbcType=INTEGER},
+      </if>
+      <if test="cutomerName != null" >
+        cutomer_name = #{cutomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCode != null" >
+        id_code = #{idCode,jdbcType=VARCHAR},
+      </if>
+      <if test="clientCardId != null" >
+        client_card_id = #{clientCardId,jdbcType=INTEGER},
+      </if>
+      <if test="shopProvince != null" >
+        shop_province = #{shopProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="shopCity != null" >
+        shop_city = #{shopCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shopSubCity != null" >
+        shop_sub_city = #{shopSubCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null" >
+        shop_address = #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTelphone != null" >
+        shop_telphone = #{shopTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time = #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopState != null" >
+        shop_state = #{shopState,jdbcType=TINYINT},
+      </if>
+      <if test="totalDealMoney != null" >
+        total_deal_money = #{totalDealMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+</mapper>

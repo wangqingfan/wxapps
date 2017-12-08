@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.system.repository.MiniAppsDao" >
+  <resultMap id="BaseResultMap" type="com.beixiao.system.domain.MiniApps" >
+    <id column="mini_app_id" property="miniAppId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="app_secret" property="appSecret" jdbcType="VARCHAR" />
+    <result column="app_state" property="appState" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mini_app_id, create_time, app_id, app_secret, app_state
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mini_apps
+    where mini_app_id = #{miniAppId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from mini_apps
+    where mini_app_id = #{miniAppId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.system.domain.MiniApps" >
+    insert into mini_apps
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="miniAppId != null" >
+        mini_app_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="appSecret != null" >
+        app_secret,
+      </if>
+      <if test="appState != null" >
+        app_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="miniAppId != null" >
+        #{miniAppId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null" >
+        #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="appState != null" >
+        #{appState,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.beixiao.system.domain.MiniApps" >
+    update mini_apps
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSecret != null" >
+        app_secret = #{appSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="appState != null" >
+        app_state = #{appState,jdbcType=TINYINT},
+      </if>
+    </set>
+    where mini_app_id = #{miniAppId,jdbcType=INTEGER}
+  </update>
+</mapper>

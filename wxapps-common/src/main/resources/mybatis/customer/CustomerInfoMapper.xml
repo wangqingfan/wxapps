@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.customer.repository.CustomerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.beixiao.customer.domain.CustomerInfo" >
+    <id column="customer_info_id" property="customerInfoId" jdbcType="INTEGER" />
+    <result column="mini_app_id" property="miniAppId" jdbcType="INTEGER" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="we_chat" property="weChat" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="from_channel" property="fromChannel" jdbcType="TINYINT" />
+    <result column="total_consume_money" property="totalConsumeMoney" jdbcType="DECIMAL" />
+    <result column="lives_province" property="livesProvince" jdbcType="VARCHAR" />
+    <result column="lives_city" property="livesCity" jdbcType="VARCHAR" />
+    <result column="lives_sub_city" property="livesSubCity" jdbcType="VARCHAR" />
+    <result column="lives_address" property="livesAddress" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
+    <result column="customer_card_id" property="customerCardId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_info_id, mini_app_id, customer_name, mobile_phone, email, we_chat, sex, 
+    from_channel, total_consume_money, lives_province, lives_city, lives_sub_city, lives_address, 
+    create_time, lst_mod_time,customer_card_id
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_info
+    where customer_info_id = #{customerInfoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from customer_info
+    where customer_info_id = #{customerInfoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.customer.domain.CustomerInfo" >
+    insert into customer_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerInfoId != null" >
+        customer_info_id,
+      </if>
+      <if test="miniAppId != null" >
+        mini_app_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="weChat != null" >
+        we_chat,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="fromChannel != null" >
+        from_channel,
+      </if>
+      <if test="totalConsumeMoney != null" >
+        total_consume_money,
+      </if>
+      <if test="livesProvince != null" >
+        lives_province,
+      </if>
+      <if test="livesCity != null" >
+        lives_city,
+      </if>
+      <if test="livesSubCity != null" >
+        lives_sub_city,
+      </if>
+      <if test="livesAddress != null" >
+        lives_address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time,
+      </if>
+      <if test="customerCardId != null and customerCardId!= 0" >
+        customer_card_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerInfoId != null" >
+        #{customerInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="miniAppId != null" >
+        #{miniAppId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="weChat != null" >
+        #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="fromChannel != null" >
+        #{fromChannel,jdbcType=TINYINT},
+      </if>
+      <if test="totalConsumeMoney != null" >
+        #{totalConsumeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="livesProvince != null" >
+        #{livesProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="livesCity != null" >
+        #{livesCity,jdbcType=VARCHAR},
+      </if>
+      <if test="livesSubCity != null" >
+        #{livesSubCity,jdbcType=VARCHAR},
+      </if>
+      <if test="livesAddress != null" >
+        #{livesAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerCardId != null and customerCardId!= 0" >
+        #{customerCardId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.beixiao.customer.domain.CustomerInfo" >
+    update customer_info
+    <set >
+      <if test="miniAppId != null" >
+        mini_app_id = #{miniAppId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="weChat != null" >
+        we_chat = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="fromChannel != null" >
+        from_channel = #{fromChannel,jdbcType=TINYINT},
+      </if>
+      <if test="totalConsumeMoney != null" >
+        total_consume_money = #{totalConsumeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="livesProvince != null" >
+        lives_province = #{livesProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="livesCity != null" >
+        lives_city = #{livesCity,jdbcType=VARCHAR},
+      </if>
+      <if test="livesSubCity != null" >
+        lives_sub_city = #{livesSubCity,jdbcType=VARCHAR},
+      </if>
+      <if test="livesAddress != null" >
+        lives_address = #{livesAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time = #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerCardId != null and customerCardId!= 0" >
+        customer_card_id = #{customerCardId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where customer_info_id = #{customerInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>
