@@ -18,13 +18,7 @@ public class LoginController {
 	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@RequestMapping("/toLogin")
 	public String toLogin(){
-		logger.info("---------------进入登录------------------");
-		try {
-			int parseInt = Integer.parseInt("S");
-			int a = parseInt/5 ;
-		} catch (Exception e) {
-			logger.error("--",e);
-		}
+		logger.info("---------------��¼------------------");
 		return "/system/login";
 	}
 }

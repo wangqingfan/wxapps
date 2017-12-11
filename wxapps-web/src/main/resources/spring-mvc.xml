@@ -9,12 +9,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
        default-lazy-init="true">
        <!-- 组件扫描 -->
-       <context:component-scan base-package="com.beixiao.controller">
+       <context:component-scan base-package="com.beixiao">
        		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
        </context:component-scan>
        <!-- 视图解析器 -->
        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-       		<property name="prefix" value="/WEB-INF/view/"/>
+       		<property name="prefix" value="/WEB-INF/view"/>
        		<property name="suffix" value=".jsp"/>
        </bean>
        <!-- 文件上传 -->
@@ -38,4 +38,7 @@
        	
        <!-- 如果不配置这个，会把静态资源当做请求处理，然后return，但是controller中又没有以js开头的，所以就会404 -->
        <mvc:resources mapping="/js/**" location="/resources/js/"/>
+       
+       <!-- 容器默认的DefaultServletHandler处理 对于静态资源(js,jpg等)的访问 -->
+       <mvc:default-servlet-handler/>
 </beans>
