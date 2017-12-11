@@ -17,4 +17,14 @@ public class TestController {
 	public String layui(){
 		return "/test/layui";
 	}
+	
+	@RequestMapping("/header")
+	public String header(){
+		return "/common/header";
+	}
+	
+	@RequestMapping("/content")
+	public String content(){
+		return "/test/content";
+	}
 }
