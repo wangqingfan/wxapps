@@ -53,7 +53,7 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a class="" href="javascript:;">订单信息</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;" mianFrameUrl="${pageContext.request.contextPath }/test/content" onclick="aa(event);">店内订餐</a></dd>
+            <dd><a href="javascript:;" mianFrameUrl="${pageContext.request.contextPath }/test/content">店内订餐</a></dd>
             <dd><a href="javascript:;">外卖</a></dd>
             <dd><a href="javascript:;">历史订单信息</a></dd>
             <dd><a href="">超链接</a></dd>
@@ -74,7 +74,7 @@
   </div>
   
   <div class="layui-body" id="main">
-    <iframe id="mainFrame" src="${pageContext.request.contextPath }/test/content" scrolling="no" frameborder="0" ></iframe>
+    <iframe id="mainFrame" src="" scrolling="no" frameborder="0" ></iframe>
   </div>
   
   <div class="layui-footer">
@@ -89,13 +89,23 @@ layui.use('element', function(){
   
 });
 
-$("#mainFrame").width($("#main").width());
-$("#mainFrame").height($("#main").height());
+$(document).ready(function(){
+	$("#mainFrame").width($("#main").width());
+	$("#mainFrame").height($("#main").height());
+	
+	$("div.layui-side-scroll dl.layui-nav-child dd a").on('click',function(){
+		var mianFrameUrl = $(this).attr('mianFrameUrl');
+		$('#mainFrame').attr('src',mianFrameUrl);
+	});
+	
+})
+
 
 window.onresize = function(){
 //	$("#main").parent().width($("body").width() -310);
 //	$("#mainFrame").width($("#main").width() -310).height($("main").height() -60);
 }
+
 
 function aa(e){
 	alert($(e).attr('mianFrameUrl'));

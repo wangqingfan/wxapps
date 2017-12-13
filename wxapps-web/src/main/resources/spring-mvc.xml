@@ -38,6 +38,7 @@
        	
        <!-- 如果不配置这个，会把静态资源当做请求处理，然后return，但是controller中又没有以js开头的，所以就会404 -->
        <mvc:resources mapping="/js/**" location="/resources/js/"/>
+       <mvc:resources mapping="/css/**" location="/resources/css/"/>
        
        <!-- 容器默认的DefaultServletHandler处理 对于静态资源(js,jpg等)的访问 -->
        <mvc:default-servlet-handler/>

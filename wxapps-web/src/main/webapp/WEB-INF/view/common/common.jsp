@@ -13,6 +13,7 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/layui/css/layui.css">
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.2.1.min.js"></script>
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/layui/layui.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/angular.js"></script>
 	</head>
 	<body>
 	

@@ -18,7 +18,7 @@ public class LoginListener implements HttpSessionListener{
 	@Override
 	public void sessionCreated(HttpSessionEvent arg0) {
 		// TODO Auto-generated method stub
-		logger.info("session创建成功1111");
+		logger.info("session创建");
 	}
 	@Override
 	public void sessionDestroyed(HttpSessionEvent arg0) {
