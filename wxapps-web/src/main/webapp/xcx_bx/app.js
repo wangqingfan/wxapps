@@ -16,5 +16,5 @@ App({
     this.sceneCount(options);
     this.log(options, "onShow");
   },
-  host: "这里是host"
+  host: "http://localhost:3000"
 })

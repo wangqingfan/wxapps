@@ -33,7 +33,7 @@ function prepareBaseInfo(backFun) {
 }
 
 function prepareBseInfoBack() {
-  _prepareBackFun();// 入口 开始调用
+  _prepareBackFun();
 }
 
 // 接口是否等待

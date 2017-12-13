@@ -16,7 +16,7 @@ function requests(value, backFun) {
   }
 
   // 判断url中是否有参数
-  if (value.url.indexof("?", 1) != -1) {
+  if (value.url.indexOf("?", 1) != -1) {
     value.url = value.url + "&t=" + new Date().getTime();
   } else {
     value.url = value.url + "?t=" + new Date().getTime();

@@ -1,6 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp();
+const _http = require("../../utils/http");
+
 let that;
 
 Page({
@@ -25,7 +27,6 @@ Page({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs);
-   
   },
   onShow: function () {
     if (!app.globalData.userInfo.hasOwnProperty("avatarUrl")){
@@ -40,5 +41,17 @@ function getUser () {
   that.setData({
     hasData: 1,
     userInfo: app.globalData.userInfo
+  })
+  _http.request({
+    url: app.host + '/mork/index.json',
+    data: {
+    },
+    method: 'GET',
+    success: function (res) {
+      console.log(res)
+    },
+    fail: function (res) {
+      console.log(res);
+    }
   })
 }
