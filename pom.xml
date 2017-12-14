@@ -21,6 +21,7 @@
     <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
     <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
     <jdbc.driver.version>${mysql.version}</jdbc.driver.version>
+    <jackson.version>1.9.3</jackson.version>
   </properties>
   <dependencyManagement>
   	<dependencies>

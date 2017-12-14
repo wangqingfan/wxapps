@@ -51,12 +51,10 @@
 			});
 			var app = angular.module('app',[]);
 			app.config(function($httpProvider){
-				$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 			})
 			app.controller('myCtrl',function($scope,$http){
 				$scope.admin = {adminCode:'',password:''};
 				$scope.submit = function(admin){
-					alert(1);
 					$http.post('${pageContext.request.contextPath}/login/login',{adminCode:'aa',password:'aa'})
 					.success(function(data){
 						

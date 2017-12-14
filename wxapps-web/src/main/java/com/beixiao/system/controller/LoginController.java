@@ -45,7 +45,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/login")
 	@ResponseBody
-	public Object login(@RequestParam Map<String,Object> map){
+	public Object login(@RequestBody Map<String,Object> param){
 		/*AdminInfo adminInfo = new AdminInfo();
 		ServletRequestDataBinder servletRequestDataBinder = new ServletRequestDataBinder(adminInfo);
 		servletRequestDataBinder.bind(request);*/
