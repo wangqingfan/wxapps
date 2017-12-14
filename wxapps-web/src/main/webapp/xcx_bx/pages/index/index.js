@@ -43,10 +43,10 @@ function getUser () {
     userInfo: app.globalData.userInfo
   })
   _http.request({
-    url: app.host + '/mork/index.json',
+    url: app.host + '/login',
     data: {
     },
-    method: 'GET',
+    method: 'POST',
     success: function (res) {
       console.log(res)
     },
