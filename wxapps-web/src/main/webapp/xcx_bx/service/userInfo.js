@@ -55,8 +55,10 @@ function wxLogin() {
   //   success: function (res) {
   //     if (res.data && res.data.code == "10000") {
   //       for (var item in res.data.data) {
+            //在globalData存入api_token
   //         _app.globalData.userInfo[item] = res.data.data[item];
   //       }
+            //在globalData存入转换的请求时间 7200代表 两个小时
   //       _app.globalData.userInfo["time"] = (res.data.data["expires_in"]) * 1000 + parseInt((new Date().getTime()));
         setBaseUserInfo();
   //     } else {
@@ -121,7 +123,7 @@ function register () {
   //     _app.log(res.data, "register success");
   //     if (res.data && res.data.code == "100000") {
   //       for (var item in res.data.data) {
-  //         _app.g.userInfo[item] = res.data.data[item];
+  //         _app.globalData.userInfo[item] = res.data.data[item];
   //       }
         // 将3rdSessionId返回给客户端，维护小程序登录态。通过3rdSessionId找到用户session_key和openid。
         wx.setStorageSync("login", _app.globalData.userInfo); 

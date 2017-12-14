@@ -1,8 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp();
-const _http = require("../../utils/http");
-
+// 缓存this
 let that;
 
 Page({
@@ -19,7 +18,7 @@ Page({
   },
   onLoad: function () {
     that = this;
-    this.setData({
+    that.setData({
       hasData: 0
     });
     
@@ -42,10 +41,9 @@ function getUser () {
     hasData: 1,
     userInfo: app.globalData.userInfo
   })
-  _http.request({
+  app.request({
     url: app.host + '/login',
-    data: {
-    },
+    data: {},
     method: 'POST',
     success: function (res) {
       console.log(res)

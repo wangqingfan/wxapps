@@ -38,8 +38,10 @@ function initModule() {
 
   //http 注册
   // 注册统一http入口
-  _app.request = http.request;
-  _app.requestBase = http.requestBase;
+  // _app.request = http.request; // 先注释掉 等待联调的时候打开
+  // _app.requestBase = http.requestBase;// 先注释掉 等待联调的时候打开
+  //联调的时候需要注释掉
+  _app.request = http.requestBase;
 
   //获取省市列表
   _app.getAddr = addrList.getAddr;
