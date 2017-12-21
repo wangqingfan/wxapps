@@ -1,18 +1,17 @@
 package com.beixiao.system.controller;
 
-import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import util.Base64Util;
+import util.MD5Util;
 
 import com.beixiao.system.domain.AdminInfo;
 import com.beixiao.system.service.AdminInfoService;
@@ -45,15 +44,26 @@ public class LoginController {
 	 */
 	@RequestMapping("/login")
 	@ResponseBody
-	public Object login(@RequestBody Map<String,Object> param){
-		/*AdminInfo adminInfo = new AdminInfo();
-		ServletRequestDataBinder servletRequestDataBinder = new ServletRequestDataBinder(adminInfo);
-		servletRequestDataBinder.bind(request);*/
+	public Object login(@RequestBody AdminInfo adminInfo,HttpSession session){
 		String result = "";
-		/*AdminInfo find = adminInfoService.findByAdminCode(adminInfo.getAdminCode());
-		if(find != null){
-			result = "success";
-		}*/
+		try {
+			AdminInfo find = adminInfoService.findByAdminCode(adminInfo.getAdminCode());
+			if(find != null){
+				String base = Base64Util.decode(adminInfo.getPassword(), "Unicode");
+				MD5Util md5Key = new MD5Util();
+				String md5Pwd = md5Key.getkeyBeanofStr(base);
+				if(find.getPassword().equals(md5Pwd)){
+					session.setAttribute("adminInfo", find);
+					result="success";
+				}
+			}else{
+				result="error";
+			}
+		} catch (Exception e) {
+			logger.error("--------工号为："+adminInfo.getAdminCode()+"------login--------------发生异常",e);
+			result="error";
+		}
 		return result;
 	}
+	
 }

@@ -28,6 +28,8 @@ public class AdminInfo {
     private String adminIdCode;//身份证号
 
     private Date lstMdfTime;//最后修改时间
+    
+    private Integer miniAppId;//所属程序 0代表北潇自己员工
 
     public Integer getAdminId() {
         return adminId;
@@ -108,4 +110,14 @@ public class AdminInfo {
     public void setLstMdfTime(Date lstMdfTime) {
         this.lstMdfTime = lstMdfTime;
     }
+
+	public Integer getMiniAppId() {
+		return miniAppId;
+	}
+
+	public void setMiniAppId(Integer miniAppId) {
+		this.miniAppId = miniAppId;
+	}
+    
+    
 }
