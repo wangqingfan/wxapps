@@ -1,14 +1,18 @@
 package com.beixiao.test.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
- * ≤‚ ‘controller
- * @author geniusDashingFan
- * 2017ƒÍ12‘¬11»’ …œŒÁ11:24:56
- * 
- */
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.beixiao.common.util.HttpClientUtil;
+import com.beixiao.common.util.UrlUtil;
+
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -26,5 +30,22 @@ public class TestController {
 	@RequestMapping("/content")
 	public String content(){
 		return "/test/content";
+	}
+	
+	@RequestMapping("/wechat")
+	@ResponseBody
+	public Object wechat(){
+		String code = "071HsXdi0iVPem1O1Aei02k7ei0HsXdw";
+		String appId= "wxda9bae61900fac0a";//Â∞èÁ®ãÂ∫èid
+		String AppSecret = "8278d09c06f09c7b100ff9614113e63f";//Â∞èÁ®ãÂ∫èÁßòÈí•
+		String url = "https://api.weixin.qq.com/sns/jscode2session";
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("js_code", code);
+		map.put("appid", appId);
+		map.put("secret", AppSecret);
+		map.put("grant_type", "authorization_code");
+		String post = UrlUtil.sendPost(url, map);
+		System.out.println("--------------------postÔºö"+post);
+		return "success";
 	}
 }
