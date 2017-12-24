@@ -16,11 +16,12 @@
     <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
     <result column="shop_state" property="shopState" jdbcType="TINYINT" />
     <result column="total_deal_money" property="totalDealMoney" jdbcType="DECIMAL" />
+    <result column="shop_type" property="shopType" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     shop_id, mini_app_id, cutomer_name, id_code, client_card_id, shop_province, shop_city, 
     shop_sub_city, shop_address, shop_telphone, create_time, lst_mod_time, shop_state, 
-    total_deal_money
+    total_deal_money,shop_type
   </sql>
   <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -77,6 +78,9 @@
       <if test="totalDealMoney != null" >
         total_deal_money,
       </if>
+      <if test="shopType != null" >
+        shop_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="shopId != null" >
@@ -121,6 +125,9 @@
       <if test="totalDealMoney != null" >
         #{totalDealMoney,jdbcType=DECIMAL},
       </if>
+      <if test="shopType != null" >
+        #{shopType,jdbcType=TINYINT},
+      </if>
     </trim>
   </insert>
   <update id="update" parameterType="com.beixiao.shop.domain.Shop" >
@@ -164,6 +171,9 @@
       </if>
       <if test="totalDealMoney != null" >
         total_deal_money = #{totalDealMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="shopType != null" >
+        shop_type = #{shopType,jdbcType=TINYINT},
       </if>
     </set>
     where shop_id = #{shopId,jdbcType=INTEGER}

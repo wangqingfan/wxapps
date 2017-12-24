@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.restaurant.repository.RestaurantMapper" >
+  <resultMap id="BaseResultMap" type="com.beixiao.restaurant.domain.Restaurant" >
+    <id column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
+    <result column="least_consume" property="leastConsume" jdbcType="DECIMAL" />
+    <result column="delivery_distance" property="deliveryDistance" jdbcType="VARCHAR" />
+    <result column="begin_bussinsess_time" property="beginBussinsessTime" jdbcType="TIMESTAMP" />
+    <result column="end_bussinsess_time" property="endBussinsessTime" jdbcType="TIMESTAMP" />
+    <result column="bussiness_state" property="bussinessState" jdbcType="TINYINT" />
+    <result column="announcement" property="announcement" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    restaurant_id, least_consume, delivery_distance, begin_bussinsess_time, end_bussinsess_time, 
+    bussiness_state, announcement, create_time, lst_mod_time
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from restaurant
+    where restaurant_id = #{restaurantId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from restaurant
+    where restaurant_id = #{restaurantId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.restaurant.domain.Restaurant" >
+    insert into restaurant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="restaurantId != null" >
+        restaurant_id,
+      </if>
+      <if test="leastConsume != null" >
+        least_consume,
+      </if>
+      <if test="deliveryDistance != null" >
+        delivery_distance,
+      </if>
+      <if test="beginBussinsessTime != null" >
+        begin_bussinsess_time,
+      </if>
+      <if test="endBussinsessTime != null" >
+        end_bussinsess_time,
+      </if>
+      <if test="bussinessState != null" >
+        bussiness_state,
+      </if>
+      <if test="announcement != null" >
+        announcement,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="restaurantId != null" >
+        #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="leastConsume != null" >
+        #{leastConsume,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDistance != null" >
+        #{deliveryDistance,jdbcType=VARCHAR},
+      </if>
+      <if test="beginBussinsessTime != null" >
+        #{beginBussinsessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endBussinsessTime != null" >
+        #{endBussinsessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bussinessState != null" >
+        #{bussinessState,jdbcType=TINYINT},
+      </if>
+      <if test="announcement != null" >
+        #{announcement,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.beixiao.restaurant.domain.Restaurant" >
+    update restaurant
+    <set >
+      <if test="leastConsume != null" >
+        least_consume = #{leastConsume,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryDistance != null" >
+        delivery_distance = #{deliveryDistance,jdbcType=VARCHAR},
+      </if>
+      <if test="beginBussinsessTime != null" >
+        begin_bussinsess_time = #{beginBussinsessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endBussinsessTime != null" >
+        end_bussinsess_time = #{endBussinsessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bussinessState != null" >
+        bussiness_state = #{bussinessState,jdbcType=TINYINT},
+      </if>
+      <if test="announcement != null" >
+        announcement = #{announcement,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time = #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where restaurant_id = #{restaurantId,jdbcType=INTEGER}
+  </update>
+</mapper>

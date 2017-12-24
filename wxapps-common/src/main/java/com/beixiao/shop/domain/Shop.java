@@ -39,6 +39,8 @@ public class Shop {
     private BigDecimal totalDealMoney;//累计成交金额
     
     private Integer accountId ;//账户id
+    
+    private Integer shopType;//商户类型
 
     /**
      * 商铺状态：已续约
@@ -49,6 +51,11 @@ public class Shop {
      * 商铺状态：未续约
      */
     public static final Integer SHOP_STATE_NO = 2;
+    
+    /**
+     * 商铺类型：餐厅
+     */
+    public static final Integer SHOP_TYPE_RESTAURANT = 1; 
     public Integer getShopId() {
         return shopId;
     }
@@ -167,6 +174,14 @@ public class Shop {
 
 	public void setAccountId(Integer accountId) {
 		this.accountId = accountId;
+	}
+
+	public Integer getShopType() {
+		return shopType;
+	}
+
+	public void setShopType(Integer shopType) {
+		this.shopType = shopType;
 	}
     
 }
