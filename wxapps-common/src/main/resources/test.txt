@@ -181,3 +181,30 @@ CREATE TABLE `activity`(
 	`lst_mod_time` datetime DEFAULT NULL COMMENT '最后修改时间',
 	PRIMARY KEY (`activity_id`)
 )
+
+ALTER TABLE restaurant ADD `shop_id` INT(11) NOT NULL COMMENT '商店id';
+ALTER TABLE activity ADD `shop_id` INT(11) NOT NULL COMMENT '商店id';
+
+
+ALTER TABLE restaurant drop begin_bussinsess_time ;
+ALTER TABLE restaurant ADD begin_bussiness_time VARCHAR(4) DEFAULT NULL COMMENT '开始营业时间';
+ALTER TABLE restaurant drop end_bussinsess_time ;
+ALTER TABLE restaurant ADD end_bussiness_time VARCHAR(4) DEFAULT NULL COMMENT '结束营业时间';
+
+
+CREATE TABLE `attachment` (
+  `attachment_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `file_name` varchar(255) DEFAULT NULL COMMENT '文件名',
+  `attachment_type` int(11) DEFAULT NULL COMMENT '附件类型',
+  `file_type` varchar(32) DEFAULT NULL COMMENT '文件类型',
+  `path_info` varchar(512) DEFAULT NULL COMMENT '存储位置',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `attachment_title` varchar(255) DEFAULT NULL COMMENT '附件标题',
+  `state` varchar(16) DEFAULT NULL COMMENT '状态',
+  `adminId` int(11) DEFAULT NULL COMMENT '创建人',
+  `href` varchar(255) DEFAULT NULL COMMENT '外链地址',
+  `width` int(11) DEFAULT NULL COMMENT '宽',
+  `height` int(11) DEFAULT NULL COMMENT '高',
+	`shop_id` int(11) NOT NULL COMMENT '商户id',
+  PRIMARY KEY (`attachment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='附件表';

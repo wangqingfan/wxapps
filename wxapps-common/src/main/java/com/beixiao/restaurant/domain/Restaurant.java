@@ -16,9 +16,9 @@ public class Restaurant {
 
     private String deliveryDistance;//配送距离
 
-    private Date beginBussinsessTime;//开始营业时间
+    private String beginBussinessTime;//开始营业时间
 
-    private Date endBussinsessTime;//结束营业时间
+    private String endBussinessTime;//结束营业时间
 
     private Integer bussinessState;//商户状态
 
@@ -27,7 +27,16 @@ public class Restaurant {
     private Date createTime;//创建时间
 
     private Date lstModTime;//修改时间
+    
+    private Integer shopId;//商店id
 
+    
+    /*---------vo-------------*/
+    
+    private String createTimeStr;
+    
+    private String lstModTimeStr;
+    
     public Integer getRestaurantId() {
         return restaurantId;
     }
@@ -52,23 +61,23 @@ public class Restaurant {
         this.deliveryDistance = deliveryDistance == null ? null : deliveryDistance.trim();
     }
 
-    public Date getBeginBussinsessTime() {
-        return beginBussinsessTime;
-    }
+    public String getBeginBussinessTime() {
+		return beginBussinessTime;
+	}
 
-    public void setBeginBussinsessTime(Date beginBussinsessTime) {
-        this.beginBussinsessTime = beginBussinsessTime;
-    }
+	public void setBeginBussinessTime(String beginBussinessTime) {
+		this.beginBussinessTime = beginBussinessTime;
+	}
 
-    public Date getEndBussinsessTime() {
-        return endBussinsessTime;
-    }
+	public String getEndBussinessTime() {
+		return endBussinessTime;
+	}
 
-    public void setEndBussinsessTime(Date endBussinsessTime) {
-        this.endBussinsessTime = endBussinsessTime;
-    }
+	public void setEndBussinessTime(String endBussinessTime) {
+		this.endBussinessTime = endBussinessTime;
+	}
 
-    public Integer getBussinessState() {
+	public Integer getBussinessState() {
         return bussinessState;
     }
 
@@ -99,4 +108,29 @@ public class Restaurant {
     public void setLstModTime(Date lstModTime) {
         this.lstModTime = lstModTime;
     }
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
+
+	public String getLstModTimeStr() {
+		return lstModTimeStr;
+	}
+
+	public void setLstModTimeStr(String lstModTimeStr) {
+		this.lstModTimeStr = lstModTimeStr;
+	}
+    
 }

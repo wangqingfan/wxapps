@@ -76,4 +76,10 @@
     </set>
     where mini_app_id = #{miniAppId,jdbcType=INTEGER}
   </update>
+  <select id="findByAppId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from mini_apps
+    where app_id = #{appId,jdbcType=VARCHAR}
+  </select>
 </mapper>

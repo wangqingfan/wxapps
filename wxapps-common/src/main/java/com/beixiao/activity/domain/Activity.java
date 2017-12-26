@@ -22,7 +22,15 @@ public class Activity {
     private Date createTime;//创建时间
 
     private Date lstModTime;//最后修改时间
+    
+    private Integer shopId;//商店id
 
+    /*---------vo-------------*/
+    
+    private String createTimeStr;
+    
+    private String lstModTimeStr;
+    
     public Integer getActivityId() {
         return activityId;
     }
@@ -78,4 +86,29 @@ public class Activity {
     public void setLstModTime(Date lstModTime) {
         this.lstModTime = lstModTime;
     }
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
+
+	public String getLstModTimeStr() {
+		return lstModTimeStr;
+	}
+
+	public void setLstModTimeStr(String lstModTimeStr) {
+		this.lstModTimeStr = lstModTimeStr;
+	}
+    
 }

@@ -31,4 +31,11 @@ public class ValidateUtil {
 		}
 		return false;
 	}
+	
+	public static boolean isEmpty(Object obj){
+		if(obj == null){
+			return true;
+		}
+		return false;
+	}
 }

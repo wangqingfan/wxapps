@@ -178,4 +178,75 @@
     </set>
     where shop_id = #{shopId,jdbcType=INTEGER}
   </update>
+  <resultMap id="basicInfoResultMap" type="com.beixiao.shop.dto.BasicInfo" >
+    <id column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="mini_app_id" property="miniAppId" jdbcType="INTEGER" />
+    <result column="cutomer_name" property="cutomerName" jdbcType="VARCHAR" />
+    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+    <result column="client_card_id" property="clientCardId" jdbcType="INTEGER" />
+    <result column="shop_province" property="shopProvince" jdbcType="VARCHAR" />
+    <result column="shop_city" property="shopCity" jdbcType="VARCHAR" />
+    <result column="shop_sub_city" property="shopSubCity" jdbcType="VARCHAR" />
+    <result column="shop_address" property="shopAddress" jdbcType="VARCHAR" />
+    <result column="shop_telphone" property="shopTelphone" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
+    <result column="shop_state" property="shopState" jdbcType="TINYINT" />
+    <result column="total_deal_money" property="totalDealMoney" jdbcType="DECIMAL" />
+    <result column="shop_type" property="shopType" jdbcType="TINYINT" />
+    <association  property="restaurant" resultMap="restaurantResultMap"/>
+    <association  property="activity" resultMap="activityResultMap"/>
+  </resultMap>
+  <resultMap type="com.beixiao.restaurant.domain.Restaurant" id="restaurantResultMap">
+  	<id column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
+    <result column="rest_least_consume" property="leastConsume" jdbcType="DECIMAL" />
+    <result column="rest_delivery_distance" property="deliveryDistance" jdbcType="VARCHAR" />
+    <result column="rest_begin_bussiness_time" property="beginBussinessTime" jdbcType="VARCHAR" />
+    <result column="rest_end_bussiness_time" property="endBussinessTime" jdbcType="VARCHAR" />
+    <result column="rest_bussiness_state" property="bussinessState" jdbcType="TINYINT" />
+    <result column="rest_announcement" property="announcement" jdbcType="VARCHAR" />
+    <result column="rest_create_time_str" property="createTimeStr" />
+    <result column="rest_lst_mod_time_str" property="lstModTimeStr" />
+    <result column="rest_shop_id" property="shopId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="activityResultMap" type="com.beixiao.activity.domain.Activity" >
+    <id column="activity_id" property="activityId" jdbcType="INTEGER" />
+    <result column="act_content" property="content" jdbcType="VARCHAR" />
+    <result column="act_state" property="state" jdbcType="TINYINT" />
+    <result column="act_create_author_id" property="createAuthorId" jdbcType="INTEGER" />
+    <result column="act_create_author_name" property="createAuthorName" jdbcType="INTEGER" />
+    <result column="act_create_time_str" property="createTimeStr" jdbcType="TIMESTAMP" />
+    <result column="act_lst_mod_time_str" property="lstModTimeStr" jdbcType="TIMESTAMP" />
+    <result column="act_shop_id" property="shopId" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="findBasicInfoByAppId" parameterType="java.lang.Integer" resultMap="basicInfoResultMap">
+  	SELECT
+		s.*,
+		r.restaurant_id,
+		r.least_consume as rest_least_consume,
+		r.delivery_distance as rest_delivery_distance,
+		r.begin_bussiness_time as rest_begin_bussiness_time,
+		r.end_bussiness_time as rest_end_bussiness_time,
+		r.bussiness_state as rest_bussiness_state,
+		r.announcement as rest_announcement,
+		DATE_FORMAT(r.create_time,'%Y-%m-%d %H:%i:%S') as rest_create_time_str,
+		DATE_FORMAT(r.lst_mod_time,'%Y-%m-%d %H:%i:%S') as rest_lst_mod_time_str,
+		r.shop_id as rest_shop_id,
+		a.activity_id,
+		a.content as act_content,
+		a.state as act_state,
+		a.create_author_id as act_create_author_id,
+		a.create_author_name as act_create_author_name,
+		DATE_FORMAT(a.create_time,'%Y-%m-%d %H:%i:%S') as act_create_time_str,
+		DATE_FORMAT(a.lst_mod_time,'%Y-%m-%d %H:%i:%S') as act_lst_mod_time_str,
+		a.shop_id as act_shop_id
+	FROM
+		shop s
+	LEFT JOIN restaurant r ON s.shop_id = r.shop_id
+	LEFT JOIN activity a ON a.shop_id = s.shop_id
+	WHERE 
+		s.shop_type = 1 
+	AND 
+		s.mini_app_id = #{value}
+  </select>
 </mapper>
