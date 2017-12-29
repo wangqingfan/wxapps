@@ -41,6 +41,7 @@ public class Shop {
     private Integer accountId ;//账户id
     
     private Integer shopType;//商户类型
+    
 
     /**
      * 商铺状态：已续约
@@ -183,5 +184,6 @@ public class Shop {
 	public void setShopType(Integer shopType) {
 		this.shopType = shopType;
 	}
-    
+
+	
 }

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.evaluate.repository.EvaluateDao" >
+  <resultMap id="BaseResultMap" type="com.beixiao.evaluate.domain.Avaluate" >
+    <id column="evaluate_id" property="evaluateId" jdbcType="INTEGER" />
+    <result column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
+    <result column="evaluate_level" property="evaluateLevel" jdbcType="TINYINT" />
+    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="is_anonymity" property="isAnonymity" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="evaluate_label" property="evaluateLabel" jdbcType="TINYINT" />
+    <result column="is_best" property="isBest" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    evaluate_id, restaurant_id, evaluate_level, describe, attachment_url, customer_id, 
+    customer_name, is_anonymity, create_time, evaluate_label, is_best
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from evaluate
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from evaluate
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.evaluate.domain.Evaluate" >
+    insert into evaluate (evaluate_id, restaurant_id, evaluate_level, 
+      describe, attachment_url, customer_id, 
+      customer_name, is_anonymity, create_time, 
+      evaluate_label, is_best)
+    values (#{evaluateId,jdbcType=INTEGER}, #{restaurantId,jdbcType=INTEGER}, #{evaluateLevel,jdbcType=TINYINT}, 
+      #{describe,jdbcType=VARCHAR}, #{attachmentUrl,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, 
+      #{customerName,jdbcType=VARCHAR}, #{isAnonymity,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{evaluateLabel,jdbcType=TINYINT}, #{isBest,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.beixiao.evaluate.domain.Evaluate" >
+    insert into evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        evaluate_id,
+      </if>
+      <if test="restaurantId != null" >
+        restaurant_id,
+      </if>
+      <if test="evaluateLevel != null" >
+        evaluate_level,
+      </if>
+      <if test="describe != null" >
+        describe,
+      </if>
+      <if test="attachmentUrl != null" >
+        attachment_url,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="isAnonymity != null" >
+        is_anonymity,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="evaluateLabel != null" >
+        evaluate_label,
+      </if>
+      <if test="isBest != null" >
+        is_best,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        #{evaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantId != null" >
+        #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateLevel != null" >
+        #{evaluateLevel,jdbcType=TINYINT},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentUrl != null" >
+        #{attachmentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymity != null" >
+        #{isAnonymity,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluateLabel != null" >
+        #{evaluateLabel,jdbcType=TINYINT},
+      </if>
+      <if test="isBest != null" >
+        #{isBest,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.beixiao.evaluate.domain.Evaluate" >
+    update evaluate
+    <set >
+      <if test="restaurantId != null" >
+        restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateLevel != null" >
+        evaluate_level = #{evaluateLevel,jdbcType=TINYINT},
+      </if>
+      <if test="describe != null" >
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentUrl != null" >
+        attachment_url = #{attachmentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymity != null" >
+        is_anonymity = #{isAnonymity,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluateLabel != null" >
+        evaluate_label = #{evaluateLabel,jdbcType=TINYINT},
+      </if>
+      <if test="isBest != null" >
+        is_best = #{isBest,jdbcType=TINYINT},
+      </if>
+    </set>
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.beixiao.evaluate.domain.Evaluate" >
+    update evaluate
+    set restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      evaluate_level = #{evaluateLevel,jdbcType=TINYINT},
+      describe = #{describe,jdbcType=VARCHAR},
+      attachment_url = #{attachmentUrl,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      is_anonymity = #{isAnonymity,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      evaluate_label = #{evaluateLabel,jdbcType=TINYINT},
+      is_best = #{isBest,jdbcType=TINYINT}
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </update>
+</mapper>

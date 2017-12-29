@@ -1,9 +1,8 @@
-package com.beixiao.restaurant.repository;
+package com.beixiao.restaurant.service;
 
-import com.beixiao.common.BaseDao;
 import com.beixiao.restaurant.domain.Restaurant;
 
-public interface RestaurantDao extends BaseDao<Restaurant>{
+public interface RestaurantService {
 	
 	/**
 	 * 通过shopid查找

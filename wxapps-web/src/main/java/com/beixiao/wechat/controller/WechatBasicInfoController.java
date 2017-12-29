@@ -1,5 +1,6 @@
-package com.beixiao.wechat;
+package com.beixiao.wechat.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.beixiao.attachment.domain.Attachment;
+import com.beixiao.attachment.service.AttachmentService;
 import com.beixiao.common.util.ValidateUtil;
 import com.beixiao.shop.dto.BasicInfo;
 import com.beixiao.shop.service.ShopService;
@@ -38,6 +41,9 @@ public class WechatBasicInfoController {
 	@Resource
 	private ShopService shopService;
 	
+	@Resource
+	private AttachmentService attachmentService;
+
 	/**
 	 * 获取基本信息
 	 * Project: wxapps-web 
@@ -75,9 +81,23 @@ public class WechatBasicInfoController {
 	 * @param param
 	 * @return Object
 	 */
-	@RequestMapping("/getAttachmentInfo")
+	@RequestMapping("/getBaseAttachmentInfo")
 	@ResponseBody
-	public Object getAttachmentInfo(@RequestParam Map<String,Object> param){
-		return null;
+	public Object getBaseAttachmentInfo(@RequestParam Map<String,Object> param){
+		String shopId = (String)param.get("shopId");
+		WechatResponse<List<Attachment>> response = null;
+		logger.info("------shopId："+shopId+"-----getAttachmentInfo------请求："+param);
+		if(!ValidateUtil.isEmpty(shopId)){
+			List<Attachment> attachments = attachmentService.findByShopIdAndType(param);
+			if(!ValidateUtil.isEmpty(attachments)){
+				response = new WechatResponse<List<Attachment>>(WechatResponse.SUCCESS_CODE, "查询成功",attachments);
+			}else{
+				response = new WechatResponse<List<Attachment>>(WechatResponse.SERVICE_DATA_ERROR_CODE, "查询附件为空");
+			}
+		}else{
+			response = new WechatResponse<List<Attachment>>(WechatResponse.PARAM_INCOMPLETE_CODE, "请求参数为空");
+		}
+		logger.info("------shopId："+shopId+"-----getAttachmentInfo------返回："+JSONObject.toJSONString(response));
+		return response;
 	}
 }

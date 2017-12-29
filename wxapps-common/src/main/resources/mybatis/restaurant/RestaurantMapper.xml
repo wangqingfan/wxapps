@@ -12,10 +12,13 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
     <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="total_evaluate_score" property="totalEvaluateScore" jdbcType="INTEGER" />
+    <result column="total_evaluate_person_num" property="totalEvaluatePersonNum" jdbcType="INTEGER" />
+    <result column="satisfaction" property="satisfaction" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     restaurant_id, least_consume, delivery_distance, begin_bussiness_time, end_bussinsess_time, 
-    bussiness_state, announcement, create_time, lst_mod_time, shop_id
+    bussiness_state, announcement, create_time, lst_mod_time, shop_id,total_evaluate_score,total_evaluate_person_num,satisfaction
   </sql>
   <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -60,6 +63,15 @@
       <if test="shopId != null" >
         shop_id,
       </if>
+      <if test="totalEvaluateScore != null" >
+        total_evaluate_score,
+      </if>
+      <if test="totalEvaluatePersonNum != null" >
+        total_evaluate_person_num,
+      </if>
+      <if test="satisfaction != null" >
+        satisfaction,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="restaurantId != null" >
@@ -91,6 +103,15 @@
       </if>
       <if test="shopId != null" >
         #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="totalEvaluateScore != null" >
+        #{totalEvaluateScore,jdbcType=INTEGER},
+      </if>
+      <if test="totalEvaluatePersonNum != null" >
+        #{totalEvaluatePersonNum,jdbcType=INTEGER},
+      </if>
+      <if test="satisfaction != null" >
+        #{satisfaction,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -124,7 +145,23 @@
       <if test="shopId != null" >
         shop_id = #{shopId,jdbcType=INTEGER},
       </if>
+      <if test="totalEvaluateScore != null" >
+        total_evaluate_score = #{totalEvaluateScore,jdbcType=INTEGER},
+      </if>
+      <if test="totalEvaluatePersonNum != null" >
+        total_evaluate_person_num = #{totalEvaluatePersonNum,jdbcType=INTEGER},
+      </if>
+      <if test="satisfaction != null" >
+        satisfaction = #{satisfaction,jdbcType=INTEGER},
+      </if>
     </set>
     where restaurant_id = #{restaurantId,jdbcType=INTEGER}
   </update>
+  
+  <select id="findByShopId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from restaurant
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -30,6 +30,11 @@ public class Restaurant {
     
     private Integer shopId;//商店id
 
+    private Integer totalEvaluateScore;//评价总分
+    
+    private Integer totalEvaluatePersonNum;//评价人数
+    
+    private Integer satisfaction;//满意度
     
     /*---------vo-------------*/
     
@@ -133,4 +138,27 @@ public class Restaurant {
 		this.lstModTimeStr = lstModTimeStr;
 	}
     
+	public Integer getTotalEvaluateScore() {
+		return totalEvaluateScore;
+	}
+
+	public void setTotalEvaluateScore(Integer totalEvaluateScore) {
+		this.totalEvaluateScore = totalEvaluateScore;
+	}
+
+	public Integer getTotalEvaluatePersonNum() {
+		return totalEvaluatePersonNum;
+	}
+
+	public void setTotalEvaluatePersonNum(Integer totalEvaluatePersonNum) {
+		this.totalEvaluatePersonNum = totalEvaluatePersonNum;
+	}
+
+	public Integer getSatisfaction() {
+		return satisfaction;
+	}
+
+	public void setSatisfaction(Integer satisfaction) {
+		this.satisfaction = satisfaction;
+	}
 }

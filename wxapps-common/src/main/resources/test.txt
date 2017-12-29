@@ -208,3 +208,26 @@ CREATE TABLE `attachment` (
 	`shop_id` int(11) NOT NULL COMMENT '商户id',
   PRIMARY KEY (`attachment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='附件表';
+
+CREATE TABLE `evaluate`(
+	`evaluate_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '评价id',
+	`restaurant_id` INT(11) NOT NULL COMMENT '餐厅id',
+	`evaluate_level` TINYINT(4) DEFAULT NULL COMMENT '评分',
+	`describe` VARCHAR(1000) DEFAULT NULL COMMENT '评价描述',
+	`attachment_url` VARCHAR(255) DEFAULT NULL COMMENT '评分图片url',
+	`customer_id` INT(11) DEFAULT NULL COMMENT '客户id',
+	`customer_name` VARCHAR(20) DEFAULT NULL COMMENT '客户姓名',
+	`is_anonymity` TINYINT(4) NOT NULL COMMENT '是否匿名',
+	`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+	`evaluate_label` TINYINT(4) DEFAULT NULL COMMENT '标签',
+	`is_best` TINYINT(4) DEFAULT NULL COMMENT '是否本次最佳',
+	PRIMARY KEY (`evaluate_id`),
+	KEY `idx_restaurant_id` (`restaurant_id`),
+	KEY `idx_evaluate_level` (`evaluate_level`),
+	KEY `idx_customer_id` (`customer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='评分'
+
+
+ALTER TABLE restaurant ADD `total_evaluate_score` INT(32) DEFAULT NULL COMMENT '评价总分';
+ALTER TABLE restaurant ADD `total_evaluate_person_num` INT(32) DEFAULT NULL COMMENT '评价总人数';
+ALTER TABLE restaurant ADD `satisfaction` TINYINT(4) DEFAULT NULL COMMENT '店铺满意度';

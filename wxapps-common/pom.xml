@@ -96,6 +96,12 @@
 		   <groupId>org.bouncycastle</groupId>  
 		   <artifactId>bcprov-jdk16</artifactId>  
 		   <version>1.46</version>  
+		</dependency>
+		<!-- commonResult -->
+		<dependency>
+		  <groupId>com.cooperate.framework</groupId>
+		  <artifactId>com.cooperate.framework.utils</artifactId>
+		  <version>1.0.1</version>
 		</dependency> 
   </dependencies>
   <build>
