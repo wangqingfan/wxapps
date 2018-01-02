@@ -231,3 +231,5 @@ CREATE TABLE `evaluate`(
 ALTER TABLE restaurant ADD `total_evaluate_score` INT(32) DEFAULT NULL COMMENT '评价总分';
 ALTER TABLE restaurant ADD `total_evaluate_person_num` INT(32) DEFAULT NULL COMMENT '评价总人数';
 ALTER TABLE restaurant ADD `satisfaction` TINYINT(4) DEFAULT NULL COMMENT '店铺满意度';
+
+ALTER TABLE evaluate CHANGE `describe` `description` VARCHAR(1000);

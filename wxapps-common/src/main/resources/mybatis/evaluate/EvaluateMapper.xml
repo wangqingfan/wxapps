@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.beixiao.evaluate.repository.EvaluateDao" >
-  <resultMap id="BaseResultMap" type="com.beixiao.evaluate.domain.Avaluate" >
+  <resultMap id="BaseResultMap" type="com.beixiao.evaluate.domain.Evaluate" >
     <id column="evaluate_id" property="evaluateId" jdbcType="INTEGER" />
     <result column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
     <result column="evaluate_level" property="evaluateLevel" jdbcType="TINYINT" />
-    <result column="describe" property="describe" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR" />
     <result column="customer_id" property="customerId" jdbcType="INTEGER" />
     <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
@@ -15,30 +15,20 @@
     <result column="is_best" property="isBest" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    evaluate_id, restaurant_id, evaluate_level, describe, attachment_url, customer_id, 
+    evaluate_id, restaurant_id, evaluate_level, description, attachment_url, customer_id, 
     customer_name, is_anonymity, create_time, evaluate_label, is_best
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from evaluate
     where evaluate_id = #{evaluateId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteById" parameterType="java.lang.Integer" >
     delete from evaluate
     where evaluate_id = #{evaluateId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.beixiao.evaluate.domain.Evaluate" >
-    insert into evaluate (evaluate_id, restaurant_id, evaluate_level, 
-      describe, attachment_url, customer_id, 
-      customer_name, is_anonymity, create_time, 
-      evaluate_label, is_best)
-    values (#{evaluateId,jdbcType=INTEGER}, #{restaurantId,jdbcType=INTEGER}, #{evaluateLevel,jdbcType=TINYINT}, 
-      #{describe,jdbcType=VARCHAR}, #{attachmentUrl,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, 
-      #{customerName,jdbcType=VARCHAR}, #{isAnonymity,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{evaluateLabel,jdbcType=TINYINT}, #{isBest,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.beixiao.evaluate.domain.Evaluate" >
     insert into evaluate
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="evaluateId != null" >
@@ -50,8 +40,8 @@
       <if test="evaluateLevel != null" >
         evaluate_level,
       </if>
-      <if test="describe != null" >
-        describe,
+      <if test="description != null" >
+        description,
       </if>
       <if test="attachmentUrl != null" >
         attachment_url,
@@ -85,8 +75,8 @@
       <if test="evaluateLevel != null" >
         #{evaluateLevel,jdbcType=TINYINT},
       </if>
-      <if test="describe != null" >
-        #{describe,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="attachmentUrl != null" >
         #{attachmentUrl,jdbcType=VARCHAR},
@@ -111,7 +101,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.beixiao.evaluate.domain.Evaluate" >
+  <update id="updateById" parameterType="com.beixiao.evaluate.domain.Evaluate" >
     update evaluate
     <set >
       <if test="restaurantId != null" >
@@ -120,8 +110,8 @@
       <if test="evaluateLevel != null" >
         evaluate_level = #{evaluateLevel,jdbcType=TINYINT},
       </if>
-      <if test="describe != null" >
-        describe = #{describe,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="attachmentUrl != null" >
         attachment_url = #{attachmentUrl,jdbcType=VARCHAR},
@@ -147,18 +137,11 @@
     </set>
     where evaluate_id = #{evaluateId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.beixiao.evaluate.domain.Evaluate" >
-    update evaluate
-    set restaurant_id = #{restaurantId,jdbcType=INTEGER},
-      evaluate_level = #{evaluateLevel,jdbcType=TINYINT},
-      describe = #{describe,jdbcType=VARCHAR},
-      attachment_url = #{attachmentUrl,jdbcType=VARCHAR},
-      customer_id = #{customerId,jdbcType=INTEGER},
-      customer_name = #{customerName,jdbcType=VARCHAR},
-      is_anonymity = #{isAnonymity,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      evaluate_label = #{evaluateLabel,jdbcType=TINYINT},
-      is_best = #{isBest,jdbcType=TINYINT}
-    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
-  </update>
+  
+  <select id="findByRestaurant" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	SELECT
+  	<include refid="Base_Column_List" />
+    from evaluate
+    where restaurant_id = #{restaurantId,jdbcType=INTEGER}
+  </select>
 </mapper>

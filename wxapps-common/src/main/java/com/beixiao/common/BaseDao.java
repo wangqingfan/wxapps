@@ -13,4 +13,5 @@ public interface BaseDao <T>{
 	public abstract List<T> findAll();
 	
 	public abstract Integer deleteById(Object key);
+	
 }

@@ -32,6 +32,13 @@ public class ValidateUtil {
 		return false;
 	}
 	
+	public static boolean isEmpty(Integer str){
+		if(str == null || 0 == str){
+			return true;
+		}
+		return false;
+	}
+	
 	public static boolean isEmpty(Object obj){
 		if(obj == null){
 			return true;

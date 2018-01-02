@@ -1,11 +1,15 @@
-package com.beixiao.evaluate.repository;
+package com.beixiao.evaluate.service;
 
 import java.util.List;
 
-import com.beixiao.common.BaseDao;
 import com.beixiao.evaluate.domain.Evaluate;
 
-public interface EvaluateDao extends BaseDao<Evaluate>{
+/**
+ * 评价service
+ * Project: wxapps-common 
+ * Author: wqf V1.0 2018年1月2日	上午10:34:06
+ */
+public interface EvaluateService {
 	
 	/**
 	 * 通过饭店来查找评价

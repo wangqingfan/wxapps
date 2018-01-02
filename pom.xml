@@ -99,4 +99,31 @@
 		</plugin > 
     </plugins>
 </build>
+	<!-- maven私服 -->
+	<repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus</name>
+            <url>http://172.20.11.100:8081/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Nexus</name>
+            <url>http://172.20.11.100:8081/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

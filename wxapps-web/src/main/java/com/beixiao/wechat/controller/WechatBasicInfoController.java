@@ -21,7 +21,6 @@ import com.beixiao.shop.service.ShopService;
 import com.beixiao.system.domain.MiniApps;
 import com.beixiao.system.service.MiniAppsService;
 import com.beixiao.wechat.dto.WechatResponse;
-import com.cooperate.framework.utils.runtime.CommonResult;
 
 /**
  * 小程序基本信息接口类

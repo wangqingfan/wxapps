@@ -14,7 +14,7 @@ public class Evaluate {
 
     private Integer evaluateLevel;//评分级别
 
-    private String describe;//评价描述
+    private String description;//评价描述
 
     private String attachmentUrl;//附件url
 
@@ -54,15 +54,15 @@ public class Evaluate {
         this.evaluateLevel = evaluateLevel;
     }
 
-    public String getDescribe() {
-        return describe;
-    }
+    public String getDescription() {
+		return description;
+	}
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getAttachmentUrl() {
+	public String getAttachmentUrl() {
         return attachmentUrl;
     }
 
