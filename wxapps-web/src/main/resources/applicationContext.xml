@@ -41,6 +41,8 @@
       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
        		<property name="dataSource" ref="dataSource"></property>
        		<property name="mapperLocations" value="classpath*:/mybatis/**/*.xml"></property>
+       		<!--设置pageHelper,引入mybatis配置文件-->
+	        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
       </bean>
        <!-- DAO接口所在的包，spring会自动查找 -->
       <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -55,28 +57,28 @@
        </bean>
        
        <!-- redisTemplate -->
-	<context:property-placeholder location="classpath:/redis.properties"/>
+	<!-- <context:property-placeholder location="classpath:/redis.properties"/>
 	<bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
-		<!-- 最大总数 -->
+		最大总数
 		<property name="maxTotal" value="${redis.maxActive}"></property>
-		<!-- 最大空闲 -->
+		最大空闲
 		<property name="maxIdle" value="${redis.maxIdle}"></property>
-		<!-- 最小空闲 -->
+		最小空闲
 		<property name="minIdle" value="${redis.minIdle}"></property>
-		<!-- 最大等待时间 -->
+		最大等待时间
 		<property name="maxWaitMillis" value="${redis.maxWaitMillis}"></property>
-		<!-- 在获取连接时检查有效性 -->
+		在获取连接时检查有效性
 		<property name="testOnBorrow" value="${redis.testOnBorrow}"></property>
-		<!-- Idle时进行连接扫描 -->
+		Idle时进行连接扫描
 		<property name="testWhileIdle" value="${redis.testWhileIdle}"></property>
-		<!-- 逐出扫描的时间间隔(毫秒)如果为负数，则不运行逐出线程，默认为-1 -->
+		逐出扫描的时间间隔(毫秒)如果为负数，则不运行逐出线程，默认为-1
 		<property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}"></property>
-		<!-- 每次逐出的最大条目数 -->
+		每次逐出的最大条目数
 		<property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}"></property>
-		<!-- 逐出连接的最小空闲时间 -->
+		逐出连接的最小空闲时间
 		<property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}"></property>
 	</bean>
-	<!-- redis连接工厂 -->
+	redis连接工厂
 	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
 		<property name="hostName" value="${redis.hostName}"></property>
 		<property name="port" value="${redis.port}"></property>
@@ -84,15 +86,15 @@
 		<property name="poolConfig" ref="jedisConfig"></property>
 		<property name="usePool" value="true"></property>
 	</bean>
-	<!--reids操作模板  -->
+	reids操作模板 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
 		<property name="connectionFactory" ref="connectionFactory"></property>
-		<!-- 如果不配置Serializer，那么存储的时候就不能存储对象，只能存储字符串，会提示错误can't cast to string  -->
+		如果不配置Serializer，那么存储的时候就不能存储对象，只能存储字符串，会提示错误can't cast to string 
 		<property name="keySerializer">
 			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
 		</property>
 		<property name="valueSerializer">
 			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"></bean>
 		</property>
-	</bean>
+	</bean> -->
 </beans>
