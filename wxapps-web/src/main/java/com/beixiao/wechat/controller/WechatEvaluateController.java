@@ -73,23 +73,18 @@ public class WechatEvaluateController {
 	public Object getEvaluateOfPage(@RequestParam Map<String,Object> param,
 			@RequestParam("pageNum") Integer pageNum,
 			@RequestParam("pageSize") Integer pageSize){
-		String shopId = (String)param.get("shopId");
+		String restaurantId = (String)param.get("restaurantId");
 		WechatResponse<PageInfo<Evaluate>> response = null;
-		if(!ValidateUtil.isEmpty(shopId) && !ValidateUtil.isEmpty(pageNum) && !ValidateUtil.isEmpty(pageSize)){
-			Restaurant restaurant = restaurantService.findByShopId(Integer.parseInt(shopId));
-			if(!ValidateUtil.isEmpty(restaurant)){
-				//分页
-				PageHelper.startPage(pageNum, pageSize);
-				List<Evaluate> list = evaluateService.findByRestaurant(restaurant.getRestaurantId());
-				PageInfo<Evaluate> evaluates = new PageInfo<Evaluate>(list);
-				response = new WechatResponse<PageInfo<Evaluate>>(WechatResponse.SUCCESS_CODE,"查询成功",evaluates);	
-			}else{
-				response = new WechatResponse<PageInfo<Evaluate>>(WechatResponse.SERVICE_DATA_ERROR_CODE,"参数错误，查询不到对应的餐厅");
-			}
+		if(!ValidateUtil.isEmpty(restaurantId) && !ValidateUtil.isEmpty(pageNum) && !ValidateUtil.isEmpty(pageSize)){
+			//分页
+			PageHelper.startPage(pageNum, pageSize);
+			List<Evaluate> list = evaluateService.findByRestaurant(Integer.parseInt(restaurantId));
+			PageInfo<Evaluate> evaluates = new PageInfo<Evaluate>(list);
+			response = new WechatResponse<PageInfo<Evaluate>>(WechatResponse.SUCCESS_CODE,"查询成功",evaluates);	
 		}else{
 			response = new WechatResponse<PageInfo<Evaluate>>(WechatResponse.PARAM_INCOMPLETE_CODE,"请求参数为空");	
 		}
-		logger.info("---shopId："+shopId+"-----getEvaluateOfPage---"+JSONObject.toJSONString(response));
+		logger.info("---restaurantId："+restaurantId+"-----getEvaluateOfPage-"+JSONObject.toJSONString(response));
 		return response;
 	}
 }

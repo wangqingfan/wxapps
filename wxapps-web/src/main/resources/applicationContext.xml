@@ -24,7 +24,8 @@
 
 
 	<!-- 配置文件 -->
-    <context:property-placeholder location="classpath*:/mybatisAlias.properties,classpath*:/jdbc.properties,classpath*:/log4j.properties,classpath*:/redis.properties"/>
+    <context:property-placeholder location="classpath*:/*.properties"/>
+    
     <!-- 数据源 -->
       <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
        		<property name="driverClassName" value="${jdbc.driver}"></property>
@@ -43,8 +44,6 @@
        		<property name="mapperLocations" value="classpath*:/mybatis/**/*.xml"></property>
        		<!--设置pageHelper,引入mybatis配置文件-->
 	        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-	        <!-- 自动扫描domain目录, 省掉Configuration.xml里的手工配置 -->
-            <property name="typeAliasesPackage" value="${mybatis.alias.basepackage}"/>
       </bean>
        <!-- DAO接口所在的包，spring会自动查找 -->
       <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
