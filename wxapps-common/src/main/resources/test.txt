@@ -233,33 +233,3 @@ ALTER TABLE restaurant ADD `total_evaluate_person_num` INT(32) DEFAULT NULL COMM
 ALTER TABLE restaurant ADD `satisfaction` TINYINT(4) DEFAULT NULL COMMENT '店铺满意度';
 
 ALTER TABLE evaluate CHANGE `describe` `description` VARCHAR(1000);
-
-
-CREATE TABLE `product`(
-	`product_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '产品主键id',
-	`product_name` VARCHAR(10) NOT NULL COMMENT '产品名称',
-	`create_user_id` INT(11) NOT NULL COMMENT '创建人id',
-	`create_time` datetime DEFAULT NULL COMMENT '创建时间',
-	PRIMARY key (`product_id`)
-)ENGINE=INNODB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='菜品表';
-
-CREATE TABLE `dishes`(
-	`dishes_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '菜品表主键id',
-	`restaurant_id` INT(11) UNSIGNED NOT NULL COMMENT '饭店表id',
-	`attachment_id` INT(11) UNSIGNED NOT NULL COMMENT '附件表id',
-	`attachment_url` VARCHAR(255) DEFAULT NULL COMMENT '附件地址用于快捷查询的vo字段',
-	`dishes_name` VARCHAR(20) DEFAULT NULL COMMENT '菜品名称',
-	`create_time` datetime DEFAULT NULL COMMENT '创建时间',
-	`lst_mod_time` datetime DEFAULT NULL COMMENT '最后修改时间',
-	`dishes_state` TINYINT(4) DEFAULT NULL COMMENT '菜品状态',
-	`description` VARCHAR(255) DEFAULT NULL COMMENT '菜品描述',
-	`sell_price` decimal(18,2) DEFAULT NULL COMMENT '售价',
-	`dishes_type` TINYINT(4) DEFAULT NULL COMMENT '菜品类型',
-	PRIMARY KEY (`dishes_id`),
-	KEY `idx_restaurant_id` (`restaurant_id`),
-	KEY `idx_attachment_id` (`attachment_id`),
-	KEY `idx_dishes_type` (`dishes_type`),
-	KEY `idx_dishes_state` (`dishes_state`)
-)ENGINE=INNODB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='菜品表';
-
-ALTER TABLE `shop` ADD `product_id` INT(11) DEFAULT NULL COMMENT '产品id';
