@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.dishes.repository.DishesDao" >
+  <resultMap id="BaseResultMap" type="com.beixiao.dishes.domain.Dishes" >
+    <id column="dishes_id" property="dishesId" jdbcType="INTEGER" />
+    <result column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
+    <result column="attachment_id" property="attachmentId" jdbcType="INTEGER" />
+    <result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR" />
+    <result column="dishes_name" property="dishesName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
+    <result column="dishes_state" property="dishesState" jdbcType="TINYINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="sell_price" property="sellPrice" jdbcType="DECIMAL" />
+    <result column="dishes_type" property="dishesType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dishes_id, restaurant_id, attachment_id, attachment_url, dishes_name, create_time, 
+    lst_mod_time, dishes_state, description, sell_price, dishes_type
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dishes
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from dishes
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.dishes.domain.Dishes" >
+    insert into dishes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dishesId != null" >
+        dishes_id,
+      </if>
+      <if test="restaurantId != null" >
+        restaurant_id,
+      </if>
+      <if test="attachmentId != null" >
+        attachment_id,
+      </if>
+      <if test="attachmentUrl != null" >
+        attachment_url,
+      </if>
+      <if test="dishesName != null" >
+        dishes_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time,
+      </if>
+      <if test="dishesState != null" >
+        dishes_state,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="sellPrice != null" >
+        sell_price,
+      </if>
+      <if test="dishesType != null" >
+        dishes_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dishesId != null" >
+        #{dishesId,jdbcType=INTEGER},
+      </if>
+      <if test="restaurantId != null" >
+        #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentId != null" >
+        #{attachmentId,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentUrl != null" >
+        #{attachmentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesName != null" >
+        #{dishesName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dishesState != null" >
+        #{dishesState,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sellPrice != null" >
+        #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="dishesType != null" >
+        #{dishesType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.beixiao.dishes.domain.Dishes" >
+    update dishes
+    <set >
+      <if test="restaurantId != null" >
+        restaurant_id = #{restaurantId,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentId != null" >
+        attachment_id = #{attachmentId,jdbcType=INTEGER},
+      </if>
+      <if test="attachmentUrl != null" >
+        attachment_url = #{attachmentUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dishesName != null" >
+        dishes_name = #{dishesName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time = #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dishesState != null" >
+        dishes_state = #{dishesState,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sellPrice != null" >
+        sell_price = #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="dishesType != null" >
+        dishes_type = #{dishesType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where dishes_id = #{dishesId,jdbcType=INTEGER}
+  </update>
+  <select id="findByShopId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	SELECT
+		d.*
+	FROM
+		dishes d
+	LEFT JOIN restaurant r ON d.restaurant_id = r.restaurant_id
+	where r.shop_id = #{value}
+  </select>
+</mapper>

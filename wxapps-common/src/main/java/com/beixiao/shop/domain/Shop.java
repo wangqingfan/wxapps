@@ -42,6 +42,8 @@ public class Shop {
     
     private Integer shopType;//商户类型
     
+    private Integer productId;//产品id
+    
 
     /**
      * 商铺状态：已续约
@@ -183,6 +185,14 @@ public class Shop {
 
 	public void setShopType(Integer shopType) {
 		this.shopType = shopType;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 
 	
