@@ -22,6 +22,7 @@
      	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
      </context:component-scan>
 
+
 	<!-- 配置文件 -->
     <context:property-placeholder location="classpath*:/mybatisAlias.properties,classpath*:/jdbc.properties,classpath*:/log4j.properties,classpath*:/redis.properties"/>
     <!-- 数据源 -->

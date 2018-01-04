@@ -16,6 +16,7 @@ CREATE TABLE `account` (
 -- Records of account
 -- ----------------------------
 
+
 -- ----------------------------
 -- Table structure for admin_info
 -- ----------------------------

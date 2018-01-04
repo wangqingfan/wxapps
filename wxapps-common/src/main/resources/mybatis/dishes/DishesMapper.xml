@@ -14,6 +14,8 @@
     <result column="sell_price" property="sellPrice" jdbcType="DECIMAL" />
     <result column="dishes_type" property="dishesType" jdbcType="TINYINT" />
   </resultMap>
+  
+  
   <sql id="Base_Column_List" >
     dishes_id, restaurant_id, attachment_id, attachment_url, dishes_name, create_time, 
     lst_mod_time, dishes_state, description, sell_price, dishes_type

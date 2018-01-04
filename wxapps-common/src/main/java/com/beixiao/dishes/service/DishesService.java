@@ -14,3 +14,4 @@ public interface DishesService {
 	 */
 	List<Dishes> findByShopId(Integer shopId);
 }
+

@@ -22,3 +22,4 @@ public class DishesServiceImpl implements DishesService{
 		return dishesDao.findByShopId(shopId);
 	}
 }
+

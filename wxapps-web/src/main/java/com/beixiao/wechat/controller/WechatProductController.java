@@ -27,6 +27,7 @@ public class WechatProductController {
 	@Resource
 	private WechatProductService wechatProductService;
 	
+	
 	/**
 	 * 通过shopId获取产品
 	 * @author wqf V1.0 2018年1月4日 上午9:58:22

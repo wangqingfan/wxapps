@@ -6,4 +6,5 @@ import com.beixiao.product.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService{
 
+	
 }

@@ -24,4 +24,5 @@ public class ShopServiceImpl implements ShopService{
 	public Shop findById(Integer shopId) {
 		return shopDao.findById(shopId);
 	}
+	
 }

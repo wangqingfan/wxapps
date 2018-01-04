@@ -17,4 +17,5 @@ public interface WechatProductService {
 	 * @return WechatResponse<Object>
 	 */
 	WechatResponse<PageInfo<Dishes>> findProductByShopId(@RequestParam Map<String,Object> param);
+	
 }

@@ -19,6 +19,7 @@
     <result column="shop_type" property="shopType" jdbcType="TINYINT" />
     <result column="product_id" property="productId" jdbcType="INTEGER" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     shop_id, mini_app_id, cutomer_name, id_code, client_card_id, shop_province, shop_city, 
     shop_sub_city, shop_address, shop_telphone, create_time, lst_mod_time, shop_state, 

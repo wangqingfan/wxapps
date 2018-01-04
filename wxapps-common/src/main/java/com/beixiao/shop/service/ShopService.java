@@ -20,4 +20,5 @@ public interface ShopService {
 	 * @return Shop
 	 */
 	Shop findById(Integer shopId);
+	
 }
