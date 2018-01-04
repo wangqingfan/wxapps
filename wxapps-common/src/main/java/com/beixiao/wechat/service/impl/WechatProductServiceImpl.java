@@ -12,7 +12,6 @@ import com.beixiao.common.util.ValidateUtil;
 import com.beixiao.dishes.domain.Dishes;
 import com.beixiao.dishes.service.DishesService;
 import com.beixiao.product.domain.Product;
-import com.beixiao.restaurant.service.RestaurantService;
 import com.beixiao.shop.domain.Shop;
 import com.beixiao.shop.service.ShopService;
 import com.beixiao.wechat.dto.WechatResponse;
