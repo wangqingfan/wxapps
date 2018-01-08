@@ -51,9 +51,9 @@
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
-          <a class="" href="javascript:;">订单信息</a>
+          <a class="" href="javascript:;">信息设置</a>
           <dl class="layui-nav-child">
-            <dd><a href="javascript:;" mianFrameUrl="${pageContext.request.contextPath }/test/content">店内订餐</a></dd>
+            <dd><a href="javascript:;" mianFrameUrl="${pageContext.request.contextPath }/basic/info/toList">基本信息列表</a></dd>
             <dd><a href="javascript:;">外卖</a></dd>
             <dd><a href="javascript:;">历史订单信息</a></dd>
             <dd><a href="">超链接</a></dd>
