@@ -234,3 +234,5 @@ ALTER TABLE restaurant ADD `total_evaluate_person_num` INT(32) DEFAULT NULL COMM
 ALTER TABLE restaurant ADD `satisfaction` TINYINT(4) DEFAULT NULL COMMENT '店铺满意度';
 
 ALTER TABLE evaluate CHANGE `describe` `description` VARCHAR(1000);
+
+ALTER TABLE shop add `shop_name` VARCHAR(20) DEFAULT NULL COMMENT '商铺名称';

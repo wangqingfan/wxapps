@@ -11,7 +11,6 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 	    <title>后台管理系统</title>
 	    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/layui/css/layui.css">
-	    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css" />
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js" ></script>
 	    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/layui/layui.js"></script>

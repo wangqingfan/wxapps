@@ -1,5 +1,9 @@
 package com.beixiao.shop.service;
 
+import java.util.List;
+import java.util.Map;
+
+import com.beixiao.common.PageAble;
 import com.beixiao.shop.domain.Shop;
 import com.beixiao.shop.dto.BasicInfo;
 
@@ -18,4 +22,12 @@ public interface ShopService {
 	 * @return Shop
 	 */
 	Shop findById(Integer shopId);
+	
+	/**
+	 * 分页查询
+	 * @author wqf V1.0 2018年1月8日 下午6:13:17
+	 * @param map
+	 * @return List<shop>
+	 */
+	PageAble<Shop> findAllPage(Map<String,Object> map);
 }

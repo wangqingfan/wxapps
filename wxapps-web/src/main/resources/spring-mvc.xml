@@ -33,6 +33,29 @@
        		<bean class="main.java.interceptor.AllInterceptor"/>
        	</mvc:interceptor>
        </mvc:interceptors> -->
+       <mvc:interceptors>
+       	<mvc:interceptor>
+       		<mvc:mapping path="/**"/>
+       		<bean class="com.beixiao.system.interceptor.AuthInterceptor">
+       			<property name="allows">
+		       		<list>
+		       			<value>/js/</value>
+		                <value>/fonts/</value>
+		                <value>/images/</value>
+		                <value>/css/</value>
+		                <value>/json/</value>
+		                <value>/img/</value>
+		                <value>/layui/</value>
+		                <value>/pdf/</value>
+		                <value>/upload/</value>
+		                <value>/login/mustLogin</value>
+		                <value>/404</value>
+		                <value>/500</value>
+		       		</list>
+       			</property>
+       		</bean>
+       	</mvc:interceptor>
+       </mvc:interceptors>
        
        <mvc:annotation-driven/>
        	

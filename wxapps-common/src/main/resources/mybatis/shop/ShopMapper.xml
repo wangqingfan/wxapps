@@ -18,12 +18,13 @@
     <result column="total_deal_money" property="totalDealMoney" jdbcType="DECIMAL" />
     <result column="shop_type" property="shopType" jdbcType="TINYINT" />
     <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
   </resultMap>
   
   <sql id="Base_Column_List" >
     shop_id, mini_app_id, cutomer_name, id_code, client_card_id, shop_province, shop_city, 
     shop_sub_city, shop_address, shop_telphone, create_time, lst_mod_time, shop_state, 
-    total_deal_money,shop_type,product_id
+    total_deal_money,shop_type,product_id,shop_name
   </sql>
   <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -86,6 +87,9 @@
       <if test="productId != null" >
         product_id,
       </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="shopId != null" >
@@ -136,6 +140,9 @@
       <if test="productId != null" >
         #{productId,jdbcType=INTEGER},
       </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="update" parameterType="com.beixiao.shop.domain.Shop" >
@@ -185,6 +192,9 @@
       </if>
       <if test="productId != null" >
         product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
       </if>
     </set>
     where shop_id = #{shopId,jdbcType=INTEGER}
@@ -253,11 +263,30 @@
 		a.shop_id as act_shop_id
 	FROM
 		shop s
-	LEFT JOIN restaurant r ON s.shop_id = r.shop_id
+	LEFT JOIN restaurant r ON s.shop_id = r.shop_id                                                                                                                                             
 	LEFT JOIN activity a ON a.shop_id = s.shop_id
 	WHERE 
 		s.shop_type = 1 
 	AND 
 		s.mini_app_id = #{value}
+  </select>
+  <select id="findAllPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from shop
+    <where>
+    	<if test="shopId != null and shopId != 0">
+    		shop_id = #{shopId}
+    	</if>
+    	<if test="shopName != null and shopName != '' ">
+    		shop_name = #{shopName}
+    	</if>
+    	<if test="creatTimeStart != null and creatTimeStart != '' ">
+    		create_time &gt;= #{creatTimeStart}
+    	</if>
+    	<if test="creatTimeEnd != null and creatTimeEnd != '' ">
+    		create_time &lt;= #{creatTimeEnd}
+    	</if>
+    </where>
   </select>
 </mapper>

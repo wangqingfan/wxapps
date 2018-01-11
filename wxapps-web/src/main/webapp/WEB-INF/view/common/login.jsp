@@ -6,6 +6,7 @@
 		<meta charset="utf-8">
 		<title>用户登录</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css" />
 	</head>
 
 	<body class="width-wrap" ng-app="app">

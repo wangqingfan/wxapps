@@ -43,6 +43,8 @@ public class Shop {
     private Integer shopType;//商户类型
     
     private Integer productId;//产品主键
+    
+    private String shopName;//商店名称
 
     /**
      * 商铺状态：已续约
@@ -192,6 +194,14 @@ public class Shop {
 
 	public void setProductId(Integer productId) {
 		this.productId = productId;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
 	
