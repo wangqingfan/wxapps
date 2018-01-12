@@ -4,15 +4,84 @@
   <text class='loadingtitle'>加载中</text>
 </view>
 <view wx:if="{{hasData == 1}}">
-  <view class="container">
-    <view class="userinfo">
-      <block>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+  <view class="box">
+    <view class="title">
+      <view class="title_top">
+        <image bindtap="bindViewTap" class="logo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="shopName">{{info.title.shopName}}</text>
+        <text class="scope" wx:if="{{info.title.disScope}}">配送范围：{{info.title.disScope}}公里 |￥{{info.title.disMenoy}}元起送</text>
+        <view class="business">{{info.title.business}}</view>
+        <view class="sign" wx:if="{{info.title.sign}}">公告：{{info.title.sign}}</view>
+      </view>
+      <view class="title_bottom">
+        <swiper indicator-dots="false" indicator-color="transparent" indicator-active-color="transparent" autoplay="true" vertical="true" circular="true" interval="2000" duration="500">
+          <block wx:for="{{info.title.activeText}}" wx:key="key">
+            <swiper-item>
+              <view>
+                <view class="first" style="background:{{item.color}}" >{{item.signal}}</view>
+                <text>{{item.text}}</text>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="numActive">{{info.title.activeText.length}}个活动</view>
+      </view>
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+    <view class="rollingShow">
+      <swiper indicator-dots="true" indicator-color="#f8f4f4" indicator-active-color="#e72121" autoplay="true" circular="true" interval="2000" duration="500">
+        <block wx:for="{{info.rollingShow.imgUrl}}" wx:key="key">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image"/>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="funMenu">
+      <view class="menu" bindtap="goToDeatil">
+        <view class="imgBor">
+          <image src='../../images/order.png'/>
+        </view>
+        <text class="font">点餐</text>
+      </view>
+      <view class="menu" bindtap="goToDeatil">
+        <view class="imgBor">
+          <image src='../../images/reservation.png'/>
+        </view>
+        <text class="font">预定</text>
+      </view>
+      <view class="menu" bindtap="goToDeatil">
+        <view class="imgBor">
+          <image src='../../images/take-out.png'/>
+        </view>
+        <text class="font">外卖</text>
+      </view>
+      <view class="menu" bindtap="goToDeatil">
+        <view class="imgBor">
+          <image src='../../images/comments.png'/>
+        </view>
+        <text class="font">评论</text>
+      </view>
+    </view>
+    <view class="shopInfor">
+      <view class="info">
+        <image src='../../images/house.png'/>
+        <text class="font">{{info.shopInfor.shopName}}</text>
+      </view>
+      <view class="info">
+        <image src='../../images/address.png'/>
+        <text class="font">{{info.shopInfor.shopAddress}}</text>
+      </view>
+      <view class="info">
+        <image src='../../images/phone.png'/>
+        <text class="font" bingtap="makePhoneCall">电话：{{info.shopInfor.shopPhone}}</text>
+      </view>
+      <view class="info">
+        <image src='../../images/time.png'/>
+        <text class="font">营业时间：{{info.shopInfor.shopTime}}</text>
+      </view>
+    </view>
+    <view class="recommended">
+  
     </view>
   </view>
 </view>

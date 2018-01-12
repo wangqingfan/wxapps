@@ -43,3 +43,158 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.box{
+  background: #d1eaea;
+}
+
+.title {
+  height: 235rpx;
+  padding: 20rpx;
+  background: linear-gradient(to right, #534947, #93b3cd, #6b171a);
+}
+
+.title .title_top {
+  height: 180rpx;
+  color: #fff;
+}
+
+.title .title_top .logo {
+  width: 175rpx;
+  height: 175rpx;
+  margin: 0 20rpx 0 0;
+  float:left;
+  border-radius: 50%;
+}
+
+.title .title_top .shopName {
+  display: block;
+  font-size: 40rpx;
+}
+
+.title .title_top .scope {
+  display: block;
+  font-size: 20rpx;
+  float: left;
+  margin-top: 20rpx;
+  line-height: 37rpx;
+  margin-right: 20rpx;
+}
+
+.title .title_top .business {
+  display: inline-block;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+  width: 100rpx;
+  height: 37rpx;
+  text-align: center;
+  line-height: 37rpx;
+  background: #4a9fd9;
+  border-radius: 5%;
+}
+
+.title .title_top .sign {
+  width: 100%;
+  display: block;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+}
+
+.title .title_bottom {
+  width: 100%;
+  display: block;
+  font-size: 20rpx;
+  margin-top: 16rpx;
+  height: 42rpx;
+  color: #fff;
+  line-height: 42rpx;
+}
+
+.title .title_bottom swiper {
+  height: 42rpx;
+  float: left;
+  width: 600rpx;
+}
+
+.title .title_bottom swiper .first {
+  float: left;
+  width: 42rpx;
+  text-align: center;
+  margin-right: 5rpx;
+  border-radius: 5rpx; 
+}
+
+.title .title_bottom .numActive {
+  float: right;
+}
+
+.rollingShow {
+  height: 320rpx;
+}
+
+.rollingShow swiper {
+  height: 320rpx;
+}
+
+.rollingShow image {
+  width: 100%;
+  height: 100%;
+}
+
+.funMenu {
+  display: flex;
+  background: #fff;
+  height: 200rpx;
+}
+
+.funMenu .menu {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+}
+
+.funMenu .menu .imgBor {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 50%;
+  background: #58c1d7;
+  margin: 10rpx auto;
+  margin-bottom: 20rpx;
+}
+
+.funMenu .menu image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 8rpx; 
+}
+
+.funMenu .menu .font {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+
+.shopInfor {
+  margin: 20rpx 0;
+  overflow: hidden;
+  background: #fff;
+  padding: 20rpx 30rpx;
+}
+
+.shopInfor .info {
+  border-bottom: 1px solid #f3f3f2;
+  padding: 20rpx 0 10rpx;
+  font-size: 30rpx;
+  color: #333;
+  
+}
+
+.shopInfor .info image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+  float: left;
+}
+
+.shopInfor .info text {
+  line-height: 35rpx;
+}

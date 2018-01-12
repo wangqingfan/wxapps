@@ -6,16 +6,12 @@ let that;
 
 Page({
   data: {
-    motto: 'Hello World',
+    //是否有商品数据
     hasData: 0,
-    userInfo: {}
+    // 首页数据
+    info: {},
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+  
   onLoad: function () {
     that = this;
     that.setData({
@@ -29,27 +25,79 @@ Page({
   },
   onShow: function () {
     if (!app.globalData.userInfo.hasOwnProperty("avatarUrl")){
-      app.dataManager.prepareBaseInfo(getUser); // 获取信息 开始注册等。。
+      app.dataManager.prepareBaseInfo(getInfo); // 获取信息 开始注册等。。
     } else {
-      getUser();
+      getInfo();
     }
+  },
+  //事件处理函数
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: '../logs/logs'
+    })
+  },
+
+  // 拨打电话
+  makePhoneCall: function () {
+    wx.makePhoneCall({
+      phoneNumber: "1212121212"
+    })
   }
 })
 
-function getUser () {
-  that.setData({
-    hasData: 1,
-    userInfo: app.globalData.userInfo
-  })
+/**
+ * 获取首页信息
+ */
+function getInfo () {
   app.request({
     url: app.host + '/login',
     data: {},
     method: 'POST',
-    success: function (res) {
-      console.log(res)
-    },
-    fail: function (res) {
-      console.log(res);
-    }
+    success: getInfoSuccess,
+    fail: getInfoFail
   })
+}
+
+/**
+ * 获取首页信息成功
+ */
+function getInfoSuccess () {
+  let data = {
+    title: {
+      shopName: "商店名称",
+      disScope: 5,
+      disMenoy: 40,
+      business: "正在营业",
+      sign: "参与本店分享活动可获取小菜或者随机红包",
+      activeText: [
+        { signal: "首", text: "首次消费满300.00元立减40元（不与其他活动同享）", color: "#64eb12" },
+        { signal: "减", text: "满50减20", color: "#c0164e"}
+      ]
+    },
+    rollingShow: {
+      imgUrl: [
+        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+      ]
+    },
+    shopInfor: {
+      shopName: "商店名称",
+      shopAddress: "北京市海淀区",
+      shopPhone: "18511427712",
+      shopTime: "00:00-23:55"
+    }
+  }
+  that.setData({
+    hasData: 1,
+    userInfo: app.globalData.userInfo,
+    info: data
+  })
+}
+
+/**
+ * 获取首页信息失败
+ */
+function getInfoFail() {
+
 }
