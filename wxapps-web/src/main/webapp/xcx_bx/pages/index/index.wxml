@@ -36,32 +36,32 @@
         </block>
       </swiper>
     </view>
-    <view class="funMenu">
-      <view class="menu" bindtap="goToDeatil">
+     <view class="funMenu">
+      <view class="menu" bindtap="goToOrder">
         <view class="imgBor">
           <image src='../../images/order.png'/>
         </view>
         <text class="font">点餐</text>
       </view>
-      <view class="menu" bindtap="goToDeatil">
+      <view class="menu" bindtap="goToReservation">
         <view class="imgBor">
           <image src='../../images/reservation.png'/>
         </view>
         <text class="font">预定</text>
       </view>
-      <view class="menu" bindtap="goToDeatil">
+      <view class="menu" bindtap="goToTakeOut">
         <view class="imgBor">
           <image src='../../images/take-out.png'/>
         </view>
         <text class="font">外卖</text>
       </view>
-      <view class="menu" bindtap="goToDeatil">
+      <view class="menu" bindtap="goToComments">
         <view class="imgBor">
           <image src='../../images/comments.png'/>
         </view>
         <text class="font">评论</text>
       </view>
-    </view>
+    </view> 
     <view class="shopInfor">
       <view class="info">
         <image src='../../images/house.png'/>
@@ -69,11 +69,11 @@
       </view>
       <view class="info">
         <image src='../../images/address.png'/>
-        <text class="font">{{info.shopInfor.shopAddress}}</text>
+        <text class="font" bindtap='goToMyMap'>{{info.shopInfor.shopAddress}}</text>
       </view>
-      <view class="info">
+      <view class="info" >
         <image src='../../images/phone.png'/>
-        <text class="font" bingtap="makePhoneCall">电话：{{info.shopInfor.shopPhone}}</text>
+        <text class="font" bindtap="makePhoneCall">电话：{{info.shopInfor.shopPhone}}</text>
       </view>
       <view class="info">
         <image src='../../images/time.png'/>
@@ -81,8 +81,22 @@
       </view>
     </view>
     <view class="recommended">
-  
+      <block wx:for="{{info.recommended.features}}" wx:key="key">
+          <view class="reChild">
+            <image src="{{item.imgUrl}}"/>
+            <text class="retitle" style="background:{{item.color}}">{{item.title}}</text>
+            <block wx:for="{{item.foodName}}" wx:for-item="i" wx:key="key">
+              <view class="foodName">{{i}}</view>
+            </block>
+            <view class="reBottom">
+              <view class="discount" wx:if="{{item.discount}}">{{item.discount}}</view>
+              <view class= "reRight">{{item.praise}}</view>
+            </view>
+          </view>
+      </block>
     </view>
+
+    
   </view>
 </view>
 

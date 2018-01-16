@@ -40,7 +40,34 @@ Page({
   // 拨打电话
   makePhoneCall: function () {
     wx.makePhoneCall({
-      phoneNumber: "1212121212"
+      phoneNumber: that.data.info.shopInfor.shopPhone
+    })
+  },
+
+  // 跳转订餐
+  goToOrder: function () {
+    
+  },
+
+  // 跳转预定
+  goToReservation: function () {
+
+  },
+
+  // 跳转外卖
+  goToTakeOut: function () {
+
+  },
+
+  // 跳转评论
+  goToComments: function () {
+
+  },
+
+  // 跳转地图
+  goToMyMap: function () {
+    wx.navigateTo({
+      url: '../myMap/myMap'
     })
   }
 })
@@ -49,13 +76,14 @@ Page({
  * 获取首页信息
  */
 function getInfo () {
-  app.request({
-    url: app.host + '/login',
-    data: {},
-    method: 'POST',
-    success: getInfoSuccess,
-    fail: getInfoFail
-  })
+  // app.request({
+  //   url: app.host + '/login',
+  //   data: {},
+  //   method: 'POST',
+  //   success: getInfoSuccess,
+  //   fail: getInfoFail
+  // })
+  getInfoSuccess();
 }
 
 /**
@@ -83,9 +111,16 @@ function getInfoSuccess () {
     },
     shopInfor: {
       shopName: "商店名称",
-      shopAddress: "北京市海淀区",
+      shopAddress: "北京市海淀区北京市海淀区",
       shopPhone: "18511427712",
       shopTime: "00:00-23:55"
+    },
+    recommended: {
+      features: [
+        { imgUrl: "http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg", title: "本店特色", foodName: ["铁板烤鸭"], praise: "镇店之宝掌柜力荐"},
+        { imgUrl: "http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg", title: "本店特色", foodName: ["铁板烤鸭"], praise: "低价酬宾", discount: "4.7折" },
+        { imgUrl: "http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg", title: "随缘一吃", foodName: ["铁板烤鸭"], praise: "咋还不点我呢" }
+      ]
     }
   }
   that.setData({

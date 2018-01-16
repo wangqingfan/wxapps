@@ -177,7 +177,7 @@
   margin: 20rpx 0;
   overflow: hidden;
   background: #fff;
-  padding: 20rpx 30rpx;
+  padding: 15rpx 30rpx;
 }
 
 .shopInfor .info {
@@ -185,16 +185,74 @@
   padding: 20rpx 0 10rpx;
   font-size: 30rpx;
   color: #333;
-  
+  position: relative;
 }
 
 .shopInfor .info image {
   width: 40rpx;
   height: 40rpx;
-  margin-right: 20rpx;
-  float: left;
+  position: absolute;
+  transform: translateY(-40%);
+  top: 50%;
 }
 
 .shopInfor .info text {
   line-height: 35rpx;
+  display: block;
+  margin-left: 60rpx;
+}
+
+.recommended {
+  background: #fff;
+  display: flex;
+  padding: 10rpx 15rpx;
+}
+
+.recommended .reChild {
+  flex: 1;
+  margin: 0 5rpx;
+  font-size: 20rpx;
+  background: #f5f8e6;
+  position: relative;
+  text-align: center;
+}
+
+.recommended .reChild image {
+  width: 100%;
+  height: 150rpx;
+}
+
+.recommended .reChild .retitle {
+  font-size: 34rpx;
+  color: #ecb47e;
+  text-align: center;
+  margin: 10rpx auto;
+  display: block;
+}
+
+.recommended .reChild .foodName {
+  font-size: 22rpx;
+  text-align: center;
+  margin: 5rpx 0;
+}
+
+.recommended .reChild .reBottom {
+  border: 1px solid #6cc5cf;
+  color: #6cc5cf;
+  display: inline-block;
+  margin: 10rpx;
+}
+
+.recommended .reChild .reBottom .discount {
+  float: left;
+  margin-right: 5rpx;
+  background: #6cc5cf;
+  color: #fff;
+  padding: 0 5rpx;
+}
+
+.recommended .reChild .reBottom .reRight {
+  float: left;
+  margin-right: 5rpx;
+  padding: 0 5rpx;
 }
