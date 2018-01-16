@@ -1,12 +1,15 @@
 // map.js
 Page({
   data: {
+    latitude: 23.099994,
+    longitude: 113.324520,
     markers: [{
+      iconPath: "../../images/mapAddress.png",
       id: 0,
       latitude: 23.099994,
       longitude: 113.324520,
-      width: 50,
-      height: 50
+      width: 30,
+      height: 30
     }]
   },
   regionchange(e) {

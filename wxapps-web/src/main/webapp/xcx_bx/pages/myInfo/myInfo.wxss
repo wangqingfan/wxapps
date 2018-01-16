@@ -6,55 +6,60 @@ page {
 
 .all {
   width: 100%;
-  margin-top: 16rpx;
+  margin-top: 4rpx;
+}
+
+.general {
+  border-bottom: 2rpx solid #edf1f2;
+  height: 100rpx;
+  padding: 20rpx 32rpx;
+  display: flex;
+  justify-content: flex-start;
   background: #fff;
   
 }
 
-.general {
-  
-  border-bottom: 2rpx solid #edf1f2;
-  height: 120rpx;
-  padding: 20rpx 0 20rpx 0;
-  display: flex;
-  justify-content: flex-start;
-  margin-left:32rpx;
+.general .avator {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
 }
 
-.avator {
-  width: 120rpx;
-  height: 120rpx;
+.general .info {
+  margin-left: 40rpx;
 }
 
-.info {
-  margin-left: 20rpx;
-}
-
-.name {
-  margin-top: 20rpx;
+.general .info .name {
   font-family: PingFangSC-Regular;
-  font-size: 32rpx;
+  font-size: 36rpx;
   color: #343c4b;
   letter-spacing: 0.38px;
-  line-height: 120rpx;
+  line-height: 100rpx;
 }
 
-.myOrder {
-  
+.firstKind {
+  margin: 20rpx 0;
+  background: #fff;
+}
+
+.firstKind .myOrder {
   border-bottom: 2rpx solid #edf1f2;
   height: 48rpx;
-  padding: 28rpx 20rpx 28rpx 0;
-  margin-left:32rpx;
+  padding: 24rpx 0;
+  margin: 0 32rpx;
+}
+.firstKind .myOrder:last-child {
+  border: none;
 }
 
-.myOrderImg {
-  width: 36rpx;
+.firstKind .myOrder .myOrderImg {
+  width: 40rpx;
   height: 44rpx;
   margin: 4rpx 30rpx 4rpx 0;
   float: left;
 }
 
-.myOrderTxt {
+.firstKind .myOrder .myOrderTxt {
   float: left;
   width: 140rpx;
   font-family: PingFangSC-Regular;
@@ -64,8 +69,15 @@ page {
   line-height: 48rpx; /* 与myOrder高度一致 */
 }
 
-.arrow {
+.firstKind .myOrder .arrow {
   float:right;
   width: 48rpx;
   height: 48rpx;
+}
+
+.firstKind .myOrder .versionNum {
+  float: right;
+  font-size: 32rpx;
+  margin-right: 20rpx;
+  line-height: 48rpx;
 }

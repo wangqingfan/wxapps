@@ -4,7 +4,9 @@
     "pages/logs/logs",
     "pages/shoppingCart/shoppingCart",
     "pages/myInfo/myInfo",
-    "pages/myMap/myMap"
+    "pages/myMap/myMap",
+    "pages/myOrder/myOrder",
+    "pages/takeOut/takeOut"
   ],
   "window":{
     "backgroundTextStyle":"light",

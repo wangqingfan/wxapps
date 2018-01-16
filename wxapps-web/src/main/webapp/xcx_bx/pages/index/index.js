@@ -30,41 +30,74 @@ Page({
       getInfo();
     }
   },
-  //事件处理函数
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    return {
+      title: "小程序名称！",
+      path: "/pages/index/index",
+      imageUrl: app.globalData.userInfo.avatarUrl,
+      success: function (res) {
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
+
+  /**
+   * 事件处理函数
+   */
   bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
 
-  // 拨打电话
+  /**
+   * 拨打电话
+   */
   makePhoneCall: function () {
     wx.makePhoneCall({
       phoneNumber: that.data.info.shopInfor.shopPhone
     })
   },
 
-  // 跳转订餐
+  /**
+   * 跳转订餐
+   */
   goToOrder: function () {
     
   },
 
-  // 跳转预定
+  /**
+   * 跳转预定
+   */
   goToReservation: function () {
 
   },
 
-  // 跳转外卖
+  /**
+   * 跳转外卖
+   */
   goToTakeOut: function () {
-
+    wx.navigateTo({
+      url: '../takeOut/takeOut'
+    })
   },
 
-  // 跳转评论
+  /**
+   * 跳转评论
+   */
   goToComments: function () {
 
   },
 
-  // 跳转地图
+  /**
+   * 跳转地图
+   */
   goToMyMap: function () {
     wx.navigateTo({
       url: '../myMap/myMap'

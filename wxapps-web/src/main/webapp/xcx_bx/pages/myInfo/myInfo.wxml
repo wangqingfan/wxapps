@@ -7,21 +7,57 @@
     </view>
   </view>
   
-  <view class="myOrder" bindtap="onClickMyOrder">
-    <image class="myOrderImg" src="../../images/orderList.png">
-    </image>
-    <view class="myOrderTxt">我的订单</view>
-    <image class="arrow" src="../../images/right.png">
-    </image>
+  <view class="firstKind">
+    <view class="myOrder" bindtap="onClickMyOrder">
+      <image class="myOrderImg" src="../../images/note.png">
+      </image>
+      <view class="myOrderTxt">我的订单</view>
+      <image class="arrow" src="../../images/right.png">
+      </image>
+    </view>
+    
+    <view class="myOrder" bindtap="onClickShipAddress">
+      <image class="myOrderImg" src="../../images/shipAddress.png">
+      </image>
+      <view class="myOrderTxt">收货地址</view>
+      <image class="arrow" src="../../images/right.png">
+      </image>
+    </view>
+
+    <view class="myOrder" bindtap="onClickCard">
+      <image class="myOrderImg" src="../../images/card.png">
+      </image>
+      <view class="myOrderTxt">卡券</view>
+      <image class="arrow" src="../../images/right.png">
+      </image>
+    </view>
+  </view>
+  
+  <view class="firstKind">
+    <view class="myOrder" bindtap="onClickWifi">
+      <image class="myOrderImg" src="../../images/wifi.png">
+      </image>
+      <view class="myOrderTxt">连接WIFI</view>
+      <image class="arrow" src="../../images/right.png">
+      </image>
+    </view>
+    
+    <view class="myOrder" bindtap="onClickConsult">
+      <image class="myOrderImg" src="../../images/service.png">
+      </image>
+      <view class="myOrderTxt">客服咨询</view>
+      <image class="arrow" src="../../images/right.png">
+      </image>
+    </view>
   </view>
 
-  <view class="myOrder" bindtap="onClickConsult">
-    <image class="myOrderImg" src="../../images/service.png">
-    </image>
-    <view class="myOrderTxt">客服咨询</view>
-    <image class="arrow" src="../../images/right.png">
-    </image>
+  <view class="firstKind">
+    <view class="myOrder">
+      <image class="myOrderImg" src="../../images/version.png">
+      </image>
+      <view class="myOrderTxt">版本号</view>
+      <text class="versionNum">{{versionNum}}</text>
+    </view>
   </view>
-
 
 </view>
