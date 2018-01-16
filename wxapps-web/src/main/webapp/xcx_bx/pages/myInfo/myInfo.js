@@ -81,19 +81,7 @@ Page({
   * 跳转收货地址
   */
   onClickShipAddress: function () {
-    wx.chooseAddress({
-      success: function (res) {
-        console.log(res.userName)
-        console.log(res.postalCode)
-        console.log(res.provinceName)
-        console.log(res.cityName)
-        console.log(res.countyName)
-        console.log(res.detailInfo)
-        console.log(res.nationalCode)
-        console.log(res.telNumber)
-        // 收货地址添加过之后传入后台存入 点餐时即使删除了微信地址也直接从后台获取
-      }
-    })
+    getWxAddress();
   },
 
   /**
@@ -154,3 +142,39 @@ Page({
     })
   }
 })
+
+/**
+ * 获取微信地址
+ */
+function getWxAddress () {
+  wx.chooseAddress({
+    success: function (res) {
+      // 告知用户点击确定获取数据 最好只告知一次。
+      console.log(res.userName)
+      console.log(res.postalCode)
+      console.log(res.provinceName)
+      console.log(res.cityName)
+      console.log(res.countyName)
+      console.log(res.detailInfo)
+      console.log(res.nationalCode)
+      console.log(res.telNumber)
+      // 收货地址添加过之后传入后台存入 点餐时即使删除了微信地址也直接从后台获取
+    },
+    fail: function (res) {
+      app.alertFun("允许授权，才能更好的服务", function () {
+        wx.openSetting({
+          success(settingdata) {
+            if (settingdata.authSetting['scope.userInfo']) {
+              // getWxAddress();
+              app.log('获取权限成功，再次请求用户数据')
+            }
+            else {
+              app.log('获取权限失败，无法继续');
+              app.alert("请重新打开此小程序，并允许授权", "", false);
+            }
+          }
+        })
+      });
+    }
+  })
+}
