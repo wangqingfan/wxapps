@@ -164,8 +164,8 @@ function getWxAddress () {
       app.alertFun("允许授权，才能更好的服务", function () {
         wx.openSetting({
           success(settingdata) {
-            if (settingdata.authSetting['scope.userInfo']) {
-              // getWxAddress();
+            if (settingdata.authSetting['scope.address']) {
+              getWxAddress();
               app.log('获取权限成功，再次请求用户数据')
             }
             else {
