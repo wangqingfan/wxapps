@@ -5,7 +5,8 @@
     "pages/shoppingCart/shoppingCart",
     "pages/myInfo/myInfo",
     "pages/myMap/myMap",
-    "pages/myOrder/myOrder",
+    "pages/myOrderPaper/myOrderPaper",
+    "pages/myOrderFood/myOrderFood",
     "pages/takeOut/takeOut"
   ],
   "window":{

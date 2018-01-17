@@ -3,6 +3,10 @@
 const app = getApp();
 // 缓存this
 let that;
+// 进入页面时判断是否能进入点餐
+let orderIdFlag = false;
+// 点餐ID
+let orderId;
 
 Page({
   data: {
@@ -12,12 +16,12 @@ Page({
     info: {},
   },
   
-  onLoad: function () {
+  onLoad: function (options) {
     that = this;
-    that.setData({
-      hasData: 0
-    });
-    
+    if (options.hasOwnProperty("orderId")) {
+      orderId = options.orderId;
+      orderIdFlag = true;
+    }
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -69,7 +73,13 @@ Page({
    * 跳转订餐
    */
   goToOrder: function () {
-    
+    if (orderIdFlag) {
+      wx.navigateTo({
+        url: '../myOrderFood/myOrderFood?orderId=' + orderId,
+      })
+    } else {
+      app.alert("扫描桌面二维码才能进入点餐哦！", "", false);
+    }
   },
 
   /**
@@ -108,7 +118,7 @@ Page({
 /**
  * 获取首页信息
  */
-function getInfo () {
+let getInfo = () => {
   // app.request({
   //   url: app.host + '/login',
   //   data: {},

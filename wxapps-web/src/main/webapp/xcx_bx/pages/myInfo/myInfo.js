@@ -73,7 +73,7 @@ Page({
     */
   onClickMyOrder: function () {
     wx.navigateTo({
-      url: '/pages/myOrder/myOrder',
+      url: '/pages/myOrderPaper/myOrderPaper',
     })
   },
 
@@ -111,8 +111,6 @@ Page({
       }
     })
   },
-
- 
 
   /**
    * 客服电话
@@ -161,20 +159,28 @@ function getWxAddress () {
       // 收货地址添加过之后传入后台存入 点餐时即使删除了微信地址也直接从后台获取
     },
     fail: function (res) {
-      app.alertFun("允许授权，才能更好的服务", function () {
-        wx.openSetting({
-          success(settingdata) {
-            if (settingdata.authSetting['scope.address']) {
-              getWxAddress();
-              app.log('获取权限成功，再次请求用户数据')
-            }
-            else {
-              app.log('获取权限失败，无法继续');
-              app.alert("请重新打开此小程序，并允许授权", "", false);
-            }
+      wx.getSetting({
+        success(settingData) {
+          if (settingData.authSetting['scope.address']) {
+            // getWxAddress();
+            app.alert("获取地址失败！进入收获地址后点击确定才能获取到地址哦！", "", false);
+          } else {
+            app.alertFun("允许授权，才能更好的服务", function () {
+              wx.openSetting({
+                success(settingdata) {
+                  if (settingdata.authSetting['scope.address']) {
+                    app.log('获取权限成功，再次请求用户数据')
+                  }
+                  else {
+                    app.log('获取权限失败，无法继续');
+                    app.alert("请重新打开此小程序，并允许授权", "", false);
+                  }
+                }
+              })
+            });
           }
-        })
-      });
+        }
+      })
     }
   })
 }
