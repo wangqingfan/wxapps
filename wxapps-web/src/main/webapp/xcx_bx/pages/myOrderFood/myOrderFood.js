@@ -1,66 +1,68 @@
 // pages/myOrderFood/myOrderFood.js
+//获取应用实例
+const app = getApp();
+// 缓存this
+let that;
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    // 首页数据
+    info: {}
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    that = this;
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-  
+    if (!app.globalData.userInfo.hasOwnProperty("avatarUrl")) {
+      app.dataManager.prepareBaseInfo(getInfo); // 获取信息 开始注册等。。
+    } else {
+      getInfo();
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
+
+/**
+ * 获取首页信息
+ */
+let getInfo = () => {
+  // app.request({
+  //   url: app.host + '/login',
+  //   data: {},
+  //   method: 'POST',
+  //   success: getInfoSuccess,
+  //   fail: getInfoFail
+  // })
+  getInfoSuccess();
+}
+
+/**
+ * 获取首页信息成功
+ */
+function getInfoSuccess() {
+  let data = {
+    title: {
+      shopName: "商店名称",
+      disScope: 5,
+      disMenoy: 40,
+      business: "正在营业",
+      sign: "参与本店分享活动可获取小菜或者随机红包",
+      activeText: [
+        { signal: "首", text: "首次消费满300.00元立减40元（不与其他活动同享）", color: "#64eb12" },
+        { signal: "减", text: "满50减20", color: "#c0164e" }
+      ]
+    },
+  }
+  that.setData({
+    userInfo: app.globalData.userInfo,
+    info: data
+  })
+}
+
+/**
+ * 获取首页信息失败
+ */
+function getInfoFail() {
+
+}

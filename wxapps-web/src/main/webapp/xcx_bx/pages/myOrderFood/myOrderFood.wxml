@@ -1,2 +1,23 @@
 <!--pages/myOrderFood/myOrderFood.wxml-->
-<text>pages/myOrderFood/myOrderFood.wxml</text>
+  <view class="title">
+    <view class="title_top">
+      <image bindtap="bindViewTap" class="logo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="shopName">{{info.title.shopName}}</text>
+      <text class="scope" wx:if="{{info.title.disScope}}">配送范围：{{info.title.disScope}}公里 |￥{{info.title.disMenoy}}元起送</text>
+      <view class="business">{{info.title.business}}</view>
+      <view class="sign" wx:if="{{info.title.sign}}">公告：{{info.title.sign}}</view>
+    </view>
+    <view class="title_bottom">
+      <swiper indicator-dots="false" indicator-color="transparent" indicator-active-color="transparent" autoplay="true" vertical="true" circular="true" interval="2000" duration="500">
+        <block wx:for="{{info.title.activeText}}" wx:key="key">
+          <swiper-item>
+            <view>
+              <view class="first" style="background:{{item.color}}" >{{item.signal}}</view>
+              <text>{{item.text}}</text>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="numActive">{{info.title.activeText.length}}个活动</view>
+    </view>
+  </view>

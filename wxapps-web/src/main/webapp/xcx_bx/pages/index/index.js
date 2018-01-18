@@ -36,6 +36,13 @@ Page({
   },
 
   /**
+    * 生命周期函数--监听页面卸载
+    */
+  onUnload: function () {
+    orderIdFlag = false;
+  },
+
+  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {

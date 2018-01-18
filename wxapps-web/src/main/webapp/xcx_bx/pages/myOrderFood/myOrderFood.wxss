@@ -1,1 +1,80 @@
 /* pages/myOrderFood/myOrderFood.wxss */
+.title {
+  height: 235rpx;
+  padding: 20rpx;
+  background: linear-gradient(to right, #534947, #93b3cd, #6b171a);
+}
+
+.title .title_top {
+  height: 180rpx;
+  color: #fff;
+}
+
+.title .title_top .logo {
+  width: 175rpx;
+  height: 175rpx;
+  margin: 0 20rpx 0 0;
+  float:left;
+  border-radius: 50%;
+}
+
+.title .title_top .shopName {
+  display: block;
+  font-size: 40rpx;
+}
+
+.title .title_top .scope {
+  display: block;
+  font-size: 20rpx;
+  float: left;
+  margin-top: 20rpx;
+  line-height: 37rpx;
+  margin-right: 20rpx;
+}
+
+.title .title_top .business {
+  display: inline-block;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+  width: 100rpx;
+  height: 37rpx;
+  text-align: center;
+  line-height: 37rpx;
+  background: #4a9fd9;
+  border-radius: 5%;
+}
+
+.title .title_top .sign {
+  width: 100%;
+  display: block;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+}
+
+.title .title_bottom {
+  width: 100%;
+  display: block;
+  font-size: 20rpx;
+  margin-top: 16rpx;
+  height: 42rpx;
+  color: #fff;
+  line-height: 42rpx;
+}
+
+.title .title_bottom swiper {
+  height: 42rpx;
+  float: left;
+  width: 600rpx;
+}
+
+.title .title_bottom swiper .first {
+  float: left;
+  width: 42rpx;
+  text-align: center;
+  margin-right: 5rpx;
+  border-radius: 5rpx; 
+}
+
+.title .title_bottom .numActive {
+  float: right;
+}
