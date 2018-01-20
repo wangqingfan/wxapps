@@ -51,4 +51,14 @@ public class BasicInfoController {
 		}
 		return shopService.findAllPage(param);
 	}
+	
+	@RequestMapping("/toEditBasic")
+	public String toEdit(@RequestParam Map<String,Object> param){
+		return "";
+	}
+	
+	@RequestMapping("/toAddBasic")
+	public String toAddBasic(){
+		return "/basicInfo/addBasic";
+	}
 }

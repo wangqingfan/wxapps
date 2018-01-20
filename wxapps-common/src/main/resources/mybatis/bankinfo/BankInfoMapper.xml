@@ -1,87 +1,107 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.beixiao.bankinfo.repository.BankInfoDao" >
-  <resultMap id="BaseResultMap" type="com.beixiao.bankinfo.domain.BankInfo" >
-    <id column="bank_id" property="bankId" jdbcType="INTEGER" />
-    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
-    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
-    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
-    <result column="p_city_id" property="pCityId" jdbcType="VARCHAR" />
-    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beixiao.bankinfo.repository.BankInfoDao">
+  <resultMap id="BaseResultMap" type="com.beixiao.bankinfo.domain.BankInfo">
+    <id column="bank_id" jdbcType="INTEGER" property="bankId" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+    <result column="p_bank_id" jdbcType="INTEGER" property="pBankId" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="bank_no" jdbcType="VARCHAR" property="bankNo" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    bank_id, bank_name, country_id, province_id, p_city_id, city_id
+  <sql id="Base_Column_List">
+    bank_id, bank_name, p_bank_id, country, province, city, street, bank_no
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from bank_info
     where bank_id = #{bankId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteById" parameterType="java.lang.Integer" >
+  <delete id="deleteById" parameterType="java.lang.Integer">
     delete from bank_info
     where bank_id = #{bankId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.beixiao.bankinfo.domain.BankInfo" >
+  <insert id="insert" parameterType="com.beixiao.bankinfo.domain.BankInfo">
     insert into bank_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="bankId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bankId != null">
         bank_id,
       </if>
-      <if test="bankName != null" >
+      <if test="bankName != null">
         bank_name,
       </if>
-      <if test="countryId != null" >
-        country_id,
+      <if test="pBankId != null">
+        p_bank_id,
       </if>
-      <if test="provinceId != null" >
-        province_id,
+      <if test="country != null">
+        country,
       </if>
-      <if test="pCityId != null" >
-        p_city_id,
+      <if test="province != null">
+        province,
       </if>
-      <if test="cityId != null" >
-        city_id,
+      <if test="city != null">
+        city,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="bankNo != null">
+        bank_no,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="bankId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bankId != null">
         #{bankId,jdbcType=INTEGER},
       </if>
-      <if test="bankName != null" >
+      <if test="bankName != null">
         #{bankName,jdbcType=VARCHAR},
       </if>
-      <if test="countryId != null" >
-        #{countryId,jdbcType=VARCHAR},
+      <if test="pBankId != null">
+        #{pBankId,jdbcType=INTEGER},
       </if>
-      <if test="provinceId != null" >
-        #{provinceId,jdbcType=VARCHAR},
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
       </if>
-      <if test="pCityId != null" >
-        #{pCityId,jdbcType=VARCHAR},
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
       </if>
-      <if test="cityId != null" >
-        #{cityId,jdbcType=VARCHAR},
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null">
+        #{bankNo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateById" parameterType="com.beixiao.bankinfo.domain.BankInfo" >
+  <update id="update" parameterType="com.beixiao.bankinfo.domain.BankInfo">
     update bank_info
-    <set >
-      <if test="bankName != null" >
+    <set>
+      <if test="bankName != null">
         bank_name = #{bankName,jdbcType=VARCHAR},
       </if>
-      <if test="countryId != null" >
-        country_id = #{countryId,jdbcType=VARCHAR},
+      <if test="pBankId != null">
+        p_bank_id = #{pBankId,jdbcType=INTEGER},
       </if>
-      <if test="provinceId != null" >
-        province_id = #{provinceId,jdbcType=VARCHAR},
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
       </if>
-      <if test="pCityId != null" >
-        p_city_id = #{pCityId,jdbcType=VARCHAR},
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
       </if>
-      <if test="cityId != null" >
-        city_id = #{cityId,jdbcType=VARCHAR},
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null">
+        bank_no = #{bankNo,jdbcType=VARCHAR},
       </if>
     </set>
     where bank_id = #{bankId,jdbcType=INTEGER}

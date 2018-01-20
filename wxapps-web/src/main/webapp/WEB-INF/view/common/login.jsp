@@ -7,6 +7,7 @@
 		<title>用户登录</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css" />
+		
 	</head>
 
 	<body class="width-wrap" ng-app="app">
@@ -34,7 +35,7 @@
 	   </nav> 
 	   <div style="height: 50px;"></div>
 
-	   <div class="main-header" style="background-image: url(${pageContext.request.contextPath }/image/login-banner-bg.png)">
+	   <div class="main-header" name="f" style="background-image: url(${pageContext.request.contextPath }/images/login-banner-bg.png)">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-sm-12">
@@ -49,13 +50,13 @@
 							<form id="loginForm" class="form-horizontal" ng-controller="myCtrl">
 								<div class="form-group input-group-lg">
 									<div class="col-md-12">
-										<input id="adminCode" name="adminCode" type="text" class="form-control" placeholder="用户名" ng-model="admin.adminCode"/>
+										<input id="adminCode" name="adminCode" type="text" class="form-control" placeholder="用户名" required ng-model="admin.adminCode"/>
 										<p id="accountError" class="text-danger" style="margin-bottom:-5px;margin-top:5px;"></p>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-md-12">
-										<input id="password" name="password" type="password" class="form-control" placeholder="密码" ng-model="admin.passwordstr"/>
+										<input id="password" name="password" type="password" class="form-control" placeholder="密码" required ng-model="admin.passwordstr"/>
 										<p id="passwordError" class="text-danger" style="margin-bottom:-5px;margin-top:5px;"></p>
 									</div>
 								</div>
@@ -73,7 +74,7 @@
 								<p id="lockError" class="text-danger"></p>
 								<div class="form-group">
 									<div class="col-md-12">
-										<input type="button" style="width:100%;" ng-click="submit(admin)" class="btn btn-primary" id="loginButton" value="登&nbsp;&nbsp;录" />
+										<input type="button" style="width:100%;" ng-click="submit(admin)" ng-disabled="f.$invalid" class="btn btn-primary" id="loginButton" value="登&nbsp;&nbsp;录" />
 									</div>
 								</div>
 							</form>
@@ -92,6 +93,7 @@
     	</div>
     	<script type="text/javascript" src="${pageContext.request.contextPath }/js/common.js"></script>
     	<script type="text/javascript" src="${pageContext.request.contextPath }/js/angular-route.js"></script>
+    	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js" ></script>
 		<script>
 		var app = angular.module('app',['ngRoute']);
 		app.config(['$httpProvider','$routeProvider',function($httpProvider,$routeProvider){
@@ -101,20 +103,29 @@
 			})
 		}]);
 		
-		app.controller('myCtrl',function($scope,$http,$location){
+		app.controller('myCtrl',function($scope,$http,$location,$document){
 			$scope.admin = {adminCode:'',password:'',passwordstr:''};
 			$scope.submit = function(admin){
 				$scope.admin.password = encode64($scope.admin.passwordstr + "");
 				$http.post('${pageContext.request.contextPath}/login/login',$scope.admin)
 				.success(function(data){
-					alert(data);
+					console.log(data);
 					//$location.path("/index");
-					window.location="${pageContext.request.contextPath }/test/layui";
+					if(data=="success"){
+						window.location="${pageContext.request.contextPath }/test/header";
+					}else{
+						alert(data);
+					}
 				})
 				.error(function(err){
 					
 				})
-			}
+			};
+			$document.bind('keypress',function(event){
+				if(event.keyCode==13){
+					$scope.submit($scope.admin);
+				}
+			})
 		});
 		</script>
 	</body>

@@ -45,4 +45,11 @@ public class ValidateUtil {
 		}
 		return false;
 	}
+	
+	public static boolean isEmpty(Object[] o){
+		if(o == null || o.length == 0){
+			return true;
+		}
+		return false;
+	}
 }

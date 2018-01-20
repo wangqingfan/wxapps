@@ -36,21 +36,21 @@ public class Attachment {
     private Integer shopId;//商户id
 
     /**
-     * 附件状态：基本附件
+     * 附件状态：未删除
      */
-    public static final String STATE_BASEIC = "01";
+    public static final String STATE_YES = "01";
     
     /**
-     * 附件状态：菜谱
+     * 附件状态：已删除
      */
-    public static final String STATE_MENU = "02";
+    public static final String STATE_NO = "02";
     
     /**
      * 附件类型：店铺头像
      */
     public static final Integer ATTACHMET_TYPE_SHOP_HEAD_PORTRAIT = 1;
     /**
-     * 附件类型：店铺环境
+     * 附件类型：店铺介绍
      */
     public static final Integer ATTACHMET_TYPE_SHOP_ENVIRONMENT = 2;
     

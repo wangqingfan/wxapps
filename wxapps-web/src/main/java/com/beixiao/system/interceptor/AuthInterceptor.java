@@ -44,10 +44,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		//需要走拦截器
 		logger.info("------需要走拦截器--------");
 		if(ValidateUtil.isEmpty(request.getSession().getAttribute("adminInfo"))){
-			request.getRequestDispatcher("/login/mustLogin").forward(request, response);;
+			//这里必须是返回false，若返回是true，则证明你通过这次请求，并且想让请求重定向到mustLogin上，这是属于要跳转到两个url，所以会报错。
+			response.sendRedirect(request.getContextPath()+"/login/mustLogin");
 			return false;
 		}
-		return super.preHandle(request, response, handler);
+		return true;
 	}
 	
 	/**

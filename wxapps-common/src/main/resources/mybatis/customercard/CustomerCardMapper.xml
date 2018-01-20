@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.customercard.repository.CustomerCardDao" >
+  <resultMap id="BaseResultMap" type="com.beixiao.customercard.domain.CustomerCard" >
+    <id column="customer_card_id" property="customerCardId" jdbcType="INTEGER" />
+    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
+    <result column="card_type" property="cardType" jdbcType="TINYINT" />
+    <result column="card_code" property="cardCode" jdbcType="VARCHAR" />
+    <result column="card_customer_name" property="cardCustomerName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="lst_mdf_time" property="lstMdfTime" jdbcType="TIMESTAMP" />
+    <result column="bind_card" property="bindCard" jdbcType="TINYINT" />
+    <result column="mobilePhone" property="mobilephone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_card_id, bank_id, card_type, card_code, card_customer_name, create_time, 
+    lst_mdf_time, bind_card, mobilePhone
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_card
+    where customer_card_id = #{customerCardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from customer_card
+    where customer_card_id = #{customerCardId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.customercard.domain.CustomerCard" >
+    insert into customer_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerCardId != null" >
+        customer_card_id,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardCode != null" >
+        card_code,
+      </if>
+      <if test="cardCustomerName != null" >
+        card_customer_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lstMdfTime != null" >
+        lst_mdf_time,
+      </if>
+      <if test="bindCard != null" >
+        bind_card,
+      </if>
+      <if test="mobilephone != null" >
+        mobilePhone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerCardId != null" >
+        #{customerCardId,jdbcType=INTEGER},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=TINYINT},
+      </if>
+      <if test="cardCode != null" >
+        #{cardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCustomerName != null" >
+        #{cardCustomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstMdfTime != null" >
+        #{lstMdfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bindCard != null" >
+        #{bindCard,jdbcType=TINYINT},
+      </if>
+      <if test="mobilephone != null" >
+        #{mobilephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.beixiao.customercard.domain.CustomerCard" >
+    update customer_card
+    <set >
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=TINYINT},
+      </if>
+      <if test="cardCode != null" >
+        card_code = #{cardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardCustomerName != null" >
+        card_customer_name = #{cardCustomerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstMdfTime != null" >
+        lst_mdf_time = #{lstMdfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bindCard != null" >
+        bind_card = #{bindCard,jdbcType=TINYINT},
+      </if>
+      <if test="mobilephone != null" >
+        mobilePhone = #{mobilephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where customer_card_id = #{customerCardId,jdbcType=INTEGER}
+  </update>
+</mapper>

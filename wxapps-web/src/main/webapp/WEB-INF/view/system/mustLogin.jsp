@@ -1,5 +1,5 @@
 <%@page language="java" contentType="text/html;charset=UTF-8"%>
-<%@include file="common.jsp"%>
+<%@include file="./../common/common.jsp"%>
 <html>
 	<head>
 		<title>跳转登录页登录页</title>

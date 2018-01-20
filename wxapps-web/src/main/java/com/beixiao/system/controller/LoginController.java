@@ -69,6 +69,6 @@ public class LoginController {
 	
 	@RequestMapping("/mustLogin")
 	public String mustLogin(ModelMap modelMap){
-		return "/common/mustLogin";
+		return "/system/mustLogin";
 	}
 }

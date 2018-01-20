@@ -5,6 +5,10 @@ public class Properties {
 	public static final String PROPERTIES_INTERFACE = "interface.properties";
 	
 	public static final String WECHAT_LOGIN = "wechat_login";
+	/*--------------------上传文件--------------------------------*/
+	public static final String UPLOAD_PATH = "upload_path";
+	public static final String UPLOAD_URL = "upload_url";
+	/*--------------------上传文件--------------------------------*/
 	
 	/**
 	 * 获取配置文件信息
