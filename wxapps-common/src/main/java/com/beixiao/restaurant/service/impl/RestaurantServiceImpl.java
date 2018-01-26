@@ -16,6 +16,12 @@ public class RestaurantServiceImpl implements RestaurantService{
 	
 	@Override
 	public Restaurant findByShopId(Integer ShopId) {
-		return null;
+		return restaurantDao.findByShopId(ShopId);
 	}
+
+	@Override
+	public Integer insert(Restaurant restaurant) {
+		return restaurantDao.insert(restaurant);
+	}
+	
 }

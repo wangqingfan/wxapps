@@ -36,7 +36,7 @@
     delete from shop
     where shop_id = #{shopId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.beixiao.shop.domain.Shop" >
+  <insert id="insert" parameterType="com.beixiao.shop.domain.Shop" useGeneratedKeys="true" keyProperty="shopId">
     insert into shop
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="shopId != null" >

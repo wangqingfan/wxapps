@@ -11,4 +11,13 @@ public interface MiniAppsService {
 	 * @return MiniApps
 	 */
 	MiniApps findByAppId (String appId);
+	
+	
+	/**
+	 * 插入
+	 * @author wqf V1.0 2018年1月24日 下午4:16:17
+	 * @param miniApps
+	 * @return Integer
+	 */
+	Integer insert(MiniApps miniApps);
 }

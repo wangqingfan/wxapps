@@ -56,4 +56,10 @@
     </set>
     where city_id = #{cityId,jdbcType=INTEGER}
   </update>
+  <select id="findByProvinceId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from city
+    where province_id = #{value,jdbcType=INTEGER}
+  </select>
 </mapper>

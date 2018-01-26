@@ -23,5 +23,13 @@ public interface AttachmentService {
 	 * @param type
 	 * @param files void
 	 */
-	void upload(Integer type,CommonsMultipartFile[] files) throws Exception;
+	String upload(Integer type,CommonsMultipartFile[] files) throws Exception;
+	
+	/**
+	 * 插入
+	 * @author wqf V1.0 2018年1月26日 下午5:44:50
+	 * @param attachment
+	 * @return Integer
+	 */
+	Integer insert(Attachment attachment);
 }

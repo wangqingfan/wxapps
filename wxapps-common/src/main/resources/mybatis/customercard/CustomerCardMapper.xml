@@ -26,7 +26,7 @@
     delete from customer_card
     where customer_card_id = #{customerCardId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.beixiao.customercard.domain.CustomerCard" >
+  <insert id="insert" parameterType="com.beixiao.customercard.domain.CustomerCard" useGeneratedKeys="true" keyProperty="customerCardId">
     insert into customer_card
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="customerCardId != null" >

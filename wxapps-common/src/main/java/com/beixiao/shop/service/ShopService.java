@@ -30,4 +30,12 @@ public interface ShopService {
 	 * @return List<shop>
 	 */
 	PageAble<Shop> findAllPage(Map<String,Object> map);
+	
+	/**
+	 * 插入
+	 * @author wqf V1.0 2018年1月24日 下午6:31:00
+	 * @param shop
+	 * @return Integer
+	 */
+	Integer insert(Shop shop);
 }

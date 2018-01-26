@@ -25,6 +25,16 @@ public class CustomerCard {
     private Integer bindCard;//绑卡状态
 
     private String mobilephone;//银行预留手机号
+    
+    /**
+     * 绑卡
+     */
+    public static final Integer BIND_CARD_YES = 1;
+    
+    /**
+     * 解绑
+     */
+    public static final Integer BIND_CARD_NO = 2;
 
     public Integer getCustomerCardId() {
         return customerCardId;

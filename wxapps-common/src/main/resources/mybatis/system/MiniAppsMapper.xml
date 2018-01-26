@@ -21,7 +21,7 @@
     delete from mini_apps
     where mini_app_id = #{miniAppId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.beixiao.system.domain.MiniApps" >
+  <insert id="insert" parameterType="com.beixiao.system.domain.MiniApps" useGeneratedKeys="true" keyProperty="miniAppId">
     insert into mini_apps
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="miniAppId != null" >

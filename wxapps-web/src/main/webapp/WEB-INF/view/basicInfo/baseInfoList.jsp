@@ -123,19 +123,22 @@
 					
 					$scope.addShop = function(){
 						layer.open({
-							  type: 2,
-							  skin : 'layui-layer-lan', //加上边框49'layui-layer-lan'layui-layer-rim 
-							  area : [ '80%', '80%' ], //宽高50
-							  title:'新增商户',
-							  content: '${pageContext.request.contextPath}/basic/info/toAddBasic',
-							  btn:['提交','关闭'],
-							  yes:function(index,layero){
-								  //提交
-							  },
-							  btn2:function(index,layero){
-								  
-							  }
-							});
+						  type: 2,
+						  skin : 'layui-layer-lan', //加上边框49'layui-layer-lan'layui-layer-rim 
+						  area : [ '80%', '85%' ], //宽高50
+						  title:'新增商户',
+						  content: '${pageContext.request.contextPath}/basic/info/toAddBasic',
+						  btn:['提交','关闭'],
+						  yes:function(index,layero){
+							  //调用子页面方法
+							  var iframeWin = window[layero.find('iframe')[0]['name']];
+							  iframeWin.formSubmit();
+						  },
+						  btn2:function(index,layero){
+							//var index = parent.layer.getFrameIndex(window.name); 获取窗口索引
+							layer.close(index)
+						  }
+						});
 					}
 				});
 			})

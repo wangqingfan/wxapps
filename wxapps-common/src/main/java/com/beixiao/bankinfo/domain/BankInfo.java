@@ -21,7 +21,17 @@ public class BankInfo {
     private String street;//银行所在区
 
     private String bankNo;//银行编码
+    
+    private String bankAddress;//银行详细信息
 
+    
+    /**
+     * 国家：中国
+     * @author wqf V1.0 2018年1月25日 上午10:05:57
+     * @return Integer
+     */
+    public static final String COUNTRY_CHINA = "中国";
+    
     public Integer getBankId() {
         return bankId;
     }
@@ -85,4 +95,13 @@ public class BankInfo {
     public void setBankNo(String bankNo) {
         this.bankNo = bankNo == null ? null : bankNo.trim();
     }
+
+	public String getBankAddress() {
+		return bankAddress;
+	}
+
+	public void setBankAddress(String bankAddress) {
+		this.bankAddress = bankAddress;
+	}
+    
 }

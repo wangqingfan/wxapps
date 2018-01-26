@@ -11,4 +11,13 @@ public interface RestaurantService {
 	 * @return Restaurant
 	 */
 	Restaurant findByShopId (Integer ShopId);
+	
+	
+	/**
+	 * 插入
+	 * @author wqf V1.0 2018年1月26日 上午9:52:24
+	 * @param restaurant
+	 * @return Integer
+	 */
+	Integer insert(Restaurant restaurant);
 }

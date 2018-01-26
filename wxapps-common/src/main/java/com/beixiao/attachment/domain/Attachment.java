@@ -13,7 +13,7 @@ public class Attachment {
 
     private String fileName;//附件名称
 
-    private Integer attachmentType;//附件类型
+    private Integer attachmentType;//附件类型，用于区分哪种附件
 
     private String fileType;//文件类型.jpg等等
 

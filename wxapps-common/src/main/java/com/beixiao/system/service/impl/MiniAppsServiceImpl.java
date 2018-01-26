@@ -19,4 +19,8 @@ public class MiniAppsServiceImpl implements MiniAppsService{
 		return miniAppsDao.findByAppId(appId);
 	}
 	
+	@Override
+	public Integer insert(MiniApps miniApps) {
+		return miniAppsDao.insert(miniApps);
+	}
 }

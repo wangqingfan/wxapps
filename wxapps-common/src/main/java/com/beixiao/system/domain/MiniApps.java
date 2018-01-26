@@ -18,6 +18,15 @@ public class MiniApps {
     private String appSecret;//微信端app密码
 
     private Integer appState;//APP状态
+    
+    /**
+     * APP状态：可用
+     */
+    public static final Integer APP_STATE_YES = 1;
+    /**
+     * APP状态：不可用
+     */
+    public static final Integer APP_STATE_NO = 2;
 
     public Integer getMiniAppId() {
         return miniAppId;

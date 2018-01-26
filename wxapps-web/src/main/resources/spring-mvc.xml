@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
        default-lazy-init="true">
        <!-- 组件扫描 -->
-       <context:component-scan base-package="com.beixiao">
+       <context:component-scan base-package="com.beixiao" use-default-filters="false">
        		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
        </context:component-scan>
        <!-- 视图解析器 -->
@@ -51,6 +51,7 @@
 		                <value>/login</value>
 		                <value>/404</value>
 		                <value>/500</value>
+		                <value>/wechat</value>
 		       		</list>
        			</property>
        		</bean>

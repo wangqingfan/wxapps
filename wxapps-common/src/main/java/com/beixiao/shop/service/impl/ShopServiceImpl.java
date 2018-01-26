@@ -40,4 +40,9 @@ public class ShopServiceImpl implements ShopService{
 		List<Shop> list = shopDao.findAllPage(map);
 		return new PageAble<Shop>(new PageInfo<Shop>(list));
 	}
+	
+	@Override
+	public Integer insert(Shop shop) {
+		return shopDao.insert(shop);
+	}
 }

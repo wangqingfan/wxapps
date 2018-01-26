@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.beixiao.attachment.service.AttachmentService;
+import com.beixiao.common.ReturnInfo;
 import com.beixiao.common.util.ValidateUtil;
 
 @Controller
@@ -28,14 +29,16 @@ public class AttachmentController {
 	@ResponseBody
 	public Object upload(@RequestParam Map<String,Object> param,@RequestParam("file") CommonsMultipartFile[] files){
 		String type = (String)param.get("type");
+		String upload = "";
 		logger.info("------type--------"+type);
 		if(!ValidateUtil.isEmpty(files)){
 			try {
-				attachmentService.upload(Integer.parseInt(type), files);
+				upload = attachmentService.upload(Integer.parseInt(type), files);
 			} catch (Exception e) {
 				logger.error("-----------upload------发生错误",e);
+				return ReturnInfo.toPostReturn(ReturnInfo.CODE_ERROR, null);
 			}
 		}
-		return null;
+		return ReturnInfo.toPostReturn(ReturnInfo.CODE_SUCCESS, upload);
 	}
 }

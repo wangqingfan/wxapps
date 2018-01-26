@@ -30,7 +30,7 @@
     delete from attachment
     where attachment_id = #{attachmentId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.beixiao.attachment.domain.Attachment">
+  <insert id="insert" parameterType="com.beixiao.attachment.domain.Attachment" useGeneratedKeys="true" keyProperty="attachmentId">
     insert into attachment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="attachmentId != null">

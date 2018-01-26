@@ -10,9 +10,10 @@
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="street" jdbcType="VARCHAR" property="street" />
     <result column="bank_no" jdbcType="VARCHAR" property="bankNo" />
+    <result column="bank_address" jdbcType="VARCHAR" property="bankAddress" />
   </resultMap>
   <sql id="Base_Column_List">
-    bank_id, bank_name, p_bank_id, country, province, city, street, bank_no
+    bank_id, bank_name, p_bank_id, country, province, city, street, bank_no,bank_address
   </sql>
   <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,7 +25,7 @@
     delete from bank_info
     where bank_id = #{bankId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.beixiao.bankinfo.domain.BankInfo">
+  <insert id="insert" parameterType="com.beixiao.bankinfo.domain.BankInfo" useGeneratedKeys="true" keyProperty="bankId">
     insert into bank_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="bankId != null">
@@ -50,6 +51,9 @@
       </if>
       <if test="bankNo != null">
         bank_no,
+      </if>
+      <if test="bankAddress != null">
+        bank_address,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -77,6 +81,9 @@
       <if test="bankNo != null">
         #{bankNo,jdbcType=VARCHAR},
       </if>
+      <if test="bankAddress != null">
+       	#{bankAddress,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="update" parameterType="com.beixiao.bankinfo.domain.BankInfo">
@@ -102,6 +109,9 @@
       </if>
       <if test="bankNo != null">
         bank_no = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAddress != null">
+       	bank_address = #{bankAddress,jdbcType=VARCHAR},
       </if>
     </set>
     where bank_id = #{bankId,jdbcType=INTEGER}

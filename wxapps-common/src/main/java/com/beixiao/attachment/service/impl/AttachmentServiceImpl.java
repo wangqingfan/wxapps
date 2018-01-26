@@ -20,6 +20,7 @@ import com.beixiao.attachment.repository.AttachmentDao;
 import com.beixiao.attachment.service.AttachmentService;
 import com.beixiao.common.util.DateUtil;
 import com.beixiao.common.util.Properties;
+import com.beixiao.common.util.ValidateUtil;
 
 @Service
 public class AttachmentServiceImpl implements AttachmentService{
@@ -34,7 +35,8 @@ public class AttachmentServiceImpl implements AttachmentService{
 	}
 	
 	@Override
-	public void upload(Integer type, CommonsMultipartFile[] files) throws Exception{
+	public String upload(Integer type, CommonsMultipartFile[] files) throws Exception{
+		String result = "";
 		for(CommonsMultipartFile file : files){
 			InputStream inputStream = null;
 			FileOutputStream outputStream = null;
@@ -58,6 +60,22 @@ public class AttachmentServiceImpl implements AttachmentService{
 					outputStream.write(buf, 0, b);
 				}
 				outputStream.flush();
+				//插入附件
+				Attachment attachment = new Attachment();
+				attachment.setFileName(uuid);//生成的附件名称
+				attachment.setAttachmentType(type);//附件类型
+				attachment.setFileType(originalFilename.substring(originalFilename.lastIndexOf(".")));//文件类型
+				attachment.setPathInfo(path);
+				attachment.setHref(url);
+				attachment.setCreateTime(new Date());
+				attachment.setState(Attachment.STATE_YES);
+				//attachment.setWidth(file.get);
+				this.insert(attachment);
+				if(ValidateUtil.isEmpty(result)){
+					result = String.valueOf(attachment.getAttachmentId());
+				}else{
+					result += ","+String.valueOf(attachment.getAttachmentId());
+				}
 			} catch (Exception e) {
 				logger.info("-----upload----发生异常"+e);
 				throw e;
@@ -71,5 +89,12 @@ public class AttachmentServiceImpl implements AttachmentService{
 			}
 			
 		}
+		
+		return result;
+	}
+	
+	@Override
+	public Integer insert(Attachment attachment) {
+		return attachmentDao.insert(attachment);
 	}
 }

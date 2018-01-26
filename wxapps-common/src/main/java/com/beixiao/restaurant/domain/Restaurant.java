@@ -42,6 +42,16 @@ public class Restaurant {
     
     private String lstModTimeStr;
     
+    /**
+     * 启用
+     */
+    public static final Integer BUSS_STATE_YES = 1;
+    
+    /**
+     * 未启用
+     */
+    public static final Integer BUSS_STATE_NO = 1;
+    
     public Integer getRestaurantId() {
         return restaurantId;
     }
