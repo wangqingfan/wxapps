@@ -34,7 +34,12 @@ public class Attachment {
     private Integer height;//图片高
 
     private Integer shopId;//商户id
-
+    
+    /*--------------------------------VO-------------------------------*/
+    private String[] ids;
+    
+    private String createTimeStr;//创建时间字符
+    
     /**
      * 附件状态：未删除
      */
@@ -157,4 +162,22 @@ public class Attachment {
     public void setShopId(Integer shopId) {
         this.shopId = shopId;
     }
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
+	}
+
+	public String getCreateTimeStr() {
+		return createTimeStr;
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
+
+	
 }

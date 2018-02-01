@@ -1,5 +1,6 @@
 package com.beixiao.basic.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+import com.beixiao.attachment.domain.Attachment;
+import com.beixiao.attachment.service.AttachmentService;
 import com.beixiao.bankinfo.domain.BankInfo;
 import com.beixiao.basic.BasicInfoService;
 import com.beixiao.common.ReturnInfo;
@@ -21,6 +25,7 @@ import com.beixiao.common.util.ValidateUtil;
 import com.beixiao.customercard.domain.CustomerCard;
 import com.beixiao.restaurant.domain.Restaurant;
 import com.beixiao.shop.domain.Shop;
+import com.beixiao.shop.dto.BasicInfo;
 import com.beixiao.shop.service.ShopService;
 import com.beixiao.system.domain.MiniApps;
 import com.beixiao.system.service.SystemService;
@@ -42,6 +47,8 @@ public class BasicInfoController {
 	private SystemService systemService;
 	@Resource
 	private BasicInfoService basicInfoService;
+	@Resource
+	private AttachmentService attachmentService;
 	/**
 	 * 跳转到基本信息列表
 	 * @author wqf V1.0 2018年1月8日 下午2:38:24
@@ -64,9 +71,28 @@ public class BasicInfoController {
 		return shopService.findAllPage(param);
 	}
 	
+	/**
+	 * 编辑
+	 * @author wqf V1.0 2018年1月31日 下午2:00:02
+	 * @param param
+	 * @param modelMap
+	 * @return String
+	 */
 	@RequestMapping("/toEditBasic")
-	public String toEdit(@RequestParam Map<String,Object> param){
-		return "";
+	public String toEdit(@RequestParam Map<String,Object> param,ModelMap modelMap){
+		param.put("shopType", Shop.SHOP_TYPE_RESTAURANT);
+		BasicInfo basicInfo = shopService.findBasicInfoByMap(param);
+		logger.info("--------basicInfo------"+JSONObject.toJSONString(basicInfo));
+		//全部查询
+		param.put("attachmentType", null);
+		List<Attachment> attachments = attachmentService.findByShopIdAndType(param);
+		if(!ValidateUtil.isEmpty(attachments)){
+			modelMap.put("attachments", attachments);
+		}
+		modelMap.put("flag", param.get("flag"));
+		modelMap.put("basicInfo", basicInfo);
+		modelMap.put("provinces", systemService.getProvices());
+		return "/basicInfo/addBasic";
 	}
 	
 	
@@ -78,6 +104,7 @@ public class BasicInfoController {
 	 */
 	@RequestMapping("/toAddBasic")
 	public String toAddBasic(ModelMap modelMap){
+		modelMap.put("flag", "add");
 		modelMap.put("provinces", systemService.getProvices());
 		return "/basicInfo/addBasic";
 	}
@@ -119,7 +146,7 @@ public class BasicInfoController {
 				restaurantBind.bind(request);
 			}
 			//保存信息
-			basicInfoService.saveBasic(miniApps, shop, bankInfo, customerCard,restaurant);
+			basicInfoService.saveOrUpdateBasic(miniApps, shop, bankInfo, customerCard,restaurant,param);
 		} catch (Exception e) {
 			logger.error("---------addBasic-----error:",e);
 			return ReturnInfo.toPostReturn(ReturnInfo.CODE_ERROR, "系统异常");

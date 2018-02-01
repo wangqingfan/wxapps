@@ -38,4 +38,28 @@ public interface ShopService {
 	 * @return Integer
 	 */
 	Integer insert(Shop shop);
+	
+	/**
+	 * 获取基本信息
+	 * @author wqf V1.0 2018年1月29日 下午5:10:37
+	 * @param map
+	 * @return BasicInfo
+	 */
+	BasicInfo findBasicInfoByMap(Map<String,Object> map);
+	
+	/**
+	 * 通过appId查找
+	 * @author wqf V1.0 2018年2月1日 下午2:03:40
+	 * @param appId
+	 * @return Shop
+	 */
+	Shop findByAppId(String appId);
+	
+	/**
+	 * 更新
+	 * @author wqf V1.0 2018年2月1日 下午2:09:23
+	 * @param shop
+	 * @return Integer
+	 */
+	Integer update (Shop shop);
 }

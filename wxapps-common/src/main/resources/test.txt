@@ -197,7 +197,7 @@ CREATE TABLE `attachment` (
   `href` varchar(255) DEFAULT NULL COMMENT '外链地址',
   `width` int(11) DEFAULT NULL COMMENT '宽',
   `height` int(11) DEFAULT NULL COMMENT '高',
-	`shop_id` int(11) NOT NULL COMMENT '商户id',
+`shop_id` int(11) DEFAULT NULL COMMENT '商户id',
   PRIMARY KEY (`attachment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='附件表';
 
@@ -237,7 +237,7 @@ CREATE TABLE `customer_card` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `lst_mdf_time` datetime DEFAULT NULL COMMENT '最后修改时间',
   `bind_card` tinyint(4) DEFAULT NULL COMMENT '1 已绑卡 2 解绑',
-  `mobilePhone` varchar(11) DEFAULT NULL COMMENT '银行卡预留手机号',
+  `mobile_phone` varchar(11) DEFAULT NULL COMMENT '银行卡预留手机号',
   PRIMARY KEY (`customer_card_id`),
   KEY `idx_card_code` (`card_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='客户卡信息';
@@ -3564,3 +3564,7 @@ ALTER TABLE bank_info ADD `bank_address` VARCHAR(255) DEFAULT NULL COMMENT '详�
 
 ALTER TABLE restaurant MODIFY `begin_bussiness_time` VARCHAR(10) DEFAULT null;
 ALTER TABLE restaurant MODIFY `end_bussiness_time` VARCHAR(10) DEFAULT null;
+
+
+
+ALTER TABLE `province` ADD INDEX idx_province_name (`province_name`);

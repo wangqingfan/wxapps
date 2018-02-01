@@ -18,4 +18,14 @@ public class BankInfoServiceImpl implements BankInfoService{
 	public Integer insert(BankInfo bankInfo) {
 		return bankInfoDao.insert(bankInfo);
 	}
+	
+	@Override
+	public BankInfo findByCustomerCardId(Integer id) {
+		return bankInfoDao.findByCustomerCardId(id);
+	}
+	
+	@Override
+	public Integer update(BankInfo bankInfo) {
+		return bankInfoDao.update(bankInfo);
+	}
 }

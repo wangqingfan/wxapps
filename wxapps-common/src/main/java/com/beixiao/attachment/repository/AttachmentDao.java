@@ -15,4 +15,12 @@ public interface AttachmentDao extends BaseDao<Attachment>{
 	 * @return List<Attachment>
 	 */
 	List<Attachment> findByShopIdAndType (Map<String,Object> param);
+	
+	/**
+	 * 批量更新
+	 * @author wqf V1.0 2018年1月29日 下午2:17:47
+	 * @param attachment
+	 * @return Integer
+	 */
+	Integer updateByIds(Attachment attachment);
 }

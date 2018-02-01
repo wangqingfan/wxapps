@@ -45,7 +45,12 @@ public class Shop {
     private Integer productId;//产品主键
     
     private String shopName;//商店名称
-
+    //---------------------------vo--------------------------
+    
+    private String createTimeStr;
+    
+    private String lstModTimeStr;
+    
     /**
      * 商铺状态：已续约
      */

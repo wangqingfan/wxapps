@@ -12,7 +12,6 @@ public interface RestaurantService {
 	 */
 	Restaurant findByShopId (Integer ShopId);
 	
-	
 	/**
 	 * 插入
 	 * @author wqf V1.0 2018年1月26日 上午9:52:24
@@ -20,4 +19,12 @@ public interface RestaurantService {
 	 * @return Integer
 	 */
 	Integer insert(Restaurant restaurant);
+	
+	/**
+	 * 通过shopId更新
+	 * @author wqf V1.0 2018年2月1日 下午2:36:35
+	 * @param restaurant
+	 * @return Integer
+	 */
+	Integer updateByShopId(Restaurant restaurant);
 }

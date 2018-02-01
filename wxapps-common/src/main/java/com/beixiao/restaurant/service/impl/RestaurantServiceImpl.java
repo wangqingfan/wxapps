@@ -24,4 +24,8 @@ public class RestaurantServiceImpl implements RestaurantService{
 		return restaurantDao.insert(restaurant);
 	}
 	
+	@Override
+	public Integer updateByShopId(Restaurant restaurant) {
+		return restaurantDao.updateByShopId(restaurant);
+	}
 }

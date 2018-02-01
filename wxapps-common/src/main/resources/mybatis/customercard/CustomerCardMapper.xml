@@ -10,11 +10,11 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="lst_mdf_time" property="lstMdfTime" jdbcType="TIMESTAMP" />
     <result column="bind_card" property="bindCard" jdbcType="TINYINT" />
-    <result column="mobilePhone" property="mobilephone" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     customer_card_id, bank_id, card_type, card_code, card_customer_name, create_time, 
-    lst_mdf_time, bind_card, mobilePhone
+    lst_mdf_time, bind_card, mobile_phone
   </sql>
   <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -53,8 +53,8 @@
       <if test="bindCard != null" >
         bind_card,
       </if>
-      <if test="mobilephone != null" >
-        mobilePhone,
+      <if test="mobilePhone != null" >
+        mobile_phone,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -82,8 +82,8 @@
       <if test="bindCard != null" >
         #{bindCard,jdbcType=TINYINT},
       </if>
-      <if test="mobilephone != null" >
-        #{mobilephone,jdbcType=VARCHAR},
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -111,8 +111,8 @@
       <if test="bindCard != null" >
         bind_card = #{bindCard,jdbcType=TINYINT},
       </if>
-      <if test="mobilephone != null" >
-        mobilePhone = #{mobilephone,jdbcType=VARCHAR},
+      <if test="mobilePhone != null" >
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
       </if>
     </set>
     where customer_card_id = #{customerCardId,jdbcType=INTEGER}

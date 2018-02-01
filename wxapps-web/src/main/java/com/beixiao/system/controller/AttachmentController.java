@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.beixiao.attachment.domain.Attachment;
 import com.beixiao.attachment.service.AttachmentService;
 import com.beixiao.common.ReturnInfo;
 import com.beixiao.common.util.ValidateUtil;
@@ -41,4 +42,24 @@ public class AttachmentController {
 		}
 		return ReturnInfo.toPostReturn(ReturnInfo.CODE_SUCCESS, upload);
 	}
+	
+	
+	/**
+	 * 删除附件
+	 * @author wqf V1.0 2018年1月31日 下午5:20:49
+	 * @param id
+	 * @return Object
+	 */
+	@RequestMapping("/deleteAtt")
+	@ResponseBody
+	public Object deleteAtt(@RequestParam("id") Integer id){
+		if(id !=null){
+			Attachment attachment = new Attachment();
+			attachment.setState(Attachment.STATE_NO);
+			attachment.setAttachmentId(id);
+			attachmentService.update(attachment);
+		}
+		return ReturnInfo.toPostReturn(ReturnInfo.CODE_SUCCESS, null);
+	}
+	
 }

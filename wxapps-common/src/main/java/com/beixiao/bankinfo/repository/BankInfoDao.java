@@ -10,4 +10,11 @@ import com.beixiao.common.BaseDao;
  */
 public interface BankInfoDao extends BaseDao<BankInfo>{
 	
+	/**
+	 * 通过客户卡id查找
+	 * @author wqf V1.0 2018年2月1日 下午2:22:01
+	 * @param id
+	 * @return BankInfo
+	 */
+	BankInfo findByCustomerCardId(Integer id); 
 }

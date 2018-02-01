@@ -32,4 +32,20 @@ public interface AttachmentService {
 	 * @return Integer
 	 */
 	Integer insert(Attachment attachment);
+	
+	/**
+	 * 批量更新
+	 * @author wqf V1.0 2018年1月29日 下午2:17:47
+	 * @param attachment
+	 * @return Integer
+	 */
+	Integer updateByIds(Attachment attachment);
+	
+	/**
+	 * 更新
+	 * @author wqf V1.0 2018年1月31日 下午5:18:51
+	 * @param attachment
+	 * @return Integer
+	 */
+	Integer update(Attachment attachment);
 }

@@ -81,6 +81,7 @@
 					table.render({
 						elem: '#test',
 					    url: '${pageContext.request.contextPath}/basic/info/getList', //数据接口
+					    cellMinWidth: 80 ,
 					    page: true, //开启分页
 					    cols: [[ //表头
 					      {field: 'shopName', title: '商店名称', width:80, fixed: 'left'},
@@ -88,7 +89,7 @@
 					      {field: 'idCode', title: '身份证号', width:80, },
 					      {field: 'shopCity', title: '城市', width:80} ,
 					      {field: 'shopTelphone', title: '商户电话', width: 170},
-					      {field: 'createTime', title: '创建时间', width: 80, },
+					      {field: 'createTime', title: '创建时间', event:'time', width: 80, },
 					      {field: 'lstModTime', title: '最后修改时间', width: 80, },
 					      {field: 'shopState', title: '商铺状态', width: 80},
 					      {field: 'totalDealMoney', title: '累计成交金额', width: 135, },
@@ -102,22 +103,31 @@
 						var tr = obj.tr;//获取当前行trdom值
 						if(layEvent=='detail'){
 						alert(data.shopId);
-							layer.open({
-							  type: 2,
-							  skin: 'layui-layer-rim', //加上边框
-							  title:'编辑',
-							  area: ['420px', '240px'], //宽高
-							  content: '${pageContext.request.contextPath}/basic/info/toEditBasic?shopId'+data.shopId
-							});
 						}else if(layEvent == 'edit'){
 							layer.open({
-							  type: 1,
-							  skin: 'layui-layer-rim', //加上边框
-							  area: ['420px', '240px'], //宽高
-							  content: data.cutomerName
+							  type: 2,
+							  skin: 'layui-layer-lan', //加上边框
+							  title:'编辑',
+							  area : [ '80%', '85%' ], //宽高50
+							  content: '${pageContext.request.contextPath}/basic/info/toEditBasic?shopId='+data.shopId+'&flag=edit',
+							  btn:['提交','关闭'],
+							  yes:function(index,layero){
+								  //调用子页面方法
+								  var iframeWin = window[layero.find('iframe')[0]['name']];
+								  iframeWin.formSubmit();
+							  },
+							  btn2:function(index,layero){
+								//var index = parent.layer.getFrameIndex(window.name); 获取窗口索引
+								layer.close(index)
+							  }
 							});
 						}else if(layEvent == 'del'){
 							alert('del'+data.cutomerName);
+						}else if(layEvent == 'time'){
+							var createTimeStr = "初始化";
+							obj.update({
+								createTime:createTimeStr
+							})
 						}
 					});
 					

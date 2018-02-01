@@ -62,4 +62,10 @@
     from city
     where province_id = #{value,jdbcType=INTEGER}
   </select>
+  <select id="getCitysByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from city
+    where province_id  = (SELECT p.province_id FROM province p WHERE p.province_name = #{value});
+  </select>
 </mapper>

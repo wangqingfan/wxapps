@@ -44,11 +44,17 @@
 				return new Promise(function(resolve,reject){
 					$("option").remove("."+cityClear);
 					$("option").remove("."+subCityClear);
+					var url = "";
+					if(Number(id)){
+						url = "${pageContext.request.contextPath}/system/getCity";
+					}else{
+						url = "${pageContext.request.contextPath}/system/getCityByName";
+					}
 					$.ajax({
 						type:"POST",
 						data:{id:id},
 						dataType:"JSON",
-						url:"${pageContext.request.contextPath}/system/getCity",
+						url: url,
 						success:function(data){
 							var result = {};
 							result.citys = data;
@@ -68,11 +74,17 @@
 			function loadSubCity(id,ele,clear){
 				return new Promise(function(resolve,reject){
 					$("option").remove("."+clear);
+					var url = "";
+					if(Number(id)){
+						url = "${pageContext.request.contextPath}/system/getSubCity";
+					}else{
+						url = "${pageContext.request.contextPath}/system/getSubCityByName";
+					}
 					$.ajax({
 						type:"POST",
 						data:{id:id},
 						dataType:"JSON",
-						url:"${pageContext.request.contextPath}/system/getSubCity",
+						url:url,
 						success:function(data){
 							var result = {};
 							result.subCitys = data;
@@ -81,6 +93,7 @@
 							}
 							var template = Handlebars.compile($("#subCity-template").html());
 							var html =template(result);
+							console.log(id+"html------------------"+html);
 							$("#"+ele).append(html);
 							resolve();
 						}

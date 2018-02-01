@@ -12,4 +12,12 @@ public interface RestaurantDao extends BaseDao<Restaurant>{
 	 * @return Restaurant
 	 */
 	Restaurant findByShopId (Integer ShopId);
+	
+	/**
+	 * 通过shopId更新
+	 * @author wqf V1.0 2018年2月1日 下午2:36:35
+	 * @param restaurant
+	 * @return Integer
+	 */
+	Integer updateByShopId(Restaurant restaurant);
 }

@@ -215,8 +215,12 @@
     <result column="shop_state" property="shopState" jdbcType="TINYINT" />
     <result column="total_deal_money" property="totalDealMoney" jdbcType="DECIMAL" />
     <result column="shop_type" property="shopType" jdbcType="TINYINT" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
     <association  property="restaurant" resultMap="restaurantResultMap"/>
     <association  property="activity" resultMap="activityResultMap"/>
+    <association  property="customerCard" resultMap="customerCardMap"/>
+    <association  property="bankInfo" resultMap="bankInfoMap"/>
+    <association  property="miniApps" resultMap="miniAppsMap"/>
   </resultMap>
   <resultMap type="com.beixiao.restaurant.domain.Restaurant" id="restaurantResultMap">
   	<id column="restaurant_id" property="restaurantId" jdbcType="INTEGER" />
@@ -240,6 +244,35 @@
     <result column="act_lst_mod_time_str" property="lstModTimeStr" jdbcType="TIMESTAMP" />
     <result column="act_shop_id" property="shopId" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="customerCardMap" type="com.beixiao.customercard.domain.CustomerCard" >
+    <id column="cc_customer_card_id" property="customerCardId" jdbcType="INTEGER" />
+    <result column="cc_bank_id" property="bankId" jdbcType="INTEGER" />
+    <result column="cc_card_type" property="cardType" jdbcType="TINYINT" />
+    <result column="cc_card_code" property="cardCode" jdbcType="VARCHAR" />
+    <result column="cc_card_customer_name" property="cardCustomerName" jdbcType="VARCHAR" />
+    <result column="cc_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="cc_lst_mdf_time" property="lstMdfTime" jdbcType="TIMESTAMP" />
+    <result column="cc_bind_card" property="bindCard" jdbcType="TINYINT" />
+    <result column="cc_mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="bankInfoMap" type="com.beixiao.bankinfo.domain.BankInfo">
+    <id column="bi_bank_id" jdbcType="INTEGER" property="bankId" />
+    <result column="bi_bank_name" jdbcType="VARCHAR" property="bankName" />
+    <result column="bi_p_bank_id" jdbcType="INTEGER" property="pBankId" />
+    <result column="bi_country" jdbcType="VARCHAR" property="country" />
+    <result column="bi_province" jdbcType="VARCHAR" property="province" />
+    <result column="bi_city" jdbcType="VARCHAR" property="city" />
+    <result column="bi_street" jdbcType="VARCHAR" property="street" />
+    <result column="bi_bank_no" jdbcType="VARCHAR" property="bankNo" />
+    <result column="bi_bank_address" jdbcType="VARCHAR" property="bankAddress" />
+  </resultMap>
+  <resultMap id="miniAppsMap" type="com.beixiao.system.domain.MiniApps" >
+    <id column="ma_mini_app_id" property="miniAppId" jdbcType="INTEGER" />
+    <result column="ma_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ma_app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="ma_app_secret" property="appSecret" jdbcType="VARCHAR" />
+    <result column="ma_app_state" property="appState" jdbcType="TINYINT" />
+  </resultMap>
   <select id="findBasicInfoByAppId" parameterType="java.lang.Integer" resultMap="basicInfoResultMap">
   	SELECT
 		s.*,
@@ -260,7 +293,7 @@
 		a.create_author_name as act_create_author_name,
 		DATE_FORMAT(a.create_time,'%Y-%m-%d %H:%i:%S') as act_create_time_str,
 		DATE_FORMAT(a.lst_mod_time,'%Y-%m-%d %H:%i:%S') as act_lst_mod_time_str,
-		a.shop_id as act_shop_id
+		a.shop_id as act_shop_id,
 	FROM
 		shop s
 	LEFT JOIN restaurant r ON s.shop_id = r.shop_id                                                                                                                                             
@@ -288,5 +321,72 @@
     		create_time &lt;= #{creatTimeEnd}
     	</if>
     </where>
+    </select>
+    <select id="findBasicInfoByMap" parameterType="java.util.Map" resultMap="basicInfoResultMap">
+	  	SELECT
+			s.*,
+			r.restaurant_id,
+			r.least_consume as rest_least_consume,
+			r.delivery_distance as rest_delivery_distance,
+			r.begin_bussiness_time as rest_begin_bussiness_time,
+			r.end_bussiness_time as rest_end_bussiness_time,
+			r.bussiness_state as rest_bussiness_state,
+			r.announcement as rest_announcement,
+			DATE_FORMAT(r.create_time,'%Y-%m-%d %H:%i:%S') as rest_create_time_str,
+			DATE_FORMAT(r.lst_mod_time,'%Y-%m-%d %H:%i:%S') as rest_lst_mod_time_str,
+			r.shop_id as rest_shop_id,
+			a.activity_id,
+			a.content as act_content,
+			a.state as act_state,
+			a.create_author_id as act_create_author_id,
+			a.create_author_name as act_create_author_name,
+			DATE_FORMAT(a.create_time,'%Y-%m-%d %H:%i:%S') as act_create_time_str,
+			DATE_FORMAT(a.lst_mod_time,'%Y-%m-%d %H:%i:%S') as act_lst_mod_time_str,
+			a.shop_id as act_shop_id,
+			cc.bank_id AS cc_bank_id,
+			cc.customer_card_id AS cc_customer_card_id,
+			cc.card_type AS cc_card_type,
+			cc.card_code AS cc_card_code,
+			cc.card_customer_name AS cc_card_customer_name,
+			cc.bind_card AS cc_bind_card,
+			cc.mobile_phone AS cc_mobile_phone,
+			cc.create_time AS cc_create_time,
+			cc.lst_mdf_time AS cc_lst_mdf_time,
+			bi.bank_id AS bi_bank_id,
+			bi.bank_name AS bi_bank_name,
+			bi.p_bank_id AS bi_p_bank_id,
+			bi.country AS bi_country,
+			bi.province AS bi_province,
+			bi.city AS bi_city,
+			bi.street AS bi_street,
+			bi.bank_no AS bi_bank_no,
+			bi.bank_address AS bi_bank_address,
+			ma.app_id AS ma_app_id
+		FROM
+			shop s
+		LEFT JOIN restaurant r ON s.shop_id = r.shop_id                                                                                                                                             
+		LEFT JOIN activity a ON a.shop_id = s.shop_id
+		LEFT JOIN customer_card cc ON s.client_card_id = cc.customer_card_id AND cc.bind_card = 1
+		LEFT JOIN bank_info bi ON cc.bank_id = bi.bank_id 
+		LEFT JOIN mini_apps ma ON s.mini_app_id = ma.mini_app_id AND ma.app_state = 1
+		<where>
+			<if test="shopType != null and shopType != '' ">
+				and s.shop_type = #{shopType}
+			</if>
+			<if test="shopId != 0 and shopId != null ">
+				and s.shop_id = #{shopId}
+			</if>
+		</where>
+  </select>
+  <select id="findByAppId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+		s.*
+	FROM
+		shop s
+	LEFT JOIN mini_apps m ON s.mini_app_id = m.mini_app_id
+	WHERE
+		m.app_state = 1
+	AND s.shop_state = 1
+	AND m.app_id = #{value}
   </select>
 </mapper>

@@ -47,7 +47,8 @@ public class AttachmentServiceImpl implements AttachmentService{
 				inputStream = file.getInputStream();
 				String path = Properties.getValue(Properties.PROPERTIES_INTERFACE, Properties.UPLOAD_PATH);
 				String url = Properties.getValue(Properties.PROPERTIES_INTERFACE, Properties.UPLOAD_URL);
-				path += DateUtil.date2String(new Date(), "yyyy-MM-dd");
+				String now = DateUtil.date2String(new Date(), "yyyy-MM-dd");
+				path += now;
 				File dir = new File(path);
 				//创建当前时间的文件夹
 				if(!dir.exists()){
@@ -66,9 +67,10 @@ public class AttachmentServiceImpl implements AttachmentService{
 				attachment.setAttachmentType(type);//附件类型
 				attachment.setFileType(originalFilename.substring(originalFilename.lastIndexOf(".")));//文件类型
 				attachment.setPathInfo(path);
-				attachment.setHref(url);
+				attachment.setHref(url+now+"/"+uuid+originalFilename.substring(originalFilename.lastIndexOf(".")));
 				attachment.setCreateTime(new Date());
 				attachment.setState(Attachment.STATE_YES);
+				attachment.setAttachmentTitle(originalFilename);
 				//attachment.setWidth(file.get);
 				this.insert(attachment);
 				if(ValidateUtil.isEmpty(result)){
@@ -96,5 +98,15 @@ public class AttachmentServiceImpl implements AttachmentService{
 	@Override
 	public Integer insert(Attachment attachment) {
 		return attachmentDao.insert(attachment);
+	}
+	
+	@Override
+	public Integer updateByIds(Attachment attachment) {
+		return attachmentDao.updateByIds(attachment);
+	}
+	
+	@Override
+	public Integer update(Attachment attachment) {
+		return attachmentDao.update(attachment);
 	}
 }

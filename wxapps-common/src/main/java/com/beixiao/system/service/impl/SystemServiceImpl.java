@@ -41,4 +41,18 @@ public class SystemServiceImpl implements SystemService{
 	public List<SubCity> getSubCitys(Integer id) {
 		return subCityDao.findByCityId(id);
 	}
+	@Override
+	public Province getProvinceByName(String name) {
+		return provinceDao.getProvinceByName(name);
+	}
+	
+	@Override
+	public List<City> getCitysByName(String id) {
+		return cityDao.getCitysByName(id);
+	}
+	
+	@Override
+	public List<SubCity> getSubCitysByName(String cityName) {
+		return subCityDao.getSubCitysByName(cityName);
+	}
 }

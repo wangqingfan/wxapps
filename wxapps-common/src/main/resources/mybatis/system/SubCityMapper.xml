@@ -62,4 +62,9 @@
     from sub_city
     where city_id = #{value,jdbcType=INTEGER}
   </select>
+  <select id="getSubCitysByName"  resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select 
+    <include refid="Base_Column_List" />
+    from sub_city WHERE city_id = (SELECT c.city_id FROM city c WHERE c.city_name = #{value})
+  </select>
 </mapper>

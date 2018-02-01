@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.beixiao.activity.domain.Activity;
+import com.beixiao.bankinfo.domain.BankInfo;
+import com.beixiao.customercard.domain.CustomerCard;
 import com.beixiao.restaurant.domain.Restaurant;
+import com.beixiao.system.domain.MiniApps;
 
 /**
  * 基本信息，包括商店、餐厅、活动、公告等
@@ -39,6 +42,8 @@ public class BasicInfo {
     private String LstModTime;//商户最后修改时间
 
     private Integer shopState;//商铺状态
+    
+    private String shopName;//商店名称
 
     private BigDecimal totalDealMoney;//累计成交金额
     
@@ -49,7 +54,13 @@ public class BasicInfo {
     private Restaurant restaurant;//餐厅
     
     private List<Activity> activity;//活动
+    
+    private CustomerCard customerCard;//客户卡信息
+    
+    private BankInfo bankInfo;//银行信息
 
+    private MiniApps miniApps;//小程序
+    
 	public Integer getShopId() {
 		return shopId;
 	}
@@ -194,5 +205,37 @@ public class BasicInfo {
 		this.activity = activity;
 	}
 
-    
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public CustomerCard getCustomerCard() {
+		return customerCard;
+	}
+
+	public void setCustomerCard(CustomerCard customerCard) {
+		this.customerCard = customerCard;
+	}
+
+	public BankInfo getBankInfo() {
+		return bankInfo;
+	}
+
+	public void setBankInfo(BankInfo bankInfo) {
+		this.bankInfo = bankInfo;
+	}
+
+	public MiniApps getMiniApps() {
+		return miniApps;
+	}
+
+	public void setMiniApps(MiniApps miniApps) {
+		this.miniApps = miniApps;
+	}
+	
+
 }

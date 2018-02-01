@@ -116,4 +116,14 @@
     </set>
     where bank_id = #{bankId,jdbcType=INTEGER}
   </update>
+  <select id="findByCustomerCardId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	SELECT
+		b.*
+	FROM
+		bank_info b
+	LEFT JOIN customer_card c ON b.bank_id = c.bank_id
+	WHERE
+		c.bind_card = 1
+	AND c.customer_card_id = #{value};
+  </select>
 </mapper>

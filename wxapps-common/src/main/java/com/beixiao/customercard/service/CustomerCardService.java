@@ -11,4 +11,12 @@ public interface CustomerCardService {
 	 * @return Integer
 	 */
 	Integer insert(CustomerCard customerCard);
+	
+	/**
+	 * 更改
+	 * @author wqf V1.0 2018年2月1日 下午2:11:48
+	 * @param customerCard
+	 * @return Integer
+	 */
+	Integer update (CustomerCard customerCard);
 }

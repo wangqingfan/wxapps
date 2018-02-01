@@ -17,4 +17,9 @@ public class CustomerCardServiceImpl implements CustomerCardService{
 	public Integer insert(CustomerCard customerCard) {
 		return customerCardDao.insert(customerCard);
 	}
+	
+	@Override
+	public Integer update(CustomerCard customerCard) {
+		return customerCardDao.update(customerCard);
+	}
 }

@@ -45,4 +45,19 @@ public class ShopServiceImpl implements ShopService{
 	public Integer insert(Shop shop) {
 		return shopDao.insert(shop);
 	}
+	
+	@Override
+	public BasicInfo findBasicInfoByMap(Map<String, Object> map) {
+		return shopDao.findBasicInfoByMap(map);
+	}
+	
+	@Override
+	public Shop findByAppId(String appId) {
+		return shopDao.findByAppId(appId);
+	}
+	
+	@Override
+	public Integer update(Shop shop) {
+		return shopDao.update(shop);
+	}
 }

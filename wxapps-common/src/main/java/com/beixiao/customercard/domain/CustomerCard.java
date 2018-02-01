@@ -24,7 +24,7 @@ public class CustomerCard {
 
     private Integer bindCard;//绑卡状态
 
-    private String mobilephone;//银行预留手机号
+    private String mobilePhone;//银行预留手机号
     
     /**
      * 绑卡
@@ -100,11 +100,12 @@ public class CustomerCard {
         this.bindCard = bindCard;
     }
 
-    public String getMobilephone() {
-        return mobilephone;
-    }
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
 
-    public void setMobilephone(String mobilephone) {
-        this.mobilephone = mobilephone == null ? null : mobilephone.trim();
-    }
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+
 }

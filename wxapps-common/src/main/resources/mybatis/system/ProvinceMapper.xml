@@ -61,4 +61,10 @@
     <include refid="Base_Column_List" />
     from province
   </select>
+  <select id="getProvinceByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from province
+    where province_name = #{value,jdbcType=VARCHAR}
+  </select>
 </mapper>

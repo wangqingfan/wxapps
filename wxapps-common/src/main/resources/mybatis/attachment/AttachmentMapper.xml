@@ -15,10 +15,11 @@
     <result column="width" jdbcType="INTEGER" property="width" />
     <result column="height" jdbcType="INTEGER" property="height" />
     <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="createTimeStr" property="createTimeStr" />
   </resultMap>
   <sql id="Base_Column_List">
     attachment_id, file_name, attachment_type, file_type, path_info, create_time, attachment_title, 
-    state, adminId, href, width, height, shop_id
+    state, adminId, href, width, height, shop_id,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as createTimeStr
   </sql>
   <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -162,12 +163,62 @@
     <include refid="Base_Column_List" />
     from attachment
     <where>
+    	state = 01
     	<if test="shopId !=null and shopId!= 0">
-    		shop_id = #{shopId,jdbcType=INTEGER}
+    		and shop_id = #{shopId,jdbcType=INTEGER}
     	</if>
     	<if test="attachmentType !=null and attachmentType != 0">
-    		attachment_type = #{attachmentType,jdbcType=INTEGER}
+    		and attachment_type = #{attachmentType,jdbcType=INTEGER}
     	</if>
     </where>
   </select>
+  <update id="updateByIds" parameterType="com.beixiao.attachment.domain.Attachment">
+  	update attachment
+    <set>
+      <if test="fileName != null">
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentType != null">
+        attachment_type = #{attachmentType,jdbcType=INTEGER},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="pathInfo != null">
+        path_info = #{pathInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attachmentTitle != null">
+        attachment_title = #{attachmentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="adminid != null">
+        adminId = #{adminid,jdbcType=INTEGER},
+      </if>
+      <if test="href != null">
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if> 
+    </set>
+   	<where>
+   		<if test="ids != null and ids != '' ">
+   			and attachment_id in 
+   			<foreach collection="ids" item="id" separator="," open="(" close=")">
+   				#{id}
+   			</foreach>
+   		</if>
+   	</where>
+  </update>
 </mapper>
