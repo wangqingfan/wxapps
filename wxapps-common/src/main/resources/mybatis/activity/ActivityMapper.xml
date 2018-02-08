@@ -6,7 +6,7 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="create_author_id" property="createAuthorId" jdbcType="INTEGER" />
-    <result column="create_author_name" property="createAuthorName" jdbcType="INTEGER" />
+    <result column="create_author_name" property="createAuthorName" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="lst_mod_time" property="lstModTime" jdbcType="TIMESTAMP" />
     <result column="shop_id" property="shopId" jdbcType="INTEGER" />
@@ -24,7 +24,7 @@
     delete from activity
     where activity_id = #{activityId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.beixiao.activity.domain.Activity" >
+  <insert id="insert" parameterType="com.beixiao.activity.domain.Activity" useGeneratedKeys="true" keyProperty="activityId">
     insert into activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="activityId != null" >
@@ -66,7 +66,7 @@
         #{createAuthorId,jdbcType=INTEGER},
       </if>
       <if test="createAuthorName != null" >
-        #{createAuthorName,jdbcType=INTEGER},
+        #{createAuthorName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -79,7 +79,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateById" parameterType="com.beixiao.activity.domain.Activity" >
+  <update id="update" parameterType="com.beixiao.activity.domain.Activity" >
     update activity
     <set >
       <if test="content != null" >
@@ -92,7 +92,7 @@
         create_author_id = #{createAuthorId,jdbcType=INTEGER},
       </if>
       <if test="createAuthorName != null" >
-        create_author_name = #{createAuthorName,jdbcType=INTEGER},
+        create_author_name = #{createAuthorName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -105,5 +105,35 @@
       </if>
     </set>
     where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="deleteAll" parameterType="java.lang.Integer">
+  	update activity set state = 2 where shop_id = #{value}
+  </update>
+  <update id="updateByShopId" parameterType="com.beixiao.activity.domain.Activity" >
+    update activity
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createAuthorId != null" >
+        create_author_id = #{createAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="createAuthorName != null" >
+        create_author_name = #{createAuthorName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstModTime != null" >
+        lst_mod_time = #{lstModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopId != null" >
+       shop_id =  #{shopId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=INTEGER}
   </update>
 </mapper>

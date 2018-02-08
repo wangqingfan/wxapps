@@ -21,12 +21,14 @@ import com.beixiao.attachment.service.AttachmentService;
 import com.beixiao.bankinfo.domain.BankInfo;
 import com.beixiao.basic.BasicInfoService;
 import com.beixiao.common.ReturnInfo;
+import com.beixiao.common.cache.ThreadLocalMap;
 import com.beixiao.common.util.ValidateUtil;
 import com.beixiao.customercard.domain.CustomerCard;
 import com.beixiao.restaurant.domain.Restaurant;
 import com.beixiao.shop.domain.Shop;
 import com.beixiao.shop.dto.BasicInfo;
 import com.beixiao.shop.service.ShopService;
+import com.beixiao.system.domain.AdminInfo;
 import com.beixiao.system.domain.MiniApps;
 import com.beixiao.system.service.SystemService;
 
@@ -146,6 +148,9 @@ public class BasicInfoController {
 				restaurantBind.bind(request);
 			}
 			//保存信息
+			AdminInfo adminInfo = (AdminInfo)request.getSession().getAttribute("adminInfo");
+			ThreadLocalMap.put("adminName", adminInfo.getUserName());
+			ThreadLocalMap.put("adminId", adminInfo.getAdminId());
 			basicInfoService.saveOrUpdateBasic(miniApps, shop, bankInfo, customerCard,restaurant,param);
 		} catch (Exception e) {
 			logger.error("---------addBasic-----error:",e);

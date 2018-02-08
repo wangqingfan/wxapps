@@ -10,12 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.beixiao.activity.domain.Activity;
+import com.beixiao.activity.service.ActivityService;
 import com.beixiao.attachment.domain.Attachment;
 import com.beixiao.attachment.service.AttachmentService;
 import com.beixiao.bankinfo.domain.BankInfo;
 import com.beixiao.bankinfo.service.BankInfoService;
 import com.beixiao.basic.BasicInfoService;
 import com.beixiao.common.ReturnInfo;
+import com.beixiao.common.cache.ThreadLocalMap;
 import com.beixiao.common.util.ValidateUtil;
 import com.beixiao.customercard.domain.CustomerCard;
 import com.beixiao.customercard.service.CustomerCardService;
@@ -43,11 +48,15 @@ public class BasicInfoServiceImpl implements BasicInfoService{
 	private RestaurantService restaurantService;
 	@Resource
 	private AttachmentService attachmentService;
+	@Resource
+	private ActivityService activityService;
 	
 	@Override
 	@Transactional(readOnly=false,rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
 	public ReturnInfo saveOrUpdateBasic(MiniApps miniApps,Shop shop,BankInfo bankInfo,CustomerCard customerCard,Restaurant restaurant,Map<String,Object> param) {
 		String flag = (String)param.get("flag");
+		String act = (String)param.get("activities");
+		JSONArray array = JSONArray.parseArray(act);
 		if(!ValidateUtil.isEmpty(flag) && !"edit".equals(flag)){
 			//新增
 			//小程序
@@ -89,6 +98,21 @@ public class BasicInfoServiceImpl implements BasicInfoService{
 				attachment.setIds(ids.split(","));
 				attachmentService.updateByIds(attachment);
 			}
+			//插入活动
+			if(!ValidateUtil.isEmpty(array)){
+				for(int i =0;i<array.size();i++){
+					JSONObject json = array.getJSONObject(i);
+					Activity activity = new Activity();
+					activity.setContent(json.getString("content"));
+					activity.setCreateTime(new Date());
+					activity.setLstModTime(new Date());
+					activity.setCreateAuthorId((Integer)ThreadLocalMap.get("adminId"));
+					activity.setCreateAuthorName((String)ThreadLocalMap.get("adminName"));
+					activity.setState(Activity.STATE_YES);
+					activity.setShopId(shop.getShopId());
+					activityService.insert(activity);
+				}
+			}
 		}else{
 			//编辑
 			Shop findByAppId = shopService.findByAppId(miniApps.getAppId());
@@ -113,8 +137,33 @@ public class BasicInfoServiceImpl implements BasicInfoService{
 				attachment.setIds(ids.split(","));
 				attachmentService.updateByIds(attachment);
 			}
+			//先删除全部然后再重新更新
+			activityService.deleteAll(findByAppId.getShopId());
+			//插入活动
+			if(!ValidateUtil.isEmpty(array)){
+				for(int i =0;i<array.size();i++){
+					//新增的id为空
+					JSONObject json = array.getJSONObject(i);
+					Activity activity = new Activity();
+					activity.setContent(json.getString("content"));
+					activity.setCreateTime(new Date());
+					activity.setLstModTime(new Date());
+					activity.setCreateAuthorId((Integer)ThreadLocalMap.get("adminId"));
+					activity.setCreateAuthorName((String)ThreadLocalMap.get("adminName"));
+					activity.setState(Activity.STATE_YES);
+					activity.setShopId(shop.getShopId());
+					if(!ValidateUtil.isEmpty(json.getInteger("id"))){
+						activity.setActivityId(json.getInteger("id"));
+						activityService.update(activity);
+					}else{
+						activityService.insert(activity);
+					}
+				}
+			}
 		}
 		
+		//清除
+		ThreadLocalMap.remove();
 		return ReturnInfo.toPostReturn(ReturnInfo.CODE_SUCCESS, null);
 	}
 }

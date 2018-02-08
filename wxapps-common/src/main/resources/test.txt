@@ -3568,3 +3568,40 @@ ALTER TABLE restaurant MODIFY `end_bussiness_time` VARCHAR(10) DEFAULT null;
 
 
 ALTER TABLE `province` ADD INDEX idx_province_name (`province_name`);
+
+CREATE TABLE `order_form`(
+	`order_form_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '订单id',
+	`order_form_type` INT(4) DEFAULT NULL COMMENT '订单类型',
+	`dishes_ids` VARCHAR(256) DEFAULT NULL COMMENT '菜品id',
+	`total_money` decimal(18,2) DEFAULT NULL COMMENT '总金额',
+	`restaurant_id` INT(11) DEFAULT NULL COMMENT '所属餐厅id',
+	`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+	PRIMARY KEY (`order_form_id`),
+	KEY `idx_restaurant_id` (`restaurant_id`)
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='订单';
+
+ALTER TABLE activity MODIFY `create_author_name` VARCHAR(32) DEFAULT NULL COMMENT '创建人姓名';
+
+
+CREATE TABLE `delivery_address`(
+	`delivery_address_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '收货地址id',
+	`delivery_province` varchar(32) DEFAULT NULL COMMENT '所属省',
+  `delivery_city` varchar(32) DEFAULT NULL COMMENT '所属市',
+  `delivery_sub_city` varchar(64) DEFAULT NULL COMMENT '所属区县',
+  `delivery_address` varchar(255) DEFAULT NULL COMMENT '详细地址',
+	`delivery_state` TINYINT(4) DEFAULT NULL COMMENT '状态',
+	PRIMARY KEY (`delivery_address_id`)
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='收货地址';
+
+CREATE TABLE `food_order`(
+	`food_order_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '订单id',
+	`food_order_type` TINYINT(4) DEFAULT NULL COMMENT '订单类型',
+	`dishes_ids` VARCHAR(256) DEFAULT NULL COMMENT '菜品id',
+	`total_money` decimal(18,2) DEFAULT NULL COMMENT '总金额',
+	`restaurant_id` INT(11) DEFAULT null COMMENT '所属餐厅id',
+	`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+	`delivery_address_id` INT(11) DEFAULT 0 COMMENT '收货地址id',
+	PRIMARY KEY (`food_order_id`),
+	KEY `idx_restaurant_id` (`restaurant_id`),
+	KEY `idx_delivery_address_id` (`delivery_address_id`)
+)ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='食物订单';

@@ -17,7 +17,7 @@ public class Activity {
 
     private Integer createAuthorId;//创建者id
 
-    private Integer createAuthorName;//创建者姓名
+    private String createAuthorName;//创建者姓名
 
     private Date createTime;//创建时间
 
@@ -30,6 +30,16 @@ public class Activity {
     private String createTimeStr;
     
     private String lstModTimeStr;
+    
+    /**
+     * 活动状态：可用
+     */
+    public static final Integer STATE_YES = 1;
+    
+    /**
+     * 活动状态：不可用
+     */
+    public static final Integer STATE_NO = 2;
     
     public Integer getActivityId() {
         return activityId;
@@ -63,11 +73,11 @@ public class Activity {
         this.createAuthorId = createAuthorId;
     }
 
-    public Integer getCreateAuthorName() {
+    public String getCreateAuthorName() {
         return createAuthorName;
     }
 
-    public void setCreateAuthorName(Integer createAuthorName) {
+    public void setCreateAuthorName(String createAuthorName) {
         this.createAuthorName = createAuthorName;
     }
 

@@ -188,6 +188,23 @@
 			        <input type="text" name="bankAddress" placeholder="详细地址" lay-verify="required" value="${basicInfo.bankInfo.bankAddress }"  autocomplete="off" class="layui-input">
 			    </div>
 			  </div>
+			  <div id="">
+				  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+				  	<legend>活动</legend>
+				  </fieldset>
+				  <div id="activityDiv">
+				  	<c:forEach items="${basicInfo.activity }" var="a">
+					  <div class="layui-form-item layui-form-text activity">
+					  	<div class="layui-form-label">
+							<input type="checkbox" name="open" checked="" lay-skin="switch" lay-text="ON|OFF">
+						</div>
+					    <div class="layui-input-block contentArea">
+					      <textarea placeholder="请输入活动内容" name="" activityId="${a.activityId }" id="" class="layui-textarea">${a.content }</textarea>
+					    </div>
+					  </div>
+				  	</c:forEach>
+				  </div>
+			  </div>
 		</form>
 			<c:if test="${not empty attachments}">
 				<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
@@ -233,21 +250,45 @@
 			    <div class="layui-upload-list" id="demo2"></div>
 			 </blockquote>
 			</div>
+		<script type="text/x-handlebars-template" id="addButtonTemp">
+			<button type="button" id="addBtn"  lay-filter="demoButton"  lay-submit  class="layui-btn layui-btn-normal layui-btn-sm"><i class="layui-icon"></i></button>
+		</script>
+		<script type="text/x-handlebars-template" id="addActivityTemp">
+			<div class="layui-form-item layui-form-text activity">
+	  			<div class="layui-form-label">
+					<input type="checkbox" name="open" checked="" lay-skin="switch" lay-text="ON|OFF">
+				</div>
+	    		<div class="layui-input-block contentArea">
+	      			<textarea placeholder="请输入活动内容" name="" id="" class="layui-textarea"></textarea>
+	    		</div>
+	  		</div>
+		</script>
 		<script>
 			$(function(){
 				$(".restaurant").hide();
 				$(".attachmentId").hide();
 				getIds();
+				//表单初始化后调用addButton()
+				loadAddButton();
 			})
-			layui.use(['form', 'layedit', 'laydate','upload'], function(){
+			layui.use(['form', 'layedit', 'laydate','upload','element'], function(){
 			  var form = layui.form
 			  ,layer = layui.layer
 			  ,layedit = layui.layedit
 			  ,laydate = layui.laydate
 			  ,$ = layui.jquery
-			  ,upload = layui.upload;
+			  ,upload = layui.upload
+			  ,ele = layui.element;
 			  //只能在表单初始化后调用，要不然会显示form,undefined
 			  loadSelect();
+			  //监听提交
+			  form.on('submit(demoButton)', function(data){
+				console.log(data);
+				console.log(JSON.stringify(data));
+				addActivity();
+			    return false;
+			  });
+			  
 			  //商户所在地添加监听
 			  //--------------------商户级联-----------
 			  form.on('select(shopProvinceFilter)',function(data){
@@ -260,7 +301,7 @@
 					  var provinceId = $("#shopProvince").find('option:selected').attr("provinceId");
 					  loadCity(provinceId,"shopCity","shopCityRemove","shopSubCityRemove").then(function(){form.render('select')});
 				  }
-			  })
+			  });
 			  form.on('select(shopCityFilter)',function(data){
 				  if(!data.value){
 					  $("option").remove(".shopSubCityRemove");
@@ -451,6 +492,20 @@
 					}
 				}
 				
+				var activity = "${basicInfo.activity}";
+				if(activity.length<1){
+					addActivity();
+				}
+				
+				//新增活动
+				function addActivity(){
+					var template = Handlebars.compile($("#addActivityTemp").html());
+					var html =template();
+					$("#activityDiv").append(html);
+					$("#addBtn").remove();
+					loadAddButton();
+					form.render('checkbox')
+				}
 			});
 			//预览图片
 			function loadPhoto(alt,url,id){
@@ -498,10 +553,35 @@
 			function formSubmit(){
 				var data = $("#addForm").serializableJson();
 				console.log(JSON.stringify(data));
-				$.extend(data,{appId:$("#app_id").val()});
-				$.formJsonAjax({
+				//app_id只有在编辑页面才会有值
+				var app_id = $("#app_id").val();
+				if(app_id){
+					$.extend(data,{appId:$("#app_id").val()});
+				}
+				//获取活动
+				var activities = new Array();
+				$.each($("#activityDiv").find("textarea"),function(i,v){
+					if($(v).parent().prev().find("input").is(":checked")){
+						//选中了，获取当前文本域的内容
+						var content = $(v).val();
+						var activityId = $(v).attr("activityId");
+						console.log("activityId----------"+activityId);
+						if(!activityId){
+							activityId = "";
+						}
+						var dat = {};
+						dat.content = content;
+						dat.id=activityId;
+						activities.push(dat);
+					}
+				});
+				$.extend(data,{activities:JSON.stringify(activities)});
+				console.log(JSON.stringify(data));
+				$.ajax({
 					url:"${path}/basic/info/addBasic",
+					traditional:true,
 					data:data,
+					type:'POST',
 					success:function(result){
 						if("success" == result.code){
 							//在当前页面调用当前页面的关闭
@@ -531,7 +611,12 @@
 				})
 				$("#ids").val(ids);
 			}
+			//显示新增按钮
+			function loadAddButton(){
+				var template = Handlebars.compile($("#addButtonTemp").html());
+				var html =template();
+				$("#activityDiv .activity:last").find(".contentArea").append(html);
+			}
 		</script>
-		
 	</body>
 </html>

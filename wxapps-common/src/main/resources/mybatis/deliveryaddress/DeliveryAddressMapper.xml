@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beixiao.deliveryaddress.repository.DeliveryAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.beixiao.deliveryaddress.domain.DeliveryAddress" >
+    <id column="delivery_address_id" property="deliveryAddressId" jdbcType="INTEGER" />
+    <result column="delivery_province" property="deliveryProvince" jdbcType="VARCHAR" />
+    <result column="delivery_city" property="deliveryCity" jdbcType="VARCHAR" />
+    <result column="delivery_sub_city" property="deliverySubCity" jdbcType="VARCHAR" />
+    <result column="delivery_address" property="deliveryAddress" jdbcType="VARCHAR" />
+    <result column="delivery_state" property="deliveryState" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    delivery_address_id, delivery_province, delivery_city, delivery_sub_city, delivery_address, 
+    delivery_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from delivery_address
+    where delivery_address_id = #{deliveryAddressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from delivery_address
+    where delivery_address_id = #{deliveryAddressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.beixiao.deliveryaddress.domain.DeliveryAddress" >
+    insert into delivery_address (delivery_address_id, delivery_province, 
+      delivery_city, delivery_sub_city, delivery_address, 
+      delivery_state)
+    values (#{deliveryAddressId,jdbcType=INTEGER}, #{deliveryProvince,jdbcType=VARCHAR}, 
+      #{deliveryCity,jdbcType=VARCHAR}, #{deliverySubCity,jdbcType=VARCHAR}, #{deliveryAddress,jdbcType=VARCHAR}, 
+      #{deliveryState,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.beixiao.deliveryaddress.domain.DeliveryAddress" >
+    insert into delivery_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deliveryAddressId != null" >
+        delivery_address_id,
+      </if>
+      <if test="deliveryProvince != null" >
+        delivery_province,
+      </if>
+      <if test="deliveryCity != null" >
+        delivery_city,
+      </if>
+      <if test="deliverySubCity != null" >
+        delivery_sub_city,
+      </if>
+      <if test="deliveryAddress != null" >
+        delivery_address,
+      </if>
+      <if test="deliveryState != null" >
+        delivery_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deliveryAddressId != null" >
+        #{deliveryAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryProvince != null" >
+        #{deliveryProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryCity != null" >
+        #{deliveryCity,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverySubCity != null" >
+        #{deliverySubCity,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryAddress != null" >
+        #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryState != null" >
+        #{deliveryState,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.beixiao.deliveryaddress.domain.DeliveryAddress" >
+    update delivery_address
+    <set >
+      <if test="deliveryProvince != null" >
+        delivery_province = #{deliveryProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryCity != null" >
+        delivery_city = #{deliveryCity,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverySubCity != null" >
+        delivery_sub_city = #{deliverySubCity,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryAddress != null" >
+        delivery_address = #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryState != null" >
+        delivery_state = #{deliveryState,jdbcType=TINYINT},
+      </if>
+    </set>
+    where delivery_address_id = #{deliveryAddressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.beixiao.deliveryaddress.domain.DeliveryAddress" >
+    update delivery_address
+    set delivery_province = #{deliveryProvince,jdbcType=VARCHAR},
+      delivery_city = #{deliveryCity,jdbcType=VARCHAR},
+      delivery_sub_city = #{deliverySubCity,jdbcType=VARCHAR},
+      delivery_address = #{deliveryAddress,jdbcType=VARCHAR},
+      delivery_state = #{deliveryState,jdbcType=TINYINT}
+    where delivery_address_id = #{deliveryAddressId,jdbcType=INTEGER}
+  </update>
+</mapper>

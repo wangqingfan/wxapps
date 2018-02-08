@@ -57,6 +57,13 @@
 		<div class="layui-tab-item">
 	      <div id="pageDemo"></div>
 	    </div>
+	    <script type="text/html" id="timeTemp">
+			{{# 
+				var time = d.createTime;
+				var result = formatDate(time,"yyyy-MM-dd hh:mm");
+			}}
+			{{result}}
+		</script>
 		<script type="text/html" id="barDemo">
 			<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -81,19 +88,19 @@
 					table.render({
 						elem: '#test',
 					    url: '${pageContext.request.contextPath}/basic/info/getList', //数据接口
-					    cellMinWidth: 80 ,
+					    cellMinWidth: 170 ,
 					    page: true, //开启分页
 					    cols: [[ //表头
-					      {field: 'shopName', title: '商店名称', width:80, fixed: 'left'},
-					      {field: 'cutomerName', title: '商户负责人姓名', width:80},
-					      {field: 'idCode', title: '身份证号', width:80, },
-					      {field: 'shopCity', title: '城市', width:80} ,
-					      {field: 'shopTelphone', title: '商户电话', width: 170},
-					      {field: 'createTime', title: '创建时间', event:'time', width: 80, },
-					      {field: 'lstModTime', title: '最后修改时间', width: 80, },
-					      {field: 'shopState', title: '商铺状态', width: 80},
-					      {field: 'totalDealMoney', title: '累计成交金额', width: 135, },
-					      {fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+					      {field: 'shopName', title: '商店名称', align:'center',fixed: 'left'},
+					      {field: 'cutomerName', title: '商户负责人姓名', align:'center'},
+					      {field: 'idCode', title: '身份证号', align:'center' },
+					      {field: 'shopCity', title: '城市',align:'center'} ,
+					      {field: 'shopTelphone', title: '商户电话',align:'center'},
+					      {field: 'createTime', title: '创建时间', templet:'#timeTemp', event:'time', align:'center'},
+					      {field: 'lstModTime', title: '最后修改时间',  templet:'#timeTemp', align:'center' },
+					      {field: 'shopState', title: '商铺状态',align:'center'},
+					      {field: 'totalDealMoney', title: '累计成交金额',align:'center' },
+					      {fixed: 'right', align:'center', toolbar: '#barDemo'}
 					    ]]
 					});
 					//监听工具条

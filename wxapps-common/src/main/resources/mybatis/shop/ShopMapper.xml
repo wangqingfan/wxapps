@@ -365,7 +365,7 @@
 		FROM
 			shop s
 		LEFT JOIN restaurant r ON s.shop_id = r.shop_id                                                                                                                                             
-		LEFT JOIN activity a ON a.shop_id = s.shop_id
+		LEFT JOIN activity a ON a.shop_id = s.shop_id and a.state = 1
 		LEFT JOIN customer_card cc ON s.client_card_id = cc.customer_card_id AND cc.bind_card = 1
 		LEFT JOIN bank_info bi ON cc.bank_id = bi.bank_id 
 		LEFT JOIN mini_apps ma ON s.mini_app_id = ma.mini_app_id AND ma.app_state = 1

@@ -54,7 +54,7 @@
           <a class="" href="javascript:;">信息设置</a>
           <dl class="layui-nav-child">
             <dd><a href="javascript:;" mianFrameUrl="${pageContext.request.contextPath }/basic/info/toList">基本信息列表</a></dd>
-            <dd><a href="javascript:;">外卖</a></dd>
+            <dd><a href="javascript:;">订单信息</a></dd>
             <dd><a href="javascript:;">历史订单信息</a></dd>
             <dd><a href="">超链接</a></dd>
           </dl>
