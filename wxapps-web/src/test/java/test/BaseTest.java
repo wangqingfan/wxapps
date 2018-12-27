@@ -1,4 +1,6 @@
 package test;
+import java.util.Random;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
@@ -16,4 +18,13 @@ public class BaseTest {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:/applicationContext.xml");
 	}
 	
+	@Test
+	public void test2(){
+		StringBuffer codeSb = new StringBuffer();
+		for(int i=0;i<6;i++){
+			Random random = new Random();
+			codeSb.append(String.valueOf(random.nextInt(10)));
+		}
+		System.out.println(codeSb.toString());
+	}
 }

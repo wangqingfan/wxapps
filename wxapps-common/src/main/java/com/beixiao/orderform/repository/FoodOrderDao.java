@@ -2,7 +2,7 @@ package com.beixiao.orderform.repository;
 
 import com.beixiao.orderform.domain.FoodOrder;
 
-public interface FoodOrderMapper {
+public interface FoodOrderDao {
     int deleteByPrimaryKey(Integer foodOrderId);
 
     int insert(FoodOrder record);

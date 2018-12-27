@@ -1,17 +1,23 @@
 package com.beixiao.deliveryaddress.domain;
 
+
+/**
+ * 收货地址
+ * Project: wxapps-common 
+ * Author: wqf V1.0 2018年2月22日	上午9:47:51
+ */
 public class DeliveryAddress {
-    private Integer deliveryAddressId;
+    private Integer deliveryAddressId;//收货地址id
 
-    private String deliveryProvince;
+    private String deliveryProvince;//所在省
 
-    private String deliveryCity;
+    private String deliveryCity;//市
 
-    private String deliverySubCity;
+    private String deliverySubCity;//区县
 
-    private String deliveryAddress;
+    private String deliveryAddress;//详细地址
 
-    private Byte deliveryState;
+    private Integer deliveryState;//收货地址状态
 
     public Integer getDeliveryAddressId() {
         return deliveryAddressId;
@@ -53,11 +59,11 @@ public class DeliveryAddress {
         this.deliveryAddress = deliveryAddress == null ? null : deliveryAddress.trim();
     }
 
-    public Byte getDeliveryState() {
+    public Integer getDeliveryState() {
         return deliveryState;
     }
 
-    public void setDeliveryState(Byte deliveryState) {
+    public void setDeliveryState(Integer deliveryState) {
         this.deliveryState = deliveryState;
     }
 }

@@ -4,20 +4,37 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class FoodOrder {
-    private Integer foodOrderId;
+    private Integer foodOrderId;//主键
 
-    private Byte foodOrderType;
+    private Integer foodOrderType;//订单类型
 
-    private String dishesIds;
+    private String dishesIds;//菜品ids
 
-    private BigDecimal totalMoney;
+    private BigDecimal totalMoney;//总金额
 
-    private Integer restaurantId;
+    private Integer restaurantId;//餐厅id
 
-    private Date createTime;
+    private Date createTime;//创建时间
 
-    private Integer deliveryAddressId;
+    private Integer deliveryAddressId;//送货地址id
+    
+    private Integer foodOrderState;//食物订单状态
 
+    /**
+     * 订单状态：可用
+     */
+    public static final Integer STATE_YES = 1;
+    
+    /**
+     * 订单状态：过期
+     */
+    public static final Integer STATE_NO = 2;
+    
+    /**
+     * 订单类型：店内
+     */
+    public static final Integer TYPE_SHOP = 1;
+    
     public Integer getFoodOrderId() {
         return foodOrderId;
     }
@@ -26,11 +43,11 @@ public class FoodOrder {
         this.foodOrderId = foodOrderId;
     }
 
-    public Byte getFoodOrderType() {
+    public Integer getFoodOrderType() {
         return foodOrderType;
     }
 
-    public void setFoodOrderType(Byte foodOrderType) {
+    public void setFoodOrderType(Integer foodOrderType) {
         this.foodOrderType = foodOrderType;
     }
 
@@ -73,4 +90,13 @@ public class FoodOrder {
     public void setDeliveryAddressId(Integer deliveryAddressId) {
         this.deliveryAddressId = deliveryAddressId;
     }
+
+	public Integer getFoodOrderState() {
+		return foodOrderState;
+	}
+
+	public void setFoodOrderState(Integer foodOrderState) {
+		this.foodOrderState = foodOrderState;
+	}
+    
 }

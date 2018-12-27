@@ -52,6 +52,7 @@
 		                <value>/404</value>
 		                <value>/500</value>
 		                <value>/wechat</value>
+		                <value>/sharding</value>
 		       		</list>
        			</property>
        		</bean>

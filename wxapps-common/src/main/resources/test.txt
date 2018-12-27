@@ -3605,3 +3605,6 @@ CREATE TABLE `food_order`(
 	KEY `idx_restaurant_id` (`restaurant_id`),
 	KEY `idx_delivery_address_id` (`delivery_address_id`)
 )ENGINE=INNODB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='食物订单';
+
+
+ALTER TABLE food_order ADD `food_order_state` INT(4) DEFAULT NULL COMMENT '订单状态';

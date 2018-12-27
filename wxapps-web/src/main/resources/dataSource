@@ -1,0 +1,39 @@
+<!-- 数据源 -->
+      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+       		<property name="driverClassName" value="${jdbc.driver}"></property>
+       		<property name="url" value="${jdbc.url}"></property>
+       		<property name="username" value="${jdbc.username}"></property>
+       		<property name="password" value="${jdbc.password}"></property>
+       		<property name="initialSize" value="${jdbc.initialSize}"></property><!-- 初始连接数量 -->  
+       		<property name="maxActive" value="${jdbc.maxActive}"></property> <!-- 最大连接数量 -->  
+       		<property name="maxIdle" value="${jdbc.maxIdle}"></property> <!-- 空闲连接数量 -->  
+       		<property name="minIdle" value="${jdbc.minIdle}"></property> <!-- 空闲连接数量 -->  
+       		<property name="maxWait" value="${jdbc.maxWait}"></property> <!-- 一个查询10分钟内没有返回，自动放弃 -->
+       		<property name="validationQuery" value="SELECT 1" />   <!-- 数据库连接可用性测试语句 -->
+       		<property name="testOnBorrow" value="true" />          <!-- 每次获取一个连接的时候，验证一下连接是否可用，语句在validationQuery里面 -->  
+       		<property name="removeAbandoned" value="true" />       <!-- 自动处理连接未关闭的问题，Setting this to true can recover db connections from poorly written applications which fail to close a connection.  -->  
+       		<property name="removeAbandonedTimeout" value="300" /> <!-- 连接使用后5分钟未关闭，则抛弃 -->  
+       		<!-- 每5分钟检查一次，每次检查3个连接，如果连接空闲时间达到5分钟，则认为可以Evict，从连接池排除   
+		             空闲的连接是否排除对连接池似乎没有太大影响，我们只需要保证每次获取的连接都可用，所以暂时先不开启  
+		        <property name="timeBetweenEvictionRunsMillis" value="300000" />  
+		        <property name="numTestsPerEvictionRun" value="3" />  
+		        <property name="minEvictableIdleTimeMillis" value="320000" />-->
+       </bean>
+      <!-- spring和mybatis整合 -->
+      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       		<property name="dataSource" ref="dataSource"></property>
+       		<property name="mapperLocations" value="classpath*:/mybatis/**/*.xml"></property>
+       		<!--设置pageHelper,引入mybatis配置文件-->
+	        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+      </bean>
+       <!-- DAO接口所在的包，spring会自动查找 -->
+      <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+       		<property name="basePackage" value="com.beixiao.*.repository"></property>
+       		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+      </bean>
+       
+       <!-- 事务管理 -->
+       <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+       		<property name="dataSource" ref="dataSource"></property>
+       </bean>
