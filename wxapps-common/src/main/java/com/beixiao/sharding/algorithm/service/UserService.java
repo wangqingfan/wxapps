@@ -16,5 +16,8 @@ public interface UserService {
     public List<User> findAll();  
       
     public List<User> findByUserIds(List<Integer> ids);  
+    
+    public boolean insertAll();  
+    
 
 }

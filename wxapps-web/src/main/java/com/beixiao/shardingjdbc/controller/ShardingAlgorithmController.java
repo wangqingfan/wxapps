@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.beixiao.account.domain.Account;
 import com.beixiao.account.repository.AccountDao;
 import com.beixiao.sharding.algorithm.domain.user.User;
+import com.beixiao.sharding.algorithm.repository.user.UserDao;
 import com.beixiao.sharding.algorithm.service.UserService;
 
 
@@ -32,7 +33,8 @@ public class ShardingAlgorithmController {
 	private UserService userService;
 	@Resource
 	private AccountDao accountDao;
-
+	@Resource
+	private UserDao userDao;
 	
 	/**
 	 * 插入
@@ -69,6 +71,21 @@ public class ShardingAlgorithmController {
 		Account a = new Account();
 		a.setAccountType(1);
 		accountDao.insert(a);
+		return "success";
+	}
+	
+	@RequestMapping("/findJoin")
+	@ResponseBody
+	public Object findJoin(@RequestParam Map<String,Object> param){
+		List<Map<String, Object>> findJoin = userDao.findJoin(Integer.parseInt((String)param.get("userId")));
+		logger.info("-----findJoin-----"+JSONObject.toJSONString(findJoin));
+		return "success";
+	}
+	
+	@RequestMapping("/insertAll")
+	@ResponseBody
+	public Object insertAll(){
+		userService.insertAll();
 		return "success";
 	}
 }
