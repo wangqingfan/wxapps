@@ -5,7 +5,6 @@
        xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:task="http://www.springframework.org/schema/task" xmlns:amq="http://activemq.apache.org/schema/core"
 	   xmlns:jms="http://www.springframework.org/schema/jms"
-	   xmlns:sharding="http://shardingjdbc.io/schema/shardingjdbc/sharding"
        xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
@@ -18,18 +17,16 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
         http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.8.0.xsd
-        http://shardingjdbc.io/schema/shardingjdbc/sharding http://shardingjdbc.io/schema/shardingjdbc/sharding/sharding.xsd">
+        ">
      <!-- 组件service扫描 -->
 	 <context:component-scan base-package="com.beixiao">
      	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
      </context:component-scan>
 	<!-- 配置文件 -->
-     <!--ignore-resource-not-found：如果属性文件找不到，是否忽略，默认false，即不忽略，找不到将抛出异常ignore-unresolvable：是否忽略解析不到的属性，如果不忽略，找不到将抛出异常-->
-     <context:property-placeholder ignore-unresolvable="true" location="classpath*:/*.properties" />
+    <context:property-placeholder location="classpath*:/*.properties"/>
 	<!-- Spring中引入其他配置文件 -->
     <import resource="classpath*:spring-datasource.xml" />
     
-        
 	<!-- spring和mybatis整合 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
      		<property name="dataSource" ref="shardingDataSource"></property>
@@ -42,41 +39,99 @@
      		<property name="basePackage" value="com.beixiao.*.repository,com.beixiao.sharding.algorithm.repository.*"></property>
      		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
-    <!--t_user表，数据库sharding策略-->
-    <sharding:standard-strategy id="userDatabaseShardingStrategy" sharding-column="user_id"
-		precise-algorithm-class="com.beixiao.sharding.algorithm.database.version203.TUserDataBaseStrategy" />
-	<!-- 默认库策略 -->
-    <sharding:none-strategy id="noneStrategy" />
-    <!-- t_user表，分表sharding策略 -->
-    <sharding:standard-strategy id="userTableShardingStrategy" sharding-column="user_id" 
-     	precise-algorithm-class="com.beixiao.sharding.algorithm.table.version203.TUserTableStrategy" />
-    
-	<sharding:data-source id="shardingDataSource">
-        <!--default-data-source指定默认数据源, 即没有在<rdb:table-rules>申明的logic-table表, 即不需要分库分表的表, 全部走默认数据源-->
-        <sharding:sharding-rule data-source-names="sharding_0,sharding_1"
-                                default-data-source-name="sharding_0"
-                                default-database-strategy-ref="noneStrategy"
-                                default-table-strategy-ref="noneStrategy">
-            <sharding:table-rules>
-                <!--
-                	actual-data-nodes 真实数据节点，由数据源名（读写分离引用master-slave:data-source中的id属性） + 表名组成，以小数点分隔。多个表以逗号分隔，支持inline表达式。
-                	不填写表示将为现有已知的数据源 + 逻辑表名称生成真实数据节点。用于广播表（即每个库中都需要一个同样的表用于关联查询，多为字典表）或只分库不分表且所有库的表结构完全一致的情况。 
-                	database-strategy-ref:数据库选择rule
-                	table-strategy-ref：表选择rule
-                -->
-                <sharding:table-rule logic-table="t_user" actual-data-nodes="sharding_${0..1}.t_user_0${0..2}" 
-                database-strategy-ref="userDatabaseShardingStrategy" table-strategy-ref="userTableShardingStrategy"/>
-            </sharding:table-rules>
-        </sharding:sharding-rule>
-        <sharding:props>
-            <prop key="sql.show">true</prop>
-            <prop key="executor.size">2</prop>
-        </sharding:props>
-    </sharding:data-source>
 	
+	<!-- 配置好dataSourceRule，即对数据源进行管理 -->
+	<bean id="dataSourceRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule">
+		<constructor-arg>
+			<map>
+				<entry key="sharding_0" value-ref="sharding_0"/>
+				<entry key="sharding_1" value-ref="sharding_1"/>
+			</map>
+		</constructor-arg>
+	</bean>
+	<!-- 配置user表，进行分库配置，逻辑表名t_user,每个库实际有三张表 -->
+	<bean id="userTableRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.TableRule">
+		<constructor-arg value="t_user" index="0"/>
+		<constructor-arg index="1">
+			<list>
+				<value>t_user_00</value>
+				<value>t_user_01</value>
+				<value>t_user_02</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg index="2" ref="dataSourceRule"/>
+		<constructor-arg index="3" ref="userDatabaseShardingStrategy"/><!-- 库动态选择 -->
+		<constructor-arg index="4" ref="userTableShardingStrategy"/><!-- 表动态选择 -->
+	</bean>
+	<!-- t_user分库策略 -->
+	<bean id="userDatabaseShardingStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
+		<constructor-arg index="0" value="user_id"/>
+		<constructor-arg index="1">
+			<bean class="com.beixiao.sharding.algorithm.database.UserSingleKeyDatabaseShardingAlgorithm"></bean>
+		</constructor-arg>
+	</bean>
+	<!-- t_user分表策略 -->
+	<bean id="userTableShardingStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
+		<constructor-arg index="0" value="user_id"/>
+		<constructor-arg index="1">
+			<bean class="com.beixiao.sharding.algorithm.table.UserSingleKeyTableShardingAlgorithm"></bean>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 配置t_student表进行分库配置，每库有两张表 -->
+	<bean id="studentTableRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.TableRule">
+		<constructor-arg index="0" value="t_student"/>
+		<constructor-arg index="1">
+			<list>
+				<value>t_student_00</value>
+				<value>t_student_01</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg index="2" ref="dataSourceRule"/>
+		<constructor-arg index="3" ref="studentDatabaseShardingStrategy" />
+		<constructor-arg index="4" ref="studentTableShardingStrategy" />
+	</bean>
+	
+	<!-- t_student分库策略 -->
+	<bean id="studentDatabaseShardingStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
+		<constructor-arg index="0" value="student_id" />
+		<constructor-arg index="1">
+			<bean class="com.beixiao.sharding.algorithm.database.StudentSingleKeyDatabaseShardingAlgorithm"></bean>
+		</constructor-arg>
+	</bean>
+	<!-- t_student分表策略 -->
+	<bean id="studentTableShardingStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
+		<constructor-arg index="0" value="student_id"/>
+		<constructor-arg index="1">
+			<bean class="com.beixiao.sharding.algorithm.table.StudentSingleKeyTableShardingAlgorithm"></bean>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 构成分库分表的规则，传入数据源集合和每个分库分表的具体规则-->
+	<bean id="shardingRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule">
+		<constructor-arg index="0" ref="dataSourceRule"></constructor-arg>
+		<constructor-arg index="1">
+			<list>
+				<ref bean="userTableRule"/>
+				<ref bean="studentTableRule"/>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<!-- 对DataSource进行封装 -->
+	<bean id="shardingDataSource" class="com.dangdang.ddframe.rdb.sharding.api.ShardingDataSource">
+		<constructor-arg ref="shardingRule"/>
+	</bean>
+	
+	<!-- 事务 -->  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="shardingDataSource" />  
+    </bean>  
+  
+    <tx:annotation-driven transaction-manager="transactionManager" /> 
     
     <!-- redisTemplate -->
-<!-- 	<context:property-placeholder location="classpath:/redis.properties"/> -->
+	<context:property-placeholder location="classpath:/redis.properties"/>
 	<bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<!-- 最大总数 -->
 		<property name="maxTotal" value="${redis.maxActive}"></property>
