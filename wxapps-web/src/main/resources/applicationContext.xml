@@ -42,13 +42,27 @@
      		<property name="basePackage" value="com.beixiao.*.repository,com.beixiao.sharding.algorithm.repository.*"></property>
      		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
+    
+    <!-- 事务 -->  
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="shardingDataSource" />  
+    </bean>  
+  
+    <tx:annotation-driven transaction-manager="transactionManager" /> 
+    
     <!--t_user表，数据库sharding策略-->
     <sharding:standard-strategy id="userDatabaseShardingStrategy" sharding-column="user_id"
 		precise-algorithm-class="com.beixiao.sharding.algorithm.database.version203.TUserDataBaseStrategy" />
+    <!--t_student表，数据库sharding策略-->
+    <sharding:standard-strategy id="studentDatabaseShardingStrategy" sharding-column="student_id"
+		precise-algorithm-class="com.beixiao.sharding.algorithm.database.version203.TStudentDataBaseStrategy" />
 	<!-- 默认库策略 -->
     <sharding:none-strategy id="noneStrategy" />
     <!-- t_user表，分表sharding策略 -->
     <sharding:standard-strategy id="userTableShardingStrategy" sharding-column="user_id" 
+     	precise-algorithm-class="com.beixiao.sharding.algorithm.table.version203.TUserTableStrategy" />
+    <!-- t_student表，分表sharding策略 -->
+    <sharding:standard-strategy id="studentTableShardingStrategy" sharding-column="student_id" 
      	precise-algorithm-class="com.beixiao.sharding.algorithm.table.version203.TUserTableStrategy" />
     
 	<sharding:data-source id="shardingDataSource">
@@ -66,6 +80,8 @@
                 -->
                 <sharding:table-rule logic-table="t_user" actual-data-nodes="sharding_${0..1}.t_user_0${0..2}" 
                 database-strategy-ref="userDatabaseShardingStrategy" table-strategy-ref="userTableShardingStrategy"/>
+                <sharding:table-rule logic-table="t_student" actual-data-nodes="sharding_${0..1}.t_student_0${0..1}" 
+                database-strategy-ref="studentDatabaseShardingStrategy" table-strategy-ref="studentTableShardingStrategy"/>
             </sharding:table-rules>
         </sharding:sharding-rule>
         <sharding:props>
