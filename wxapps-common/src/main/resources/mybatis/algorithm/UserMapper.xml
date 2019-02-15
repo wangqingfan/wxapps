@@ -31,4 +31,7 @@
   <select id="findJoin" parameterType="java.lang.Integer" resultType="java.util.Map">
   	SELECT u.user_id as userId ,s.student_id as studentId FROM t_user u LEFT JOIN t_student s on u.user_id = s.user_id  where u.user_id = #{value}
   </select> 
+  <select id="findByLimits" parameterType="java.lang.Integer" resultMap="resultMap">
+  	select <include refid="columnsName"/> from t_user order by user_id  limit #{start},#{end}
+  </select> 
 </mapper>  

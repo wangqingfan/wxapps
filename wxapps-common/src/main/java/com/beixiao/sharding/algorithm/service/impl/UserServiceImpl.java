@@ -45,20 +45,38 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public boolean insertAll() {
-		User u1 = new User();
-		u1.setAge(25);
-		u1.setName("测试u1");
-		u1.setUserId(110);
-		userDao.insert(u1);
-		User u2 = new User();
-		u2.setAge(25);
-		u2.setName("测试u2");
-		u2.setUserId(111);
-		userDao.insert(u2);
-		if(1==1){
-			int i = 1/0;
+		for(int i=0;i<100;i++){
+			User u1 = new User();
+			u1.setAge(i+10);
+			u1.setName("测试u1");
+			u1.setUserId(i+1);
+			userDao.insert(u1);
 		}
+//		User u2 = new User();
+//		u2.setAge(25);
+//		u2.setName("测试u2");
+//		u2.setUserId(111);
+//		userDao.insert(u2);
+//		if(1==1){
+//			int i = 1/0;
+//		}
 		return false;
 	}
 	
+	@Override
+	public List<User> findByLimits(Integer start, Integer end) {
+		return userDao.findByLimits(start, end);
+	}
+}
+
+
+class Something {
+	public static void main(String[] args) {
+		ourter:for(int i= 0 ;i<10;i++){
+			for(int j= 0 ;j<10;j++){
+				break ourter;
+			}
+			
+		}
+	}
 }

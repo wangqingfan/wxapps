@@ -19,5 +19,5 @@ public interface UserService {
     
     public boolean insertAll();  
     
-
+    public List<User> findByLimits(Integer start ,Integer end);  
 }

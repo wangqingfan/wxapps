@@ -88,4 +88,16 @@ public class ShardingAlgorithmController {
 		userService.insertAll();
 		return "success";
 	}
+	
+	
+	@RequestMapping("/findBylimits")
+	@ResponseBody
+	public Object findBylimits(@RequestParam("page") String page,@RequestParam("pageSize") String pageSize){
+		Integer pageInt = Integer.parseInt(page);
+		Integer sizeInt = Integer.parseInt(pageSize);
+		List<User> findByUserIds = userService.findByLimits((pageInt-1)*sizeInt, sizeInt);
+		System.out.println("size:"+findByUserIds);
+		findByUserIds.forEach(u->System.out.println(u.getUserId()+"---"+u.getName()+"---"+u.getAge()));
+		return JSONObject.toJSON(findByUserIds);
+	}
 }

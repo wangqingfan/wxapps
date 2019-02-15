@@ -3,6 +3,8 @@ package com.beixiao.sharding.algorithm.repository.user;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.beixiao.common.BaseDao;
 import com.beixiao.sharding.algorithm.domain.user.User;
 
@@ -28,4 +30,14 @@ public interface UserDao extends BaseDao<User>{
 	 * @return List<Map<String,Object>>
 	 */
 	List<Map<String,Object>> findJoin(Integer userId);
+	
+	
+	/**
+	 * 分页
+	 * @author wqf V1.0 2019年2月15日 上午10:09:19
+	 * @param start
+	 * @param end
+	 * @return List<User>
+	 */
+	List<User> findByLimits(@Param("start")Integer start ,@Param("end")Integer end);
 }
